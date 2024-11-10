@@ -168,7 +168,7 @@ public class Login extends javax.swing.JDialog {
             mostrarInterfaz(fachada.buscarUsuario(cedula));
             dispose();
         }catch (UsuarioNoRegistradoException | UsuarioEnSesionException | CredencialesIncorrectasException e){
-            lblError.setText(e.getMessage());
+            lblError.setText("Ingreso incorrecto: " + e.getMessage());
         }             
     }
     
