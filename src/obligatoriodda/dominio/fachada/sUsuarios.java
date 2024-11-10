@@ -67,7 +67,7 @@ class sUsuarios {
         usuarioEncontrado.ingresar();
     }
 
-    private Usuario buscarUsuario(String cedula) {
+    public Usuario buscarUsuario(String cedula) {
 
         Usuario usuarioEncontrado = jugadores.get(cedula);
         if (usuarioEncontrado instanceof Usuario) {
