@@ -121,19 +121,19 @@ public class Mesa {
 
     private void validarJugadoresRequeridos() {
         if (jugadoresRequeridos < 2 || jugadoresRequeridos > 5) {
-            throw new ArgumentosMesaException("La cantidad de jugadores requeridos debe estar entre 2 y 5.");
+            throw new ArgumentosMesaException("Cantidad de jugadores no valida");
         }
     }
 
     private void validarApuestaBase() {
         if (apuestaBase < 1) {
-            throw new ArgumentosMesaException("La apuesta base debe ser al menos 1.");
+            throw new ArgumentosMesaException("Apuesta base invalida");
         }
     }
 
     private void validarComision() {
         if (porcentajeComision < 1 || porcentajeComision > 50) {
-            throw new ArgumentosMesaException("El porcentaje de comisión debe estar entre 1 y 50 inclusive.");
+            throw new ArgumentosMesaException("Comision invalida");
         }
     }
 

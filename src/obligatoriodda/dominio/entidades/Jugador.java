@@ -7,6 +7,7 @@ import obligatoriodda.dominio.interfaces.IValidable;
  *
  * @author jlima
  */
+@SuppressWarnings("unused")
 public class Jugador extends Usuario implements IValidable{
     private double saldo;
 
