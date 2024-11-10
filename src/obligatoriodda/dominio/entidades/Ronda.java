@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ronda {
-    private static int contadorRondas = 0;
+    
+    // <editor-fold defaultstate="collapsed" desc="Atributos">
+    private static int contadorRondas = 1;
     private int numeroRonda;
     private double pozo;
     private Figura figuraGanadora;
@@ -12,9 +14,11 @@ public class Ronda {
     private List<Jugador> participantes;
     private Jugador jugadorGanador;
     private Apuesta apuesta;
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Ronda() {
-        this.numeroRonda = ++contadorRondas;
+        this.numeroRonda = contadorRondas++;
         this.pozo = 0.0;
         this.figuraGanadora = null;
         this.estado = EstadoRonda.ESPERANDO_APUESTA;
@@ -22,7 +26,9 @@ public class Ronda {
         this.jugadorGanador = null;
         this.apuesta = null;
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Getters">
     public int getNumeroRonda() {
         return numeroRonda;
     }
@@ -31,64 +37,54 @@ public class Ronda {
         return pozo;
     }
 
-    public void setPozo(double pozo) {
-        this.pozo = pozo;
-    }
-
     public Figura getFiguraGanadora() {
         return figuraGanadora;
-    }
-
-    public void setFiguraGanadora(Figura figuraGanadora) {
-        this.figuraGanadora = figuraGanadora;
     }
 
     public EstadoRonda getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoRonda estado) {
-        this.estado = estado;
-    }
-
     public List<Jugador> getParticipantes() {
         return participantes;
-    }
-
-    public void agregarParticipante(Jugador jugador) {
-        participantes.add(jugador);
     }
 
     public Jugador getJugadorGanador() {
         return jugadorGanador;
     }
 
-    public void setJugadorGanador(Jugador jugadorGanador) {
-        this.jugadorGanador = jugadorGanador;
-    }
-
     public Apuesta getApuesta() {
         return apuesta;
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
+    public void agregarParticipante(Jugador jugador) {
+        participantes.add(jugador);
+    }
+
+    public void setPozo(double pozo) {
+        this.pozo = pozo;
+    }
+
+    public void setFiguraGanadora(Figura figuraGanadora) {
+        this.figuraGanadora = figuraGanadora;
+    }
+
+    public void setEstado(EstadoRonda estado) {
+        this.estado = estado;
+    }
+
+    public void setJugadorGanador(Jugador jugadorGanador) {
+        this.jugadorGanador = jugadorGanador;
     }
 
     public void setApuesta(Apuesta apuesta) {
         this.apuesta = apuesta;
     }
+    // </editor-fold>
 
-    // Nuevos métodos
-
-    public int obtenerCantidadDeParticipantes() {
-        return participantes.size();
-    }
-
-    public String obtenerNombreDelGanador() {
-        return (jugadorGanador != null) ? jugadorGanador.getNombreCompleto() : "No hay ganador";
-    }
-
-    public String obtenerNombreDeLaFiguraGanadora() {
-        return (figuraGanadora != null) ? figuraGanadora.getNombre() : "No hay figura ganadora";
-    }
-
+    // <editor-fold defaultstate="collapsed" desc="Métodos Sobreescritos">
     @Override
     public String toString() {
         return "Ronda{" +
@@ -101,4 +97,5 @@ public class Ronda {
                 ", apuesta=" + apuesta +
                 '}';
     }
+    // </editor-fold>
 }

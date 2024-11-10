@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mesa {
+    
+    // <editor-fold defaultstate="collapsed" desc="Atributos">
     private static int contadorMesas = 0;
     private int numeroMesa;
     private int jugadoresRequeridos;
@@ -17,12 +19,15 @@ public class Mesa {
     private List<Ronda> rondas;
     private Mazo mazo;
     private EstadoMesa estado;
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) {
         this.numeroMesa = ++contadorMesas;
-        setJugadoresRequeridos(jugadoresRequeridos);
-        setApuestaBase(apuestaBase);
-        setPorcentajeComision(porcentajeComision);
+        
+        this.jugadoresRequeridos = jugadoresRequeridos;
+        this.apuestaBase = apuestaBase;
+        this.porcentajeComision = porcentajeComision;
 
         this.totalApostado = 0.0;
         this.pozoAcumulado = 0.0;
@@ -33,7 +38,9 @@ public class Mesa {
         this.estado = EstadoMesa.ABIERTA;
         validar();
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Getters">
     public int getNumeroMesa() {
         return numeroMesa;
     }
@@ -42,18 +49,8 @@ public class Mesa {
         return jugadoresRequeridos;
     }
 
-    public void setJugadoresRequeridos(int jugadoresRequeridos) {
-        this.jugadoresRequeridos = jugadoresRequeridos;
-        validar();
-    }
-
     public double getApuestaBase() {
         return apuestaBase;
-    }
-
-    public void setApuestaBase(double apuestaBase) {
-        this.apuestaBase = apuestaBase;
-        validar();
     }
 
     public double getTotalApostado() {
@@ -62,11 +59,6 @@ public class Mesa {
 
     public double getPorcentajeComision() {
         return porcentajeComision;
-    }
-
-    public void setPorcentajeComision(double porcentajeComision) {
-        this.porcentajeComision = porcentajeComision;
-        validar();
     }
 
     public double getPozoAcumulado() {
@@ -96,11 +88,9 @@ public class Mesa {
     public int getNumeroRondaActual() {
         return rondas.size();
     }
+    // </editor-fold>
 
-    public double calcularRecaudacion() {
-        return totalApostado * (porcentajeComision / 100);
-    }
-
+    // <editor-fold defaultstate="collapsed" desc="Métodos">
     public void agregarParticipante(Jugador jugador) {
         if (participantes.size() < jugadoresRequeridos) {
             participantes.add(jugador);
@@ -113,6 +103,12 @@ public class Mesa {
         rondas.add(ronda);
     }
 
+    public double calcularRecaudacion() {
+        return totalApostado * (porcentajeComision / 100);
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Validaciones">
     private void validar() {
         validarJugadoresRequeridos();
         validarApuestaBase();
@@ -136,6 +132,9 @@ public class Mesa {
             throw new ArgumentosMesaException("Comision invalida");
         }
     }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Metodos Sobreescritos">
 
     @Override
     public String toString() {
@@ -146,8 +145,8 @@ public class Mesa {
                 ", totalApostado=" + totalApostado +
                 ", porcentajeComision=" + porcentajeComision +
                 ", pozoAcumulado=" + pozoAcumulado +
-                ", cantidadJugadores=" + getCantidadJugadores() +
-                ", estado=" + estado +
+                ", cantidadJugadores=" + getCantidadJugadores() + ", estado=" + estado +
                 '}';
     }
+    // </editor-fold>
 }

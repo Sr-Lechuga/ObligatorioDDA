@@ -9,25 +9,31 @@ import obligatoriodda.dominio.interfaces.IValidable;
  */
 public abstract class Usuario implements IValidable {
 
+    // <editor-fold defaultstate="collapsed" desc="Atributos">
     private String cedula;
     private String clave;
     private boolean activo;
     private String nombreCompleto;
+    // </editor-fold>
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
-    }
-
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Usuario(String cedula, String clave, String nombreCompleto) {
         this.cedula = cedula;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
         this.activo = false;
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Getters">
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Validaciones">
     public boolean validarCredenciales(String cedula, String clave) {
-        return this.cedula.equals(cedula)
-                && this.clave.equals(clave);
+        return this.cedula.equals(cedula) && this.clave.equals(clave);
     }
 
     @Override
@@ -42,10 +48,7 @@ public abstract class Usuario implements IValidable {
     }
 
     private void validarCedula() throws UsuarioInvalidoException {
-//        if (!this.cedula.matches("\\d{7,8}")) {
-//            throw new UsuarioInvalidoException("Ingrese la cedula con el digito verificador. Sin puntos ni guiones.");
-//        }
-        if(this.cedula.isBlank()){
+        if (this.cedula.isBlank()) {
             throw new UsuarioInvalidoException("La cedula no puede ser vacia.");
         }
     }
@@ -61,7 +64,9 @@ public abstract class Usuario implements IValidable {
             throw new UsuarioInvalidoException("El nombre completo no puede ser vacio.");
         }
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
     public boolean estaActivo() {
         return this.activo;
     }
@@ -69,4 +74,5 @@ public abstract class Usuario implements IValidable {
     public void ingresar() {
         this.activo = true;
     }
+    // </editor-fold>
 }
