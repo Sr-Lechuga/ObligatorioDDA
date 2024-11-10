@@ -1,5 +1,50 @@
 package obligatoriodda.dominio.entidades;
 
-public class Mazo {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+public class Mazo {
+    private List<Carta> cartas;
+
+    public Mazo() {
+        cartas = new ArrayList<>();
+        crearMazo();
+    }
+
+    private void crearMazo() {
+        String[] valores = {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        Palo[] palos = {
+            new Palo("C", "Corazones"),
+            new Palo("D", "Diamantes"),
+            new Palo("T", "Tréboles"),
+            new Palo("P", "Picas")
+        };
+
+        for (Palo palo : palos) {
+            for (String valor : valores) {
+                cartas.add(new Carta(valor, palo));
+            }
+        }
+    }
+
+    public void mezclar() {
+        Collections.shuffle(cartas);
+    }
+
+    public List<Carta> repartirCartas(int cantidad) {
+        if (cantidad > cartas.size()) {
+            throw new IllegalArgumentException("No hay suficientes cartas en el mazo.");
+        }
+
+        List<Carta> cartasRepartidas = new ArrayList<>();
+        for (int i = 0; i < cantidad; i++) {
+            cartasRepartidas.add(cartas.remove(cartas.size() - 1)); // Reparte la última carta
+        }
+        return cartasRepartidas;
+    }
+
+    public List<Carta> getCartas() {
+        return cartas;
+    }
 }
