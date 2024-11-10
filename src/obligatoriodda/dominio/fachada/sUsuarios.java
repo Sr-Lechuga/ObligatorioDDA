@@ -39,7 +39,7 @@ class sUsuarios {
             );
         }
         
-        Jugador jugadorARegistrar = new Jugador(saldo, cedula, clave, nombreCompleto);
+        Jugador jugadorARegistrar = new Jugador(saldo, cedula, clave, nombreCompleto, null);
         jugadorARegistrar.validar();
         jugadores.put(cedula, jugadorARegistrar);
     }
