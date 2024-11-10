@@ -1,5 +1,6 @@
 package main;
 
+import iuswing.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,9 @@ public class main {
         } catch (UsuarioNoRegistradoException | UsuarioEnSesionException | CredencialesIncorrectasException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Principal principal = new Principal();
+        principal.setVisible(true);
     }
 
     private static void cargarSistema(Fachada fachada) {
