@@ -13,7 +13,7 @@ public class Mazo {
     }
 
     private void crearMazo() {
-        String[] valores = {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        String[] valores = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         Palo[] palos = {
             new Palo("C", "Corazones"),
             new Palo("D", "Diamantes"),
