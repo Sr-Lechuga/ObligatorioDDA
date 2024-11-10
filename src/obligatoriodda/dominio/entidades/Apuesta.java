@@ -23,7 +23,6 @@ public class Apuesta implements IValidable {
 
     public void setValor(double valor) {
         this.valor = valor;
-        validar();
     }
 
     public Jugador getCreador() {
@@ -38,7 +37,6 @@ public class Apuesta implements IValidable {
       validarCantidadParticipantes();
       participantes.add(jugador);
     }
-
 
     @Override
     public void validar() {
