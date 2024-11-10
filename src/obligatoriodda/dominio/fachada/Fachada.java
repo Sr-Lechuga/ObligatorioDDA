@@ -1,8 +1,8 @@
 package obligatoriodda.dominio.fachada;
 
-import obligatoriodda.dominio.excepciones.CredencialesIncorrectasException;
-import obligatoriodda.dominio.excepciones.UsuarioEnSesionException;
-import obligatoriodda.dominio.excepciones.UsuarioNoRegistradoException;
+import obligatoriodda.dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioEnSesionException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 
 /**
  *

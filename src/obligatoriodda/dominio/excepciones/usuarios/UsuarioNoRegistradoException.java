@@ -1,4 +1,4 @@
-package obligatoriodda.dominio.excepciones;
+package obligatoriodda.dominio.excepciones.usuarios;
 
 /**
  *

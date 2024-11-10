@@ -1,13 +1,14 @@
 package obligatoriodda.dominio.fachada;
 
 import java.util.HashMap;
-import obligatoriodda.dominio.Administrador;
-import obligatoriodda.dominio.Jugador;
-import obligatoriodda.dominio.Usuario;
-import obligatoriodda.dominio.excepciones.CredencialesIncorrectasException;
-import obligatoriodda.dominio.excepciones.UsuarioEnSesionException;
-import obligatoriodda.dominio.excepciones.UsuarioInvalidoException;
-import obligatoriodda.dominio.excepciones.UsuarioNoRegistradoException;
+
+import obligatoriodda.dominio.entidades.Administrador;
+import obligatoriodda.dominio.entidades.Jugador;
+import obligatoriodda.dominio.entidades.Usuario;
+import obligatoriodda.dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioEnSesionException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioInvalidoException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 
 /**
  *

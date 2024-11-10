@@ -1,6 +1,6 @@
-package obligatoriodda.dominio;
+package obligatoriodda.dominio.entidades;
 
-import obligatoriodda.dominio.excepciones.SaldoException;
+import obligatoriodda.dominio.excepciones.usuarios.SaldoException;
 import obligatoriodda.dominio.interfaces.IValidable;
 
 /**

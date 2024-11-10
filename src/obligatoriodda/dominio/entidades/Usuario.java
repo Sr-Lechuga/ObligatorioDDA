@@ -1,6 +1,6 @@
-package obligatoriodda.dominio;
+package obligatoriodda.dominio.entidades;
 
-import obligatoriodda.dominio.excepciones.UsuarioInvalidoException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioInvalidoException;
 import obligatoriodda.dominio.interfaces.IValidable;
 
 /**

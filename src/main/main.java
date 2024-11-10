@@ -2,9 +2,10 @@ package main;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import obligatoriodda.dominio.excepciones.CredencialesIncorrectasException;
-import obligatoriodda.dominio.excepciones.UsuarioEnSesionException;
-import obligatoriodda.dominio.excepciones.UsuarioNoRegistradoException;
+
+import obligatoriodda.dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioEnSesionException;
+import obligatoriodda.dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 import obligatoriodda.dominio.fachada.Fachada;
 import utilidades.precarga.Precarga;
 

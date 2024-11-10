@@ -1,4 +1,4 @@
-package obligatoriodda.dominio;
+package obligatoriodda.dominio.entidades;
 
 /**
  *
