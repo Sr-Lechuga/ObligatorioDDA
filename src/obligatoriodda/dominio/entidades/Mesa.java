@@ -4,40 +4,36 @@ import obligatoriodda.dominio.excepciones.mesas.ArgumentosMesaException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author jlima
- */
 public class Mesa {
-    private static int contadorMesas = 0; // Contador para llevar el número de mesas
+    private static int contadorMesas = 0;
     private int numeroMesa;
     private int jugadoresRequeridos;
     private double apuestaBase;
     private double totalApostado;
     private double porcentajeComision;
     private double pozoAcumulado;
-    
-    private List<Jugador> participantes; // Lista de jugadores
-    private List<Ronda> rondas; // Lista de rondas
-    private Mazo mazo; // Mazo de cartas
-    private EstadoMesa estado; // Estado de la mesa
+
+    private List<Jugador> participantes;
+    private List<Ronda> rondas;
+    private Mazo mazo;
+    private EstadoMesa estado;
 
     public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) {
-        this.numeroMesa = ++contadorMesas; // Incrementa y asigna el número de mesa
+        this.numeroMesa = ++contadorMesas;
         setJugadoresRequeridos(jugadoresRequeridos);
         setApuestaBase(apuestaBase);
         setPorcentajeComision(porcentajeComision);
-        
-        this.totalApostado = 0.0; // Inicialmente no hay apuestas
-        this.pozoAcumulado = 0.0; // Inicialmente el pozo acumulado es cero
-        
-        this.participantes = new ArrayList<>(); // Inicializa la lista de jugadores
-        this.rondas = new ArrayList<>(); // Inicializa la lista de rondas
-        this.mazo = new Mazo(); // Inicializa el mazo (asumiendo que Mazo tiene un constructor por defecto)
-        this.estado = EstadoMesa.ABIERTO; // Estado inicial de la mesa
+
+        this.totalApostado = 0.0;
+        this.pozoAcumulado = 0.0;
+
+        this.participantes = new ArrayList<>();
+        this.rondas = new ArrayList<>();
+        this.mazo = new Mazo();
+        this.estado = EstadoMesa.ABIERTA;
+        validar();
     }
 
-    // Getters y Setters
     public int getNumeroMesa() {
         return numeroMesa;
     }
@@ -48,7 +44,7 @@ public class Mesa {
 
     public void setJugadoresRequeridos(int jugadoresRequeridos) {
         this.jugadoresRequeridos = jugadoresRequeridos;
-        validar(); // Llamar a validar después de establecer el valor
+        validar();
     }
 
     public double getApuestaBase() {
@@ -57,7 +53,7 @@ public class Mesa {
 
     public void setApuestaBase(double apuestaBase) {
         this.apuestaBase = apuestaBase;
-        validar(); // Llamar a validar después de establecer el valor
+        validar();
     }
 
     public double getTotalApostado() {
@@ -70,7 +66,7 @@ public class Mesa {
 
     public void setPorcentajeComision(double porcentajeComision) {
         this.porcentajeComision = porcentajeComision;
-        validar(); // Llamar a validar después de establecer el valor
+        validar();
     }
 
     public double getPozoAcumulado() {
@@ -94,15 +90,15 @@ public class Mesa {
     }
 
     public int getCantidadJugadores() {
-        return participantes.size(); // Retorna la cantidad de jugadores actuales
+        return participantes.size();
     }
 
     public int getNumeroRondaActual() {
-        return rondas.size(); // Retorna el número de la ronda actual (suponiendo que el número de rondas es el número actual)
+        return rondas.size();
     }
 
     public double calcularRecaudacion() {
-        return totalApostado * (porcentajeComision / 100); // Calcula la recaudación
+        return totalApostado * (porcentajeComision / 100);
     }
 
     public void agregarParticipante(Jugador jugador) {
