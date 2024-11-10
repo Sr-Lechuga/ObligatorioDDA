@@ -35,17 +35,25 @@ public class Apuesta implements IValidable {
     }
 
     public void agregarParticipante(Jugador jugador) {
-        if (participantes.size() < 4) {
-            participantes.add(jugador);
-        } else {
-            throw new IllegalStateException("No se pueden agregar más de 4 participantes");
-        }
+      validarCantidadParticipantes();
+      participantes.add(jugador);
     }
+
 
     @Override
     public void validar() {
-        if (valor <= 0) {
-            throw new IllegalArgumentException("El valor de la apuesta debe ser mayor a 0");
-        }
+      validarValor();
+    }
+
+    private void validarValor() {
+      if (valor <= 0) {
+          throw new IllegalArgumentException("El valor de la apuesta debe ser mayor a 0");
+      }
+    }
+    
+    private void validarCantidadParticipantes() {
+      if (participantes.size() >= 4) {
+        throw new IllegalStateException("No se pueden agregar más de 4 participantes");
+      }
     }
 }
