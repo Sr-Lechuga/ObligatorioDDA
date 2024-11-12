@@ -4,10 +4,10 @@ import iuswing.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import obligatoriodda.dominio.excepciones.usuarios.CredencialesIncorrectasException;
-import obligatoriodda.dominio.excepciones.usuarios.UsuarioEnSesionException;
-import obligatoriodda.dominio.excepciones.usuarios.UsuarioNoRegistradoException;
-import obligatoriodda.dominio.fachada.Fachada;
+import dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import dominio.excepciones.usuarios.UsuarioEnSesionException;
+import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
+import dominio.subsistemas.Fachada;
 import utilidades.precarga.Precarga;
 
 /**

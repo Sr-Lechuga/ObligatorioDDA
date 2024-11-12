@@ -4,13 +4,13 @@
  */
 package iuswing;
 
-import obligatoriodda.dominio.entidades.Administrador;
-import obligatoriodda.dominio.entidades.Jugador;
-import obligatoriodda.dominio.entidades.Usuario;
-import obligatoriodda.dominio.excepciones.usuarios.CredencialesIncorrectasException;
-import obligatoriodda.dominio.excepciones.usuarios.UsuarioEnSesionException;
-import obligatoriodda.dominio.excepciones.usuarios.UsuarioNoRegistradoException;
-import obligatoriodda.dominio.fachada.Fachada;
+import dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import dominio.excepciones.usuarios.UsuarioEnSesionException;
+import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
+import dominio.subsistemas.Fachada;
+import dominio.subsistemas.usuarios.entidades.Administrador;
+import dominio.subsistemas.usuarios.entidades.Jugador;
+import dominio.subsistemas.usuarios.entidades.Usuario;
 
 /**
  *

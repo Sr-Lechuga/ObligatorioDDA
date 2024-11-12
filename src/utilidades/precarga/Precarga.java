@@ -1,6 +1,6 @@
 package utilidades.precarga;
 
-import obligatoriodda.dominio.fachada.Fachada;
+import dominio.subsistemas.Fachada;
 
 /**
  *
