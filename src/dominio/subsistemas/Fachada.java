@@ -8,7 +8,11 @@ import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 import dominio.subsistemas.mesas.sMesas;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.reglas.sReglas;
+import dominio.subsistemas.mesas.sMesas;
+import dominio.subsistemas.mesas.entidades.Mesa;
+import dominio.subsistemas.reglas.sReglas;
 import dominio.subsistemas.usuarios.sUsuarios;
+import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Usuario;
 import utilidades.observer.Observable;
@@ -25,6 +29,8 @@ public class Fachada extends Observable{
     private sReglas subReglas = new sReglas();
     // </editor-fold>
     
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Constructor">    
     
     // Para evitar que se pueda instanciar
@@ -36,6 +42,9 @@ public class Fachada extends Observable{
         }
         return instancia;
     }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Métodos Usuario">
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Usuario">
