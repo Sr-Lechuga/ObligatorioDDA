@@ -1,6 +1,5 @@
 package controladores;
 
-import java.util.logging.Logger;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
