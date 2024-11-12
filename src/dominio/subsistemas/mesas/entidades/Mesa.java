@@ -11,7 +11,7 @@ import dominio.subsistemas.usuarios.entidades.Jugador;
 public class Mesa {
     
     // <editor-fold defaultstate="collapsed" desc="Atributos">
-    private static int contadorMesas = 0;
+    private static int contadorMesas = 1;
     private int numeroMesa;
     private int jugadoresRequeridos;
     private double apuestaBase;
@@ -26,8 +26,8 @@ public class Mesa {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) {
-        this.numeroMesa = ++contadorMesas;
+    public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) throws ArgumentosMesaException {
+        this.numeroMesa = contadorMesas++;
         
         this.jugadoresRequeridos = jugadoresRequeridos;
         this.apuestaBase = apuestaBase;
@@ -95,7 +95,7 @@ public class Mesa {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos">
-    public void agregarParticipante(Jugador jugador) {
+    public void agregarParticipante(Jugador jugador) throws ArgumentosMesaException {
         if (participantes.size() < jugadoresRequeridos) {
             participantes.add(jugador);
         } else {
@@ -113,25 +113,25 @@ public class Mesa {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Validaciones">
-    private void validar() {
+    private void validar() throws ArgumentosMesaException {
         validarJugadoresRequeridos();
         validarApuestaBase();
         validarComision();
     }
 
-    private void validarJugadoresRequeridos() {
+    private void validarJugadoresRequeridos() throws ArgumentosMesaException {
         if (jugadoresRequeridos < 2 || jugadoresRequeridos > 5) {
             throw new ArgumentosMesaException("Cantidad de jugadores no valida");
         }
     }
 
-    private void validarApuestaBase() {
+    private void validarApuestaBase() throws ArgumentosMesaException {
         if (apuestaBase < 1) {
             throw new ArgumentosMesaException("Apuesta base invalida");
         }
     }
 
-    private void validarComision() {
+    private void validarComision() throws ArgumentosMesaException {
         if (porcentajeComision < 1 || porcentajeComision > 50) {
             throw new ArgumentosMesaException("Comision invalida");
         }
