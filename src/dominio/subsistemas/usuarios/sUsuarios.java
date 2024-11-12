@@ -17,10 +17,22 @@ import dominio.subsistemas.usuarios.entidades.Usuario;
 public class sUsuarios {
 
     //<cedula,usuario>
-//    private HashMap<Integer, Usuario> usuariosActivos = new HashMap<>();
     private HashMap<String, Administrador> administradores = new HashMap<>();
     private HashMap<String, Jugador> jugadores = new HashMap<>();
 
+    /**
+     * Agrega un nuevo administrador al sistema.
+     *
+     * Este método verifica si el usuario ya está registrado. Si el usuario ya existe,
+     * se lanza una excepción. Si no existe, se crea un nuevo objeto Administrador,
+     * se valida y se agrega al sistema.
+     *
+     * @param cedula La cédula del administrador que se desea agregar. Debe ser única.
+     * @param clave La clave de acceso del administrador.
+     * @param nombreCompleto El nombre completo del administrador.
+     * @throws UsuarioInvalidoException Si el usuario ya está registrado en el sistema.
+     * @throws Exception Si ocurre un error durante la validación del administrador.
+     */
     public void agregarAdministrador(String cedula, String clave, String nombreCompleto) throws Exception {
         if (buscarUsuario(cedula) != null) {
             throw new UsuarioInvalidoException(
