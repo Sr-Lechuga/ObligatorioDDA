@@ -1,6 +1,6 @@
 package dominio.excepciones.mesas;
 
-public class ArgumentosMesaException extends RuntimeException {
+public class ArgumentosMesaException extends Exception {
     public ArgumentosMesaException(String message) {
         super(message);
     }
