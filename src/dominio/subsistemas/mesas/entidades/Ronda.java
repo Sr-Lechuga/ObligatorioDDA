@@ -13,8 +13,9 @@ public class Ronda {
     private static int contadorRondas = 1;
     private int numeroRonda;
     private double pozo;
-    private Figura figuraGanadora;
     private EstadoRonda estado;
+
+    private Figura figuraGanadora;
     private List<Jugador> participantes;
     private Jugador jugadorGanador;
     private Apuesta apuesta;
@@ -25,10 +26,12 @@ public class Ronda {
         this.numeroRonda = contadorRondas++;
         this.pozo = 0.0;
         this.figuraGanadora = null;
-        this.estado = EstadoRonda.ESPERANDO_APUESTA;
-        this.participantes = new ArrayList<>();
         this.jugadorGanador = null;
         this.apuesta = null;
+        
+        this.estado = EstadoRonda.ESPERANDO_APUESTA;
+
+        this.participantes = new ArrayList<>();
     }
     // </editor-fold>
 
@@ -62,44 +65,15 @@ public class Ronda {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Metodos">
-    public void agregarParticipante(Jugador jugador) {
-        participantes.add(jugador);
-    }
-
-    public void setPozo(double pozo) {
-        this.pozo = pozo;
-    }
-
-    public void setFiguraGanadora(Figura figuraGanadora) {
-        this.figuraGanadora = figuraGanadora;
-    }
-
+    // <editor-fold defaultstate="collapsed" desc="Setters">
     public void setEstado(EstadoRonda estado) {
         this.estado = estado;
     }
-
-    public void setJugadorGanador(Jugador jugadorGanador) {
-        this.jugadorGanador = jugadorGanador;
-    }
-
-    public void setApuesta(Apuesta apuesta) {
-        this.apuesta = apuesta;
-    }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Métodos Sobreescritos">
-    @Override
-    public String toString() {
-        return "Ronda{" +
-                "numeroRonda=" + numeroRonda +
-                ", pozo=" + pozo +
-                ", figuraGanadora=" + figuraGanadora +
-                ", estado=" + estado +
-                ", participantes=" + participantes +
-                ", jugadorGanador=" + jugadorGanador +
-                ", apuesta=" + apuesta +
-                '}';
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
+    public void agregarParticipante(Jugador jugador) {
+        participantes.add(jugador);
     }
     // </editor-fold>
 }

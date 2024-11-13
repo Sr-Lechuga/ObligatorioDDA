@@ -72,7 +72,7 @@ public class sUsuarios {
             );
         }
 
-        if (!usuarioEncontrado.validarCredenciales(cedula, clave)) {
+        if (!usuarioEncontrado.verificarCredenciales(cedula, clave)) {
             throw new CredencialesIncorrectasException("Credenciales incorrectas.");
         }
 

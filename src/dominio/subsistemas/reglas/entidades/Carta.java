@@ -1,33 +1,63 @@
 package dominio.subsistemas.reglas.entidades;
 
-public class Carta {
+import panelCartasPoker.CartaPoker;
+
+public class Carta implements CartaPoker{
     
     // <editor-fold defaultstate="collapsed" desc="Atributos">
-    private String valor;
-    private Palo palo;
+    private int valor;
+    private String palo;
+    private boolean visible; 
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Carta(String valor, Palo palo) {
+    public Carta(int valor, String palo) {
         this.valor = valor;
-        this.palo = palo;
+        this.palo = palo.toUpperCase();
+        visible = false;
+        validar();
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Getters">
-    public String getValor() {
+    // <editor-fold defaultstate="collapsed" desc="Metodos de interfaz">
+    @Override
+    public int getValorCarta() {
         return valor;
     }
 
-    public Palo getPalo() {
+    @Override
+    public String getPaloCarta() {
         return palo;
+    }
+
+    @Override
+    public boolean estaVisible() {
+        return visible;
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        this.visible = b;
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Métodos overrided">
-    @Override
-    public String toString() {
-        return valor + " de " + palo.getDescripcion(); // Utiliza la descripción del palo
+
+    // <editor-fold defaultstate="collapsed" desc="Validaciones">
+    public void validar(){
+        validarPalo();
+        validarValor();
+    }
+
+    private void validarPalo() {
+        if (!palo.toUpperCase().matches("[CDTP]")) {
+            throw new IllegalArgumentException("Código de palo inválido. Debe ser 'C', 'D', 'T' o 'P'.");
+        }
+    }
+
+    private void validarValor() {
+        if(valor < 1 || valor > 13){
+            throw new IllegalArgumentException("Valor de la carta inválido. Debe ser entre 1 y 13.");
+        }
     }
     // </editor-fold>
 }

@@ -10,7 +10,7 @@ public class Apuesta implements IValidable {
     
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private double valor;
-    private List<Jugador> participantes;
+    private List<Jugador> apostadores;
     private Jugador creador;
     // </editor-fold>
 
@@ -18,33 +18,30 @@ public class Apuesta implements IValidable {
     public Apuesta(double valor, Jugador creador) {
         this.valor = valor;
         this.creador = creador;
-        this.participantes = new ArrayList<>();
+        
+        this.apostadores = new ArrayList<>();
         validar();
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Getters y Setters">
+    // <editor-fold defaultstate="collapsed" desc="Getters">
     public double getValor() {
         return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     public Jugador getCreador() {
         return creador;
     }
 
-    public List<Jugador> getParticipantes() {
-        return participantes;
+    public List<Jugador> getApostadores() {
+        return apostadores;
     }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">
-    public void agregarParticipante(Jugador jugador) {
+    public void agregarApostador(Jugador jugador) {
       validarCantidadParticipantes();
-      participantes.add(jugador);
+      apostadores.add(jugador);
     }
     // </editor-fold>
     
@@ -61,7 +58,7 @@ public class Apuesta implements IValidable {
     }
 
     private void validarCantidadParticipantes() {
-        if (participantes.size() >= 4) {
+        if (apostadores.size() >= 4) {
             throw new IllegalStateException("No se pueden agregar más de 4 participantes");
         }
     }

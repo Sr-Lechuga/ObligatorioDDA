@@ -103,8 +103,9 @@ public class Mesa {
         }
     }
 
-    public void agregarRonda(Ronda ronda) {
-        rondas.add(ronda);
+    public void iniciarNuevaRonda() {
+        Ronda nuevaRonda = new Ronda();
+        rondas.add(nuevaRonda);
     }
 
     public double calcularRecaudacion() {
@@ -135,22 +136,6 @@ public class Mesa {
         if (porcentajeComision < 1 || porcentajeComision > 50) {
             throw new ArgumentosMesaException("Comision invalida");
         }
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Metodos Sobreescritos">
-
-    @Override
-    public String toString() {
-        return "Mesa{" +
-                "numeroMesa=" + numeroMesa +
-                ", jugadoresRequeridos=" + jugadoresRequeridos +
-                ", apuestaBase=" + apuestaBase +
-                ", totalApostado=" + totalApostado +
-                ", porcentajeComision=" + porcentajeComision +
-                ", pozoAcumulado=" + pozoAcumulado +
-                ", cantidadJugadores=" + getCantidadJugadores() + ", estado=" + estado +
-                '}';
     }
     // </editor-fold>
 }
