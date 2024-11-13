@@ -45,7 +45,7 @@ public class Login extends javax.swing.JDialog {
         btnLogin = new javax.swing.JButton();
         txtCedula = new javax.swing.JTextField();
         pwdClave = new javax.swing.JPasswordField();
-        lblError = new javax.swing.JLabel();
+        lblErrorLogin = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField2");
 
@@ -77,8 +77,8 @@ public class Login extends javax.swing.JDialog {
 
         pwdClave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblError.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblError.setForeground(new java.awt.Color(255, 51, 51));
+        lblErrorLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblErrorLogin.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,7 +105,7 @@ public class Login extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblErrorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLogin)))
@@ -127,7 +127,7 @@ public class Login extends javax.swing.JDialog {
                 .addGap(48, 48, 48)
                 .addComponent(btnLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblErrorLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
         );
 
@@ -152,7 +152,7 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblClave;
-    private javax.swing.JLabel lblError;
+    private javax.swing.JLabel lblErrorLogin;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JPasswordField pwdClave;
     private javax.swing.JTextField txtCedula;
@@ -168,15 +168,15 @@ public class Login extends javax.swing.JDialog {
             mostrarInterfaz(fachada.buscarUsuario(cedula));
             dispose();
         }catch (UsuarioNoRegistradoException | UsuarioEnSesionException | CredencialesIncorrectasException e){
-            lblError.setText("Ingreso incorrecto: " + e.getMessage());
+            lblErrorLogin.setText("Ingreso incorrecto: " + e.getMessage());
         }             
     }
     
     public void mostrarInterfaz(Usuario usuario) {
         if (usuario instanceof Administrador) {
-            new InterfazAdmin().setVisible(true);
+            new AdministrarMesas().setVisible(true);
         } else if (usuario instanceof Jugador) {            
-            new InterfazJugador().setVisible(true);
+            new IngresarAUnaMesa().setVisible(true);
         }
     }
     
