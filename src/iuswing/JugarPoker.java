@@ -4,6 +4,8 @@
  */
 package iuswing;
 
+import panelCartasPoker.PanelCartasPoker;
+
 /**
  *
  * @author agust
@@ -15,6 +17,10 @@ public class JugarPoker extends javax.swing.JFrame {
      */
     public JugarPoker() {
         initComponents();
+        // Inicializar el panel de cartas de póker
+        PanelCartasPoker panelCartas = new PanelCartasPoker();
+        // Añadir el panel de cartas al JFrame
+        add(panelCartas);
     }
 
     /**
