@@ -2,7 +2,7 @@ package dominio.subsistemas.reglas.entidades;
 
 import panelCartasPoker.CartaPoker;
 
-public class Carta implements CartaPoker{
+public class Carta implements CartaPoker, Comparable<Carta> {
     
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private int valor;
@@ -39,6 +39,15 @@ public class Carta implements CartaPoker{
     public void setVisible(boolean b) {
         this.visible = b;
     }
+
+    @Override
+    public int compareTo(Carta o) {
+        if (o == null) {
+            throw new NullPointerException("La carta a comparar no puede ser nula");
+        }
+        return Integer.compare(this.valor, o.getValorCarta());
+    }
+
     // </editor-fold>
 
 
@@ -60,4 +69,6 @@ public class Carta implements CartaPoker{
         }
     }
     // </editor-fold>
+
+
 }

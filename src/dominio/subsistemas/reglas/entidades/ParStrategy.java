@@ -2,11 +2,11 @@ package dominio.subsistemas.reglas.entidades;
 
 import java.util.List;
 
-public class ParStrategy implements FiguraStrategy{
+public class ParStrategy extends FigurasPokerStrategy implements FiguraStrategy{
 
   @Override
   public boolean analizarMano(List<Carta> mano) {
-    throw new UnsupportedOperationException("Unimplemented method 'analizarMano'");
+    return contarNCartasDeMismoValor(mano, 2);
   }
 
 }

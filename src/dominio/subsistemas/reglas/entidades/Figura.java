@@ -31,5 +31,6 @@ public class Figura {
     public boolean analizarMano(List<Carta> mano) {
         return estrategia.analizarMano(mano);
     }
+
     // </editor-fold>
 }
