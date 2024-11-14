@@ -70,7 +70,7 @@ public class Fachada extends Observable{
         submesas.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
     }
 
-    public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException {
+    public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException, GestionMesasException {
         submesas.agregarParticipanteEnMesa(unaMesa, unJugador);
     }
 

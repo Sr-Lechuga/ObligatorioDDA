@@ -19,7 +19,6 @@ public class Mazo {
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Mazo() {
         cartas = new ArrayList<>();
-        crearMazo();
     }
     // </editor-fold>
 
@@ -42,7 +41,7 @@ public class Mazo {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos Publicos">
-    public void juntarLuegoMezclar(){
+    public void barajar(){
         crearMazo();
         mezclar();
     }

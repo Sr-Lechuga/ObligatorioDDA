@@ -3,6 +3,8 @@ package dominio.subsistemas.mesas.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import dominio.excepciones.usuarios.SaldoException;
+import dominio.subsistemas.mesas.estados.EstadoMesa;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
@@ -71,9 +73,41 @@ public class Ronda {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Metodos">
+    // <editor-fold defaultstate="collapsed" desc="Metodos publicos">
     public void agregarParticipante(Jugador jugador) {
         participantes.add(jugador);
     }
+
+    public void quitarParticipante(Jugador jugador){
+        participantes.remove(jugador);
+
+        if(participantes.isEmpty()){
+            this.estado = EstadoRonda.TERMINADA;
+        }
+    }
+
+    public void aumentarPozo(double apuesta) {
+        this.pozo += apuesta;
+    }
+    
+    public double obtenerPozoAcumulado() {
+        if(!hayApuesta()){
+            return pozo;
+        }
+        return 0;
+      }
+    
+    public void iniciarApuesta(Jugador jugador, double apuesta) throws SaldoException {
+        jugador.removerSaldo(apuesta);
+        this.pozo += apuesta;
+        this.estado = EstadoRonda.APUESTA_INICIADA;
+    }
+      // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Metodos privados">
+    private boolean hayApuesta(){
+        return this.apuesta != null;
+    }
     // </editor-fold>
+
 }

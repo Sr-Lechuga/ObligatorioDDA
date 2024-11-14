@@ -27,8 +27,9 @@ public class sMesas {
    * @param unaMesa
    * @param unJugador
    * @throws ArgumentosMesaException
+   * @throws GestionMesasException
    */
-  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException{
+  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException, GestionMesasException{
     unaMesa.agregarParticipante(unJugador);
   }
 

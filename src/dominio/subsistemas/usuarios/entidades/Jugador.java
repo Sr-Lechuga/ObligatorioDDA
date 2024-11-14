@@ -1,7 +1,10 @@
 package dominio.subsistemas.usuarios.entidades;
 
+import java.util.List;
+
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.interfaces.IValidable;
+import dominio.subsistemas.reglas.entidades.Carta;
 import dominio.subsistemas.usuarios.estados.EstadoJugador;
 
 @SuppressWarnings("unused")
@@ -10,6 +13,8 @@ public class Jugador extends Usuario implements IValidable {
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private double saldo;
     private EstadoJugador estado;
+
+    private List<Carta> mano;
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
@@ -17,6 +22,8 @@ public class Jugador extends Usuario implements IValidable {
         super(cedula, clave, nombreCompleto);
         this.saldo = saldo;
         this.estado = estado;
+
+        this.mano = null;
     }
     // </editor-fold>
 
@@ -27,6 +34,23 @@ public class Jugador extends Usuario implements IValidable {
 
     public EstadoJugador getEstado() {
         return estado; 
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
+    public void validarSaldoMinimo(double saldoMinimo) throws SaldoException{
+        if(Double.compare(this.saldo, saldoMinimo) < 0){
+            throw new SaldoException("Saldo insuficiente");
+        }
+    }
+
+    public void removerSaldo(double apuesta) throws SaldoException {
+        validarSaldoMinimo(apuesta);
+        this.saldo -= apuesta;
+    }
+    
+    public void recibirCartas(List<Carta> cartas) {
+        this.mano = cartas;
     }
     // </editor-fold>
 

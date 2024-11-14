@@ -6,6 +6,7 @@ public class Figura {
     
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private String nombre;
+    private String descripcion;
     private FiguraStrategy estrategia;
     // </editor-fold>
 
@@ -16,8 +17,9 @@ public class Figura {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Figura(String nombre) {
+    public Figura(String nombre, String descripcion) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
     }
     // </editor-fold>
 
