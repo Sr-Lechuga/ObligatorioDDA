@@ -1,105 +1,146 @@
 package dominio.subsistemas.mesas.entidades;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class Ronda {
-    
-    // <editor-fold defaultstate="collapsed" desc="Atributos">
-    private static int contadorRondas = 1;
-    private int numeroRonda;
-    private double pozo;
-    private Figura figuraGanadora;
-    private EstadoRonda estado;
-    private List<Jugador> participantes;
-    private Jugador jugadorGanador;
-    private Apuesta apuesta;
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Ronda() {
-        this.numeroRonda = contadorRondas++;
-        this.pozo = 0.0;
-        this.figuraGanadora = null;
-        this.estado = EstadoRonda.ESPERANDO_APUESTA;
-        this.participantes = new ArrayList<>();
-        this.jugadorGanador = null;
-        this.apuesta = null;
-    }
-    // </editor-fold>
+  // <editor-fold defaultstate="collapsed" desc="Atributos">
+  private static int contadorRondas = 1;
 
-    // <editor-fold defaultstate="collapsed" desc="Getters">
-    public int getNumeroRonda() {
-        return numeroRonda;
-    }
+  private int numeroRonda;
+  private double pozo;
+  private EstadoRonda estado;
+  private int respuestas;
 
-    public double getPozo() {
-        return pozo;
-    }
+  private List<Jugador> participantes;
+  private List<Jugador> retirados;
+  private Apuesta apuesta;
+  private Jugador jugadorGanador;
+  private Figura figuraGanadora;
+  // </editor-fold>
 
-    public Figura getFiguraGanadora() {
-        return figuraGanadora;
-    }
+  // <editor-fold defaultstate="collapsed" desc="Constructores">
+  public Ronda(List<Jugador> participantes) {
+    this.numeroRonda = contadorRondas++;
+    this.pozo = 0.0;
+    this.figuraGanadora = null;
+    this.jugadorGanador = null;
+    this.apuesta = null;
 
-    public EstadoRonda getEstado() {
-        return estado;
-    }
+    this.estado = EstadoRonda.ESPERANDO_APUESTA;
 
-    public List<Jugador> getParticipantes() {
-        return participantes;
-    }
+    this.participantes = participantes;
+  }
+  // </editor-fold>
 
-    public Jugador getJugadorGanador() {
-        return jugadorGanador;
-    }
+  // <editor-fold defaultstate="collapsed" desc="Getters">
+  public int getNumeroRonda() {
+    return numeroRonda;
+  }
 
-    public Apuesta getApuesta() {
-        return apuesta;
-    }
-    // </editor-fold>
+  public double getPozo() {
+    return pozo;
+  }
 
-    // <editor-fold defaultstate="collapsed" desc="Metodos">
-    public void agregarParticipante(Jugador jugador) {
-        participantes.add(jugador);
-    }
+  public Figura getFiguraGanadora() {
+    return figuraGanadora;
+  }
 
-    public void setPozo(double pozo) {
-        this.pozo = pozo;
-    }
+  public EstadoRonda getEstado() {
+    return estado;
+  }
 
-    public void setFiguraGanadora(Figura figuraGanadora) {
-        this.figuraGanadora = figuraGanadora;
-    }
+  public List<Jugador> getParticipantes() {
+    return participantes;
+  }
 
-    public void setEstado(EstadoRonda estado) {
-        this.estado = estado;
-    }
+  public Jugador getJugadorGanador() {
+    return jugadorGanador;
+  }
 
-    public void setJugadorGanador(Jugador jugadorGanador) {
-        this.jugadorGanador = jugadorGanador;
-    }
+  public Apuesta getApuesta() {
+    return apuesta;
+  }
+  // </editor-fold>
 
-    public void setApuesta(Apuesta apuesta) {
-        this.apuesta = apuesta;
-    }
-    // </editor-fold>
+  // <editor-fold defaultstate="collapsed" desc="Setters">
+  public void setEstado(EstadoRonda estado) {
+    this.estado = estado;
+  }
+  // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Métodos Sobreescritos">
-    @Override
-    public String toString() {
-        return "Ronda{" +
-                "numeroRonda=" + numeroRonda +
-                ", pozo=" + pozo +
-                ", figuraGanadora=" + figuraGanadora +
-                ", estado=" + estado +
-                ", participantes=" + participantes +
-                ", jugadorGanador=" + jugadorGanador +
-                ", apuesta=" + apuesta +
-                '}';
+  // <editor-fold defaultstate="collapsed" desc="Metodos publicos">
+  // DEPRECTED
+  public void agregarParticipante(Jugador jugador) {
+    participantes.add(jugador);
+  }
+
+  public void aumentarPozo(double apuesta) {
+    this.pozo += apuesta;
+  }
+
+  public double obtenerPozoAcumulado() {
+    if (!hayApuesta()) {
+      getPozo();
     }
-    // </editor-fold>
+    return 0;
+  }
+
+  public void iniciarApuesta(Jugador jugador, double valorApuesta) throws SaldoException {
+    jugador.removerSaldo(valorApuesta);
+    aumentarPozo(valorApuesta);
+
+    this.apuesta = new Apuesta(valorApuesta, jugador);
+
+    setEstado(EstadoRonda.APUESTA_INICIADA);
+    this.respuestas++;
+  }
+
+  public void pasar(Jugador jugador) {
+    participantes.remove(jugador);
+    retirados.addLast(jugador);
+
+    actualizarEstadoRonda();
+  }
+
+  public void pagarApuesta(Jugador apostador) throws SaldoException {
+    this.apuesta.agregarApostador(apostador);
+    aumentarPozo(apuesta.getValor());
+    this.respuestas++;
+  }
+
+  // </editor-fold>
+
+  // <editor-fold defaultstate="collapsed" desc="Metodos privados">
+  private boolean hayApuesta() {
+    return this.apuesta != null;
+  }
+
+  private void actualizarEstadoRonda() {
+    if (participantes.isEmpty()) {
+      setEstado(EstadoRonda.TERMINADA);
+    } else if (this.respuestas == participantes.size() + retirados.size()) {
+      if (participantes.size() == 1) {
+        victoria();
+      } else {
+        pedirCartas();
+      }
+    }
+  }
+
+  private void pedirCartas() {
+    setEstado(EstadoRonda.PIDIENDO_CARTAS);
+  }
+
+  private void victoria() {
+    setEstado(EstadoRonda.TERMINADA);
+  }
+
+  // </editor-fold>
+
 }

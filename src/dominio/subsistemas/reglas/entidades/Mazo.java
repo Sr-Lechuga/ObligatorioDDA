@@ -10,32 +10,40 @@ public class Mazo {
     private List<Carta> cartas;
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Mazo() {
-        cartas = new ArrayList<>();
-        crearMazo();
+    // <editor-fold defaultstate="collapsed" desc="Getters">
+    public List<Carta> getCartas() {
+        return cartas;
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Metodos">
-    private void crearMazo() {
-        String[] valores = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        Palo[] palos = {
-            new Palo("C", "Corazones"),
-            new Palo("D", "Diamantes"),
-            new Palo("T", "Tréboles"),
-            new Palo("P", "Picas")
-        };
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
+    public Mazo() {
+        cartas = new ArrayList<>();
+    }
+    // </editor-fold>
 
-        for (Palo palo : palos) {
-            for (String valor : valores) {
+    // <editor-fold defaultstate="collapsed" desc="Metodos Privados">
+    private void crearMazo() {
+        cartas = new ArrayList<>();
+        int[] valores = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+        String[] palos = {"C","D","T","P"};
+
+        for (String palo : palos) {
+            for (int valor : valores) {
                 cartas.add(new Carta(valor, palo));
             }
         }
     }
 
-    public void mezclar() {
+    private void mezclar() {
         Collections.shuffle(cartas);
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Metodos Publicos">
+    public void barajar(){
+        crearMazo();
+        mezclar();
     }
 
     public List<Carta> repartirCartas(int cantidad) {
@@ -48,10 +56,6 @@ public class Mazo {
             cartasRepartidas.add(cartas.remove(cartas.size() - 1)); // Reparte la última carta
         }
         return cartasRepartidas;
-    }
-
-    public List<Carta> getCartas() {
-        return cartas;
     }
     // </editor-fold>
 }

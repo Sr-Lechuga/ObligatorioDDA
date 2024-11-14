@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
+import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
@@ -27,8 +28,10 @@ public class sMesas {
    * @param unaMesa
    * @param unJugador
    * @throws ArgumentosMesaException
+   * @throws GestionMesasException
+   * @throws SaldoException 
    */
-  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException{
+  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException, GestionMesasException, SaldoException{
     unaMesa.agregarParticipante(unJugador);
   }
 

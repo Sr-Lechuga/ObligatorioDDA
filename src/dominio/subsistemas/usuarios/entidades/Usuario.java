@@ -32,9 +32,6 @@ public abstract class Usuario implements IValidable {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Validaciones">
-    public boolean validarCredenciales(String cedula, String clave) {
-        return this.cedula.equals(cedula) && this.clave.equals(clave);
-    }
 
     @Override
     public void validar() throws Exception {
@@ -67,6 +64,10 @@ public abstract class Usuario implements IValidable {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">
+    public boolean verificarCredenciales(String cedula, String clave) {
+        return this.cedula.equals(cedula) && this.clave.equals(clave);
+    }
+    
     public boolean estaActivo() {
         return this.activo;
     }

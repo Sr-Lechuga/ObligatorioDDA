@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
+import dominio.excepciones.mesas.GestionMesasException;
+import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
+import dominio.subsistemas.reglas.entidades.Carta;
 import dominio.subsistemas.reglas.entidades.Mazo;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class Mesa {
-    
+
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private static int contadorMesas = 1;
     private int numeroMesa;
@@ -28,7 +31,7 @@ public class Mesa {
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) throws ArgumentosMesaException {
         this.numeroMesa = contadorMesas++;
-        
+
         this.jugadoresRequeridos = jugadoresRequeridos;
         this.apuestaBase = apuestaBase;
         this.porcentajeComision = porcentajeComision;
@@ -95,20 +98,60 @@ public class Mesa {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos">
-    public void agregarParticipante(Jugador jugador) throws ArgumentosMesaException {
-        if (participantes.size() < jugadoresRequeridos) {
-            participantes.add(jugador);
-        } else {
+    public void agregarParticipante(Jugador jugador)
+            throws ArgumentosMesaException, GestionMesasException, SaldoException {
+        if (participantes.size() > jugadoresRequeridos) {
             throw new ArgumentosMesaException("No se pueden agregar más jugadores, la mesa está llena.");
+        }
+        if (this.estado != EstadoMesa.ABIERTA) {
+            throw new GestionMesasException("La mesa no esta abierta para recibir jugadores.");
+        }
+
+        participantes.add(jugador);
+
+        if (this.participantes.size() == jugadoresRequeridos) {
+            iniciarMesa();
         }
     }
 
-    public void agregarRonda(Ronda ronda) {
-        rondas.add(ronda);
+    public void quitarParticipante(Jugador jugador) {
+        participantes.remove(jugador);
+    }
+
+    private void iniciarMesa() throws SaldoException {
+        this.estado = EstadoMesa.INICIADA;
+        iniciarNuevaRonda();
+    }
+
+    public void iniciarNuevaRonda() throws SaldoException {
+        if (this.rondas.size() > 0) {
+            this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
+        }
+
+        Ronda nuevaRonda = new Ronda(participantes);
+
+        nuevaRonda.aumentarPozo(this.pozoAcumulado);
+        this.pozoAcumulado = 0;
+
+        for (Jugador jugador : participantes) {
+            nuevaRonda.agregarParticipante(jugador);
+            jugador.removerSaldo(apuestaBase);
+            nuevaRonda.aumentarPozo(apuestaBase);
+
+            jugador.recibirCartas(mazo.repartirCartas(5));
+        }
+
+        rondas.add(nuevaRonda);
+
+        mazo.barajar();
     }
 
     public double calcularRecaudacion() {
         return totalApostado * (porcentajeComision / 100);
+    }
+
+    public void pedirCartas(Jugador jugador, int cantidadDeCartas) {
+        jugador.recibirCartas(mazo.repartirCartas(cantidadDeCartas));
     }
     // </editor-fold>
 
@@ -135,22 +178,6 @@ public class Mesa {
         if (porcentajeComision < 1 || porcentajeComision > 50) {
             throw new ArgumentosMesaException("Comision invalida");
         }
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Metodos Sobreescritos">
-
-    @Override
-    public String toString() {
-        return "Mesa{" +
-                "numeroMesa=" + numeroMesa +
-                ", jugadoresRequeridos=" + jugadoresRequeridos +
-                ", apuestaBase=" + apuestaBase +
-                ", totalApostado=" + totalApostado +
-                ", porcentajeComision=" + porcentajeComision +
-                ", pozoAcumulado=" + pozoAcumulado +
-                ", cantidadJugadores=" + getCantidadJugadores() + ", estado=" + estado +
-                '}';
     }
     // </editor-fold>
 }

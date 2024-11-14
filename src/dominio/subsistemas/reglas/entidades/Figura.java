@@ -1,14 +1,25 @@
 package dominio.subsistemas.reglas.entidades;
 
+import java.util.List;
+
 public class Figura {
     
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private String nombre;
+    private String descripcion;
+    private FiguraStrategy estrategia;
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Setter">
+    public void setEstrategia(FiguraStrategy estrategia) {
+        this.estrategia = estrategia;
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Figura(String nombre) {
+    public Figura(String nombre, String descripcion) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
     }
     // </editor-fold>
 
@@ -19,8 +30,9 @@ public class Figura {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos">
-    public void analizarMano() {
-        throw new UnsupportedOperationException("Método no implementado");
+    public boolean analizarMano(List<Carta> mano) {
+        return estrategia.analizarMano(mano);
     }
+
     // </editor-fold>
 }

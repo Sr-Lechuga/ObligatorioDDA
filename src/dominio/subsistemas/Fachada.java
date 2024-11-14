@@ -3,6 +3,7 @@ package dominio.subsistemas;
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import dominio.excepciones.usuarios.SaldoException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
 import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 import dominio.subsistemas.mesas.sMesas;
@@ -17,20 +18,19 @@ import utilidades.observer.Observable;
  *
  * @author jlima
  */
-public class Fachada extends Observable{
+public class Fachada extends Observable {
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private static Fachada instancia;
     private sUsuarios subUsuarios = new sUsuarios();
     private sMesas submesas = new sMesas();
     private sReglas subReglas = new sReglas();
     // </editor-fold>
-    
-    
-    
-    // <editor-fold defaultstate="collapsed" desc="Constructor">    
-    
+
+    // <editor-fold defaultstate="collapsed" desc="Constructor">
+
     // Para evitar que se pueda instanciar
-    private Fachada() {}
+    private Fachada() {
+    }
 
     public static Fachada getInstancia() {
         if (instancia == null) {
@@ -63,14 +63,14 @@ public class Fachada extends Observable{
     }
     // </editor-fold>
 
-
     // <editor-fold defaultstate="collapsed" desc="Métodos Mesas">
     public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision)
             throws ArgumentosMesaException {
         submesas.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
     }
 
-    public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException {
+    public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador)
+            throws ArgumentosMesaException, GestionMesasException, SaldoException {
         submesas.agregarParticipanteEnMesa(unaMesa, unJugador);
     }
 
@@ -78,7 +78,6 @@ public class Fachada extends Observable{
         return submesas.calcularRecaudacion(numeroMesa);
     }
 
-    
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
