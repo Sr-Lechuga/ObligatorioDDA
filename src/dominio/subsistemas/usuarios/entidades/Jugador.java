@@ -9,7 +9,7 @@ import dominio.subsistemas.usuarios.estados.EstadoJugador;
 
 @SuppressWarnings("unused")
 public class Jugador extends Usuario implements IValidable {
-    
+
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private double saldo;
     private EstadoJugador estado;
@@ -33,13 +33,13 @@ public class Jugador extends Usuario implements IValidable {
     }
 
     public EstadoJugador getEstado() {
-        return estado; 
+        return estado;
     }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">
-    public void validarSaldoMinimo(double saldoMinimo) throws SaldoException{
-        if(Double.compare(this.saldo, saldoMinimo) < 0){
+    public void validarSaldoMinimo(double saldoMinimo) throws SaldoException {
+        if (Double.compare(this.saldo, saldoMinimo) < 0) {
             throw new SaldoException("Saldo insuficiente");
         }
     }
@@ -48,9 +48,15 @@ public class Jugador extends Usuario implements IValidable {
         validarSaldoMinimo(apuesta);
         this.saldo -= apuesta;
     }
-    
+
     public void recibirCartas(List<Carta> cartas) {
         this.mano = cartas;
+    }
+
+    public void descartarCartas(List<Carta> cartasDescarte) {
+        for (Carta carta : cartasDescarte) {
+            mano.remove(carta);
+        }
     }
     // </editor-fold>
 

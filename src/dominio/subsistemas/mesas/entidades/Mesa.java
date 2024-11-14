@@ -7,11 +7,12 @@ import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
+import dominio.subsistemas.reglas.entidades.Carta;
 import dominio.subsistemas.reglas.entidades.Mazo;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class Mesa {
-    
+
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private static int contadorMesas = 1;
     private int numeroMesa;
@@ -30,7 +31,7 @@ public class Mesa {
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) throws ArgumentosMesaException {
         this.numeroMesa = contadorMesas++;
-        
+
         this.jugadoresRequeridos = jugadoresRequeridos;
         this.apuestaBase = apuestaBase;
         this.porcentajeComision = porcentajeComision;
@@ -97,22 +98,23 @@ public class Mesa {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos">
-    public void agregarParticipante(Jugador jugador) throws ArgumentosMesaException, GestionMesasException, SaldoException {
+    public void agregarParticipante(Jugador jugador)
+            throws ArgumentosMesaException, GestionMesasException, SaldoException {
         if (participantes.size() > jugadoresRequeridos) {
             throw new ArgumentosMesaException("No se pueden agregar más jugadores, la mesa está llena.");
         }
-        if(this.estado != EstadoMesa.ABIERTA){
+        if (this.estado != EstadoMesa.ABIERTA) {
             throw new GestionMesasException("La mesa no esta abierta para recibir jugadores.");
-        } 
-        
+        }
+
         participantes.add(jugador);
 
-        if(this.participantes.size() == jugadoresRequeridos){
+        if (this.participantes.size() == jugadoresRequeridos) {
             iniciarMesa();
         }
     }
 
-    public void quitarParticipante(Jugador jugador){
+    public void quitarParticipante(Jugador jugador) {
         participantes.remove(jugador);
     }
 
@@ -120,13 +122,13 @@ public class Mesa {
         this.estado = EstadoMesa.INICIADA;
         iniciarNuevaRonda();
     }
-        
+
     public void iniciarNuevaRonda() throws SaldoException {
-        if(this.rondas.size() > 0){
-            this.pozoAcumulado = this.rondas.get(this.rondas.size()-1).obtenerPozoAcumulado();
+        if (this.rondas.size() > 0) {
+            this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
         }
 
-        Ronda nuevaRonda = new Ronda();
+        Ronda nuevaRonda = new Ronda(participantes);
 
         nuevaRonda.aumentarPozo(this.pozoAcumulado);
         this.pozoAcumulado = 0;
@@ -138,14 +140,18 @@ public class Mesa {
 
             jugador.recibirCartas(mazo.repartirCartas(5));
         }
-    
+
         rondas.add(nuevaRonda);
 
         mazo.barajar();
-    }        
+    }
 
     public double calcularRecaudacion() {
         return totalApostado * (porcentajeComision / 100);
+    }
+
+    public void pedirCartas(Jugador jugador, int cantidadDeCartas) {
+        jugador.recibirCartas(mazo.repartirCartas(cantidadDeCartas));
     }
     // </editor-fold>
 
