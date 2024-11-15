@@ -12,7 +12,6 @@ public abstract class Usuario implements IValidable {
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private String cedula;
     private String clave;
-    private boolean activo;
     private String nombreCompleto;
     // </editor-fold>
 
@@ -21,7 +20,6 @@ public abstract class Usuario implements IValidable {
         this.cedula = cedula;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
-        this.activo = false;
     }
     // </editor-fold>
 
@@ -36,10 +34,6 @@ public abstract class Usuario implements IValidable {
 
     public String getClave() {
         return clave;
-    }
-
-    public boolean isActivo() {
-        return activo;
     }
 
     // </editor-fold>
@@ -79,14 +73,6 @@ public abstract class Usuario implements IValidable {
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     public boolean verificarCredenciales(String cedula, String clave) {
         return this.cedula.equals(cedula) && this.clave.equals(clave);
-    }
-
-    public boolean estaActivo() {
-        return this.activo;
-    }
-
-    public void ingresar() {
-        this.activo = true;
     }
     // </editor-fold>
 

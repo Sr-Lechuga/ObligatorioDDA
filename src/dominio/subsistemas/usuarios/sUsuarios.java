@@ -93,7 +93,6 @@ public class sUsuarios {
             throw new CredencialesIncorrectasException("Credenciales incorrectas.");
         }
 
-        usuarioEncontrado.ingresar();
         Sesion sesion = new Sesion(usuarioEncontrado);
         logueados.put(cedula, sesion);
         return sesion;
@@ -120,7 +119,7 @@ public class sUsuarios {
     }
 
     private boolean estaUsuarioEnLinea(Usuario usuarioEncontrado) {
-        return usuarioEncontrado.estaActivo();
+        return logueados.get(usuarioEncontrado.getCedula()) != null;
     }
 
 }
