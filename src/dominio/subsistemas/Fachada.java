@@ -5,7 +5,6 @@ import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
-import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 import dominio.subsistemas.mesas.sMesas;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.reglas.sReglas;
@@ -55,12 +54,12 @@ public class Fachada extends Observable {
     }
 
     public Sesion loginAdministrador(String cedula, String clave)
-            throws UsuarioNoRegistradoException, UsuarioEnSesionException, CredencialesIncorrectasException {
+            throws UsuarioEnSesionException, CredencialesIncorrectasException {
         return subUsuarios.loginAdministrador(cedula, clave);
     }
 
     public Sesion loginJugador(String cedula, String clave)
-            throws UsuarioNoRegistradoException, UsuarioEnSesionException, CredencialesIncorrectasException {
+            throws UsuarioEnSesionException, CredencialesIncorrectasException {
         return subUsuarios.loginJugador(cedula, clave);
     }
 

@@ -1,12 +1,10 @@
 package dominio.subsistemas.usuarios;
 
-import java.awt.List;
 import java.util.HashMap;
 
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
 import dominio.excepciones.usuarios.UsuarioInvalidoException;
-import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 import dominio.subsistemas.usuarios.entidades.Administrador;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
@@ -51,6 +49,14 @@ public class sUsuarios {
         administradores.put(cedula, administradorARegistrar);
     }
 
+    /**
+     * 
+     * @param saldo
+     * @param cedula
+     * @param clave
+     * @param nombreCompleto
+     * @throws Exception
+     */
     public void agregarJugador(double saldo, String cedula, String clave, String nombreCompleto) throws Exception {
         if (buscarUsuario(cedula) != null) {
             throw new UsuarioInvalidoException(
@@ -62,26 +68,54 @@ public class sUsuarios {
         jugadores.put(cedula, jugadorARegistrar);
     }
 
+    /**
+     * 
+     * @param cedula
+     * @param clave
+     * @return
+     * @throws UsuarioEnSesionException
+     * @throws CredencialesIncorrectasException
+     */
     public Sesion loginAdministrador(String cedula, String clave)
-            throws UsuarioNoRegistradoException, UsuarioEnSesionException, CredencialesIncorrectasException {
+            throws UsuarioEnSesionException, CredencialesIncorrectasException {
 
         Administrador administrador = buscarAdministrtrador(cedula);
         return ingresar(cedula, clave, administrador);
     }
 
+    /**
+     * 
+     * @param cedula
+     * @param clave
+     * @return
+     * @throws UsuarioEnSesionException
+     * @throws CredencialesIncorrectasException
+     */
     public Sesion loginJugador(String cedula, String clave)
-            throws UsuarioNoRegistradoException, UsuarioEnSesionException, CredencialesIncorrectasException {
+            throws UsuarioEnSesionException, CredencialesIncorrectasException {
 
         Jugador jugador = buscarJugador(cedula);
         return ingresar(cedula, clave, jugador);
     }
 
+    /**
+     * 
+     * @param cedula
+     * @param clave
+     * @param usuarioEncontrado
+     * @return
+     * @throws UsuarioEnSesionException
+     * @throws CredencialesIncorrectasException
+     */
     public Sesion ingresar(String cedula, String clave, Usuario usuarioEncontrado)
-            throws UsuarioNoRegistradoException, UsuarioEnSesionException, CredencialesIncorrectasException {
+            throws UsuarioEnSesionException, CredencialesIncorrectasException {
 
         if (!(usuarioEncontrado instanceof Usuario)) {
-            throw new UsuarioNoRegistradoException(
-                    String.format("El usuario %s no está registrado en el sistema.", cedula));
+            throw new CredencialesIncorrectasException("Credenciales incorrectas.");
+        }
+
+        if (!usuarioEncontrado.verificarCredenciales(cedula, clave)) {
+            throw new CredencialesIncorrectasException("Credenciales incorrectas.");
         }
 
         if (estaUsuarioEnLinea(usuarioEncontrado)) {
@@ -89,15 +123,16 @@ public class sUsuarios {
                     "Acceso denegado. El usuario ya esta esta logueado.");
         }
 
-        if (!usuarioEncontrado.verificarCredenciales(cedula, clave)) {
-            throw new CredencialesIncorrectasException("Credenciales incorrectas.");
-        }
-
         Sesion sesion = new Sesion(usuarioEncontrado);
         logueados.put(cedula, sesion);
         return sesion;
     }
 
+    /**
+     * 
+     * @param cedula
+     * @return
+     */
     public Usuario buscarUsuario(String cedula) {
 
         Usuario usuarioEncontrado = buscarJugador(cedula);
@@ -110,14 +145,29 @@ public class sUsuarios {
         return usuarioEncontrado;
     }
 
+    /**
+     * 
+     * @param cedula
+     * @return
+     */
     private Administrador buscarAdministrtrador(String cedula) {
         return administradores.get(cedula);
     }
 
+    /**
+     * 
+     * @param cedula
+     * @return
+     */
     private Jugador buscarJugador(String cedula) {
         return jugadores.get(cedula);
     }
 
+    /**
+     * 
+     * @param usuarioEncontrado
+     * @return
+     */
     private boolean estaUsuarioEnLinea(Usuario usuarioEncontrado) {
         return logueados.get(usuarioEncontrado.getCedula()) != null;
     }

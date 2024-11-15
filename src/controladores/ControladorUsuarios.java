@@ -2,7 +2,6 @@ package controladores;
 
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
-import dominio.excepciones.usuarios.UsuarioNoRegistradoException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.usuarios.entidades.Sesion;
 import iuswing.LoginAdministrador;
@@ -27,7 +26,7 @@ public class ControladorUsuarios implements Observador {
         sesion = fachada.loginJugador(cedula, clave);
 
       vistaLogin.mostrarProximaInterfaz(sesion.getUsuario());
-    } catch (UsuarioNoRegistradoException | UsuarioEnSesionException | CredencialesIncorrectasException e) {
+    } catch (UsuarioEnSesionException | CredencialesIncorrectasException e) {
       vistaLogin.mostrarMensajeError(e.getMessage());
     }
   }
