@@ -10,7 +10,7 @@ import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class sMesas {
 
-  HashMap<Integer,Mesa> mesasAbiertas = new HashMap<>();
+  HashMap<Integer, Mesa> mesasAbiertas = new HashMap<>();
 
   /**
    * @param jugadoresRequeridos
@@ -18,9 +18,10 @@ public class sMesas {
    * @param porcentajeComision
    * @throws ArgumentosMesaException
    */
-  public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) throws ArgumentosMesaException{
+  public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision)
+      throws ArgumentosMesaException {
     Mesa mesaNueva = new Mesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
-    mesasAbiertas.put(mesaNueva.getNumeroMesa(),mesaNueva);
+    mesasAbiertas.put(mesaNueva.getNumeroMesa(), mesaNueva);
   }
 
   /**
@@ -29,9 +30,10 @@ public class sMesas {
    * @param unJugador
    * @throws ArgumentosMesaException
    * @throws GestionMesasException
-   * @throws SaldoException 
+   * @throws SaldoException
    */
-  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) throws ArgumentosMesaException, GestionMesasException, SaldoException{
+  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador)
+      throws ArgumentosMesaException, GestionMesasException, SaldoException {
     unaMesa.agregarParticipante(unJugador);
   }
 
@@ -41,26 +43,29 @@ public class sMesas {
    * @return
    * @throws GestionMesasException
    */
-  public double calcularRecaudacion(int numeroMesa) throws GestionMesasException{
+  public double calcularRecaudacion(int numeroMesa) throws GestionMesasException {
     Mesa mesaBuscada = buscarMesa(numeroMesa);
 
-    //TODO: Completar segun letra
+    // TODO: Completar segun letra
 
-    if(!(mesaBuscada instanceof Mesa)){
+    if (!(mesaBuscada instanceof Mesa)) {
       throw new GestionMesasException(
-        String.format("La mesa %s no esta registarda en el sistema.", numeroMesa)
-      );
+          String.format("La mesa %s no esta registarda en el sistema.", numeroMesa));
     }
-    
+
     return mesaBuscada.calcularRecaudacion();
   }
-  
+
   /**
    * 
    * @param numeroMesa
    * @return
    */
-  private Mesa buscarMesa(int numeroMesa){
+  private Mesa buscarMesa(int numeroMesa) {
     return mesasAbiertas.get(numeroMesa);
+  }
+
+  public HashMap<Integer, Mesa> obtenerMesas() {
+    return this.mesasAbiertas;
   }
 }

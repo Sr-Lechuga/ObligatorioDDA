@@ -1,5 +1,7 @@
 package dominio.subsistemas;
 
+import java.util.HashMap;
+
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
@@ -22,7 +24,7 @@ public class Fachada extends Observable {
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private static Fachada instancia;
     private sUsuarios subUsuarios = new sUsuarios();
-    private sMesas submesas = new sMesas();
+    private sMesas subMesas = new sMesas();
     private sReglas subReglas = new sReglas();
     // </editor-fold>
 
@@ -71,16 +73,20 @@ public class Fachada extends Observable {
     // <editor-fold defaultstate="collapsed" desc="Métodos Mesas">
     public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision)
             throws ArgumentosMesaException {
-        submesas.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
+        subMesas.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
     }
 
     public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador)
             throws ArgumentosMesaException, GestionMesasException, SaldoException {
-        submesas.agregarParticipanteEnMesa(unaMesa, unJugador);
+        subMesas.agregarParticipanteEnMesa(unaMesa, unJugador);
     }
 
     public double calcularRecaudacion(int numeroMesa) throws GestionMesasException {
-        return submesas.calcularRecaudacion(numeroMesa);
+        return subMesas.calcularRecaudacion(numeroMesa);
+    }
+
+    public HashMap<Integer, Mesa> obtenerMesas() {
+        return subMesas.obtenerMesas();
     }
 
     // </editor-fold>
