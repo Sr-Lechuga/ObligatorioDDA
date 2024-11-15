@@ -33,24 +33,178 @@ public class JugarPoker extends javax.swing.JFrame {
     private void initComponents() {
 
         panelCartasPoker1 = new panelCartasPoker.PanelCartasPoker();
+        lblMensaje = new javax.swing.JLabel();
+        btnSeguir = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnPasar = new javax.swing.JButton();
+        btnApostar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listJugadores = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listFiguras = new javax.swing.JList<>();
+        lblJugadores = new javax.swing.JLabel();
+        lblFiguras = new javax.swing.JLabel();
+        checkBoxHabilitar = new javax.swing.JCheckBox();
+        lblMontoBase = new javax.swing.JLabel();
+        btnPagar = new javax.swing.JButton();
+        txtApostar = new javax.swing.JTextField();
+        txtPagar = new javax.swing.JTextField();
+        lblJugador = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        lblMesa = new javax.swing.JLabel();
+        lblPozoActual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblMensaje.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMensaje.setForeground(new java.awt.Color(255, 0, 255));
+
+        btnSeguir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSeguir.setText("Seguir jugando");
+
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.setText("Salir");
+
+        btnPasar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnPasar.setText("Pasar");
+
+        btnApostar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnApostar.setText("Apostar");
+
+        jScrollPane1.setViewportView(listJugadores);
+
+        jScrollPane2.setViewportView(listFiguras);
+
+        lblJugadores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblJugadores.setText("Jugadores:");
+
+        lblFiguras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblFiguras.setText("Figuras:");
+
+        checkBoxHabilitar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        checkBoxHabilitar.setText("Habilitar panel");
+
+        lblMontoBase.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMontoBase.setText("El monto base es: ");
+
+        btnPagar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnPagar.setText("Pagar");
+
+        txtApostar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtPagar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblJugador.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblJugador.setText("Jugador: ");
+
+        lblSaldo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSaldo.setText("Saldo: ");
+
+        lblMesa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblMesa.setText("Mesa: ");
+
+        lblPozoActual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPozoActual.setText("Pozo actual: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFiguras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(panelCartasPoker1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(378, 378, 378)
+                        .addComponent(btnSeguir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir)
+                        .addGap(77, 77, 77)
+                        .addComponent(checkBoxHabilitar)
+                        .addGap(146, 146, 146)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMontoBase)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnPasar)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtApostar)
+                                    .addComponent(btnApostar))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblPozoActual)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblJugador)
+                                    .addComponent(lblMesa)
+                                    .addComponent(lblSaldo))
+                                .addGap(146, 146, 146)
+                                .addComponent(panelCartasPoker1, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(panelCartasPoker1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblJugador)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSaldo)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblMesa)
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelCartasPoker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeguir)
+                    .addComponent(btnSalir)
+                    .addComponent(checkBoxHabilitar)
+                    .addComponent(lblMontoBase))
+                .addGap(18, 18, 18)
+                .addComponent(lblPozoActual)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblJugadores)
+                            .addComponent(lblFiguras))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnApostar)
+                            .addComponent(btnPasar)
+                            .addComponent(btnPagar))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtApostar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,6 +246,26 @@ public class JugarPoker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApostar;
+    private javax.swing.JButton btnPagar;
+    private javax.swing.JButton btnPasar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnSeguir;
+    private javax.swing.JCheckBox checkBoxHabilitar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFiguras;
+    private javax.swing.JLabel lblJugador;
+    private javax.swing.JLabel lblJugadores;
+    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblMesa;
+    private javax.swing.JLabel lblMontoBase;
+    private javax.swing.JLabel lblPozoActual;
+    private javax.swing.JLabel lblSaldo;
+    private javax.swing.JList<String> listFiguras;
+    private javax.swing.JList<String> listJugadores;
     private panelCartasPoker.PanelCartasPoker panelCartasPoker1;
+    private javax.swing.JTextField txtApostar;
+    private javax.swing.JTextField txtPagar;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,9 +3,12 @@ package controladores;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
+import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
 
@@ -36,7 +39,13 @@ public class ControladorMesas implements Observador {
   
   public String agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) {
     try {
-      instanciaFachada.agregarParticipanteEnMesa(unaMesa, unJugador);
+        try {
+            instanciaFachada.agregarParticipanteEnMesa(unaMesa, unJugador);
+        } catch (GestionMesasException ex) {
+            Logger.getLogger(ControladorMesas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SaldoException ex) {
+            Logger.getLogger(ControladorMesas.class.getName()).log(Level.SEVERE, null, ex);
+        }
       instanciaFachada.avisar("Participante Agregado");
       return "OK";
     } catch (ArgumentosMesaException e) {
