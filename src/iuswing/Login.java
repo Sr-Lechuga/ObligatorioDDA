@@ -48,7 +48,7 @@ public abstract class Login extends javax.swing.JDialog implements VistaLogin {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblLogin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblLogin.setText("Login");
 
         lblCedula.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

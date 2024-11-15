@@ -4,11 +4,13 @@
  */
 package iuswing;
 
+import vistas.VistaCrearMesa;
+
 /**
  *
  * @author agust
  */
-public class CrearMesa extends javax.swing.JDialog {
+public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
 
     /**
      * Creates new form CrearMesa
@@ -27,7 +29,7 @@ public class CrearMesa extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblCrearMesa = new javax.swing.JLabel();
         lblCantidadJugadores = new javax.swing.JLabel();
         txtCantidadJugadores = new javax.swing.JTextField();
         lblMontoApuestaBase = new javax.swing.JLabel();
@@ -39,8 +41,8 @@ public class CrearMesa extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Crear Mesa");
+        lblCrearMesa.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblCrearMesa.setText("Crear Mesa");
 
         lblCantidadJugadores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCantidadJugadores.setText("Ingrese cantidad de jugadores:");
@@ -60,8 +62,9 @@ public class CrearMesa extends javax.swing.JDialog {
         lblErrorMesa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblErrorMesa.setForeground(new java.awt.Color(255, 51, 51));
 
-        btnCrearMesa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCrearMesa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCrearMesa.setText("Crear");
+        btnCrearMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,10 +73,10 @@ public class CrearMesa extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCrearMesa)
+                    .addComponent(btnCrearMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblErrorMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblCrearMesa)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -95,7 +98,7 @@ public class CrearMesa extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jLabel1)
+                .addComponent(lblCrearMesa)
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCantidadJugadores)
@@ -110,9 +113,9 @@ public class CrearMesa extends javax.swing.JDialog {
                     .addComponent(txtComision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
                 .addComponent(lblErrorMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
-                .addComponent(btnCrearMesa)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(89, 89, 89)
+                .addComponent(btnCrearMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,8 +165,8 @@ public class CrearMesa extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearMesa;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCantidadJugadores;
+    private javax.swing.JLabel lblCrearMesa;
     private javax.swing.JLabel lblErrorMesa;
     private javax.swing.JLabel lblMontoApuestaBase;
     private javax.swing.JLabel lblPorcentajeComision;
@@ -171,4 +174,19 @@ public class CrearMesa extends javax.swing.JDialog {
     private javax.swing.JTextField txtComision;
     private javax.swing.JTextField txtMontoApuestaBase;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void crearMesa() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mostrarMensajeError(String mensajeError) {
+        lblErrorMesa.setText(mensajeError);
+    }
+
+    @Override
+    public void mostrarMensajeAviso(String mensajeAviso) {
+        //nothing
+    }
 }
