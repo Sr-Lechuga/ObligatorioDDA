@@ -1,6 +1,7 @@
 package dominio.subsistemas.mesas;
 
-import java.util.HashMap;
+import java.awt.List;
+import java.util.ArrayList;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
@@ -10,7 +11,7 @@ import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class sMesas {
 
-  HashMap<Integer, Mesa> mesasAbiertas = new HashMap<>();
+  ArrayList<Mesa> mesasAbiertas = new ArrayList<>();
 
   /**
    * @param jugadoresRequeridos
@@ -21,7 +22,7 @@ public class sMesas {
   public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision)
       throws ArgumentosMesaException {
     Mesa mesaNueva = new Mesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
-    mesasAbiertas.put(mesaNueva.getNumeroMesa(), mesaNueva);
+    mesasAbiertas.add(mesaNueva);
   }
 
   /**
@@ -46,8 +47,6 @@ public class sMesas {
   public double calcularRecaudacion(int numeroMesa) throws GestionMesasException {
     Mesa mesaBuscada = buscarMesa(numeroMesa);
 
-    // TODO: Completar segun letra
-
     if (!(mesaBuscada instanceof Mesa)) {
       throw new GestionMesasException(
           String.format("La mesa %s no esta registarda en el sistema.", numeroMesa));
@@ -65,7 +64,7 @@ public class sMesas {
     return mesasAbiertas.get(numeroMesa);
   }
 
-  public HashMap<Integer, Mesa> obtenerMesas() {
+  public ArrayList<Mesa> obtenerMesas() {
     return this.mesasAbiertas;
   }
 }

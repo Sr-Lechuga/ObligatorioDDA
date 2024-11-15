@@ -7,7 +7,6 @@ import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
-import dominio.subsistemas.reglas.entidades.Carta;
 import dominio.subsistemas.reglas.entidades.Mazo;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
@@ -153,6 +152,7 @@ public class Mesa {
     public void pedirCartas(Jugador jugador, int cantidadDeCartas) {
         jugador.recibirCartas(mazo.repartirCartas(cantidadDeCartas));
     }
+
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Validaciones">
@@ -180,4 +180,5 @@ public class Mesa {
         }
     }
     // </editor-fold>
+
 }

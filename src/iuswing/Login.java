@@ -4,12 +4,8 @@
  */
 package iuswing;
 
-import javax.swing.JTextField;
 
-import controladores.ControladorUsuarios;
-import dominio.subsistemas.usuarios.entidades.Sesion;
 import dominio.subsistemas.usuarios.entidades.Usuario;
-import java.awt.Font;
 import vistas.VistaLogin;
 
 /**
@@ -26,7 +22,7 @@ public abstract class Login extends javax.swing.JDialog implements VistaLogin {
     initComponents();
     setLocationRelativeTo(parent);
     txtCedula.requestFocus();
-    btnLogin.setEnabled(false);
+//    btnLogin.setEnabled(false);
   }
 
   /**
@@ -70,6 +66,8 @@ public abstract class Login extends javax.swing.JDialog implements VistaLogin {
         });
 
         txtCedula.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCedula.setText("100");
+        txtCedula.setToolTipText("");
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyReleased(evt);
@@ -77,6 +75,8 @@ public abstract class Login extends javax.swing.JDialog implements VistaLogin {
         });
 
         pwdClave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pwdClave.setText("100");
+        pwdClave.setToolTipText("");
         pwdClave.setAlignmentX(0.0F);
 
         lblErrorLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

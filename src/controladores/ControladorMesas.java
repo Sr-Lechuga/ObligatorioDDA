@@ -8,7 +8,7 @@ import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Usuario;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utilidades.observer.Observable;
@@ -55,7 +55,7 @@ public class ControladorMesas implements Observador {
     }
   }
 
-  public HashMap<Integer, Mesa> obtenerMesas() {
+  public ArrayList<Mesa> obtenerMesas() {
     return fachada.obtenerMesas();
   }
 

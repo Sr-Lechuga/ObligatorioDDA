@@ -1,6 +1,6 @@
 package dominio.subsistemas;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
@@ -85,7 +85,7 @@ public class Fachada extends Observable {
         return subMesas.calcularRecaudacion(numeroMesa);
     }
 
-    public HashMap<Integer, Mesa> obtenerMesas() {
+    public ArrayList<Mesa> obtenerMesas() {
         return subMesas.obtenerMesas();
     }
 
