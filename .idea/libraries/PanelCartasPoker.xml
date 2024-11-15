@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="PanelCartasPoker">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/PanelCartasPoker.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
