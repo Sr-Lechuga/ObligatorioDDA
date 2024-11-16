@@ -14,7 +14,7 @@ import utilidades.observer.Observador;
 import vistas.VistaCrearMesa;
 import vistas.VistaMesa;
 
-public class ControladorMesas implements Observador {
+public class ControladorAdministrarMesa implements Observador {
 
   private Fachada fachada = Fachada.getInstancia();
   private VistaMesa vistaMesa;
@@ -30,7 +30,7 @@ public class ControladorMesas implements Observador {
     this.vistaCrearMesa = vistaCrearMesa;
   }
 
-  public ControladorMesas(VistaMesa vistaMesa, Usuario usuario) {
+  public ControladorAdministrarMesa(VistaMesa vistaMesa, Usuario usuario) {
     this.vistaMesa = vistaMesa;
     this.usuario = usuario;
     this.fachada.agregar(this); // Add observador

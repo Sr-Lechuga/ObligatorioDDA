@@ -2,15 +2,15 @@ package iuswing;
 
 import java.awt.Frame;
 
-import controladores.ControladorUsuarios;
+import controladores.ControladorAcceso;
 import dominio.subsistemas.usuarios.entidades.Usuario;
 
 public class LoginJugador extends Login {
-    ControladorUsuarios controladorUsuarios;
+    ControladorAcceso controladorUsuarios;
 
     public LoginJugador(Frame parent, boolean modal) {
         super(parent, modal);
-        this.controladorUsuarios = new ControladorUsuarios(this);
+        this.controladorUsuarios = new ControladorAcceso(this);
     }
 
     @Override
