@@ -7,11 +7,8 @@ import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Usuario;
-import iuswing.CrearMesa;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
 import vistas.VistaCrearMesa;

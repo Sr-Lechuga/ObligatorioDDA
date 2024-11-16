@@ -1,6 +1,7 @@
 package dominio.subsistemas;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
@@ -15,17 +16,21 @@ import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
 import dominio.subsistemas.usuarios.entidades.Usuario;
 import utilidades.observer.Observable;
+import utilidades.observer.Observador;
 
 /**
  *
  * @author jlima
  */
-public class Fachada extends Observable {
+public class Fachada implements Observable {
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private static Fachada instancia;
     private sUsuarios subUsuarios = new sUsuarios();
     private sMesas subMesas = new sMesas();
     private sReglas subReglas = new sReglas();
+
+    // Lista de observadores del dominio
+    private final List<Observador> observadores = new ArrayList<>();
 
     // </editor-fold>
 
@@ -41,9 +46,6 @@ public class Fachada extends Observable {
         }
         return instancia;
     }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Métodos Usuario">
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Usuario">
@@ -90,10 +92,32 @@ public class Fachada extends Observable {
         return subMesas.obtenerMesas();
     }
 
-
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
     // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Métodos Inteface Observable">
+    @Override
+    public void agregar(Observador observer) {
+
+        if (!observadores.contains(observer)) {
+            observadores.add(observer);
+        }
+    }
+
+    @Override
+    public void quitar(Observador observer) {
+        if (observadores.contains(observer)) {
+            observadores.remove(observer);
+        }
+    }
+
+    @Override
+    public void avisar(Object evento) {
+        for (Observador unObservador : this.observadores) {
+            unObservador.actualizar(this, evento);
+        }
+    }
+    // </editor-fold>
 }

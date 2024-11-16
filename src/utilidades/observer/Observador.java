@@ -7,11 +7,12 @@ package utilidades.observer;
 public interface Observador {
 
     /**
-         * Método que se invoca para notificar al observador sobre un evento.
-         *
-         * @param observable el objeto observable que ha cambiado
-         * @param objeto el objeto que representa el evento o la información relacionada
-    */
+     * Método que se invoca para notificar al observador sobre un evento.
+     *
+     * @param observable el objeto observable que ha cambiado
+     * @param objeto     el objeto que representa el evento o la información
+     *                   relacionada
+     */
     public void actualizar(Observable unObservable, Object unEvento);
-    
+
 }

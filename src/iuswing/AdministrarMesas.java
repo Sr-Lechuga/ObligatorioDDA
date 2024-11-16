@@ -3,7 +3,6 @@ package iuswing;
 import java.util.ArrayList;
 
 import controladores.ControladorMesas;
-import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Administrador;
 import dominio.subsistemas.usuarios.entidades.Usuario;
