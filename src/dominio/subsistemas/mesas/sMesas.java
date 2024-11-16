@@ -1,6 +1,5 @@
 package dominio.subsistemas.mesas;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;

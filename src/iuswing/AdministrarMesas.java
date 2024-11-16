@@ -60,6 +60,11 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaMesa {
         btnCrearMesa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCrearMesa.setText("Crear nueva Mesa");
         btnCrearMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCrearMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearMesaActionPerformed(evt);
+            }
+        });
 
         lblErrorMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorMessage.setForeground(new java.awt.Color(204, 0, 0));
@@ -111,6 +116,10 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaMesa {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCrearMesaActionPerformed
 
     /**
      * @param args the command line arguments
