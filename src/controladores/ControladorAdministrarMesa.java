@@ -16,12 +16,12 @@ import vistas.VistaMesa;
 
 public class ControladorAdministrarMesa implements Observador {
 
-  private Fachada fachada = Fachada.getInstancia();
+  private Fachada fachada;
   private VistaMesa vistaMesa;
   private VistaCrearMesa vistaCrearMesa;
   private Usuario usuario; // Puede ser un jugador o un administrador
-  private Mesa mesa;
 
+  // <editor-fold defaultstate="collapsed" desc="Setters">
   public void setVistaMesa(VistaMesa vistaMesa) {
     this.vistaMesa = vistaMesa;
   }
@@ -29,13 +29,18 @@ public class ControladorAdministrarMesa implements Observador {
   public void setVistaCrearMesa(VistaCrearMesa vistaCrearMesa) {
     this.vistaCrearMesa = vistaCrearMesa;
   }
+  // </editor-fold>
 
-  public ControladorAdministrarMesa(VistaMesa vistaMesa, Usuario usuario) {
+  // <editor-fold defaultstate="collapsed" desc="Constructor">
+  public ControladorAdministrarMesa(VistaMesa vistaMesa, Usuario usuarioEnSesion) {
+    this.fachada = Fachada.getInstancia();
     this.vistaMesa = vistaMesa;
-    this.usuario = usuario;
+    this.usuario = usuarioEnSesion;
+
     this.fachada.agregar(this); // Add observador
     actualizarTitulo();
   }
+  // </editor-fold>
 
   /**
    * Crea una nueva mesa de juego con los parámetros especificados.

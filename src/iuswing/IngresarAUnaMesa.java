@@ -1,14 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package iuswing;
 
-import controladores.ControladorAcceso;
+import java.util.ArrayList;
+
 import controladores.ControladorIngresarMesa;
+import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
-import dominio.subsistemas.usuarios.estados.EstadoJugador;
 import vistas.VistaMenuMesas;
+import vistas.formats.MesaListRenderer;
 
 /**
  *
@@ -16,13 +14,11 @@ import vistas.VistaMenuMesas;
  */
 public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMesas {
 
-  ControladorIngresarMesa controladorUsuarios;
-  Jugador jugador = new Jugador(100, "52923064", "asd", "Agustina Sanchez", EstadoJugador.APUESTA_INICIADA);
+  ControladorIngresarMesa controladorIngresarMesa;
 
-  public IngresarAUnaMesa() {
+  public IngresarAUnaMesa(Jugador jugadorEnSesion) {
     initComponents();
-    controladorUsuarios = new ControladorIngresarMesa(this);
-    controladorUsuarios.obtenerInfoJugador(jugador);
+    controladorIngresarMesa = new ControladorIngresarMesa(this, jugadorEnSesion);
   }
 
   /**
@@ -32,6 +28,7 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
    */
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated
+  // <editor-fold defaultstate="collapsed" desc="Generated
   // Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
@@ -39,7 +36,7 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
     lblSaldo = new javax.swing.JLabel();
     lblNombreCompleto = new javax.swing.JLabel();
     jScrollPane1 = new javax.swing.JScrollPane();
-    listaMesasAbiertas = new javax.swing.JList<>();
+    listaMesasAbiertas = new javax.swing.JList();
     btnJugarPoker = new javax.swing.JButton();
     lblError = new javax.swing.JLabel();
 
@@ -56,8 +53,7 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
 
     btnJugarPoker.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     btnJugarPoker.setText("Jugar");
-    btnJugarPoker.setBorder(
-        javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    btnJugarPoker.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
     lblError.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     lblError.setForeground(new java.awt.Color(255, 0, 51));
@@ -68,37 +64,22 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(
-                    javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(
-                        javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(257, 257,
-                                257)
-                            .addComponent(lblSaldo,
-                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                229,
+                            .addGap(257, 257, 257)
+                            .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 229,
                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                            layout
-                                .createSequentialGroup()
-                                .addComponent(lblError,
-                                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                                    605,
-                                    javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(76, 76, 76)
-                                .addComponent(btnJugarPoker,
-                                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                                    149,
-                                    javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblNombreCompleto,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        229,
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 605,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(76, 76, 76)
+                            .addComponent(btnJugarPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 229,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBienvenido)
-                    .addComponent(jScrollPane1,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        862,
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862,
                         javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 43, Short.MAX_VALUE)));
     layout.setVerticalGroup(
@@ -106,45 +87,25 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(lblBienvenido)
-                .addPreferredGap(
-                    javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(
-                    javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSaldo,
-                        javax.swing.GroupLayout.Alignment.TRAILING,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        38,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreCompleto,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        38,
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSaldo, javax.swing.GroupLayout.Alignment.TRAILING,
+                        javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
                         javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1,
-                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                    337,
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337,
                     javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(
-                    javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblError,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        35,
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnJugarPoker,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        35,
+                    .addComponent(btnJugarPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
                         javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE)));
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
-
-  @Override
-  public void actualizarInfoJugador(String nombreCompleto, double saldoActual) {
-    lblNombreCompleto.setText(nombreCompleto);
-    lblSaldo.setText("Saldo: $" + saldoActual);
-  }
 
   /**
    * @param args the command line arguments
@@ -189,25 +150,9 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(new Runnable() {
       public void run() {
-        new IngresarAUnaMesa().setVisible(true);
+        new IngresarAUnaMesa(null).setVisible(true);
       }
     });
-  }
-
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnJugarPoker;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JLabel lblBienvenido;
-  private javax.swing.JLabel lblError;
-  private javax.swing.JLabel lblNombreCompleto;
-  private javax.swing.JLabel lblSaldo;
-  private javax.swing.JList<String> listaMesasAbiertas;
-  // End of variables declaration//GEN-END:variables
-
-  @Override
-  public void mostrarMesas() {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
 
   @Override
@@ -220,4 +165,36 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
     // nothing
   }
 
+  @Override
+  public void mostrarMesas() {
+    ArrayList<Mesa> mesasDisponibles = controladorIngresarMesa.obtenerMesasDisponibles();
+
+    if (mesasDisponibles.isEmpty())
+      mostrarMensajeError("No hay mesas para mostrar");
+    else {
+      listaMesasAbiertas.setListData(new Mesa[0]);
+      listaMesasAbiertas.setListData(mesasDisponibles.toArray());
+      listaMesasAbiertas.setCellRenderer(new MesaListRenderer());
+    }
+  }
+
+  @Override
+  public void actualizarInfoJugador(String informacionJugador) {
+    lblSaldo.setText(informacionJugador);
+  }
+
+  @Override
+  public void actualizarTitulo(String titulo) {
+    lblBienvenido.setText(titulo);
+  }
+
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton btnJugarPoker;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JLabel lblBienvenido;
+  private javax.swing.JLabel lblError;
+  private javax.swing.JLabel lblNombreCompleto;
+  private javax.swing.JLabel lblSaldo;
+  private javax.swing.JList listaMesasAbiertas;
+  // End of variables declaration//GEN-END:variables
 }

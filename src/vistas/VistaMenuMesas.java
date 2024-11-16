@@ -5,5 +5,7 @@ public interface VistaMenuMesas extends VistaIU {
 
     public void mostrarMesas();
 
-    public void actualizarInfoJugador(String nombreCompleto, double saldoActual);
+    public void actualizarInfoJugador(String informacionJugador);
+
+    public void actualizarTitulo(String string);
 }

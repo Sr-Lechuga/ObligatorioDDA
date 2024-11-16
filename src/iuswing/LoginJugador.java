@@ -3,6 +3,7 @@ package iuswing;
 import java.awt.Frame;
 
 import controladores.ControladorAcceso;
+import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Usuario;
 
 public class LoginJugador extends Login {
@@ -19,8 +20,9 @@ public class LoginJugador extends Login {
     }
 
     @Override
-    public void mostrarProximaInterfaz(Usuario user) {
-        IngresarAUnaMesa ingresarAUnaMesa = new IngresarAUnaMesa();
+    public void mostrarProximaInterfaz(Usuario usuario) {
+        Jugador jugador = (Jugador) usuario;
+        IngresarAUnaMesa ingresarAUnaMesa = new IngresarAUnaMesa(jugador);
         ingresarAUnaMesa.setVisible(true);
         dispose();
     }

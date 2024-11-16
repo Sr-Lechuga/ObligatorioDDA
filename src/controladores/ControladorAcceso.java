@@ -20,6 +20,7 @@ public class ControladorAcceso implements Observador {
 
   public ControladorAcceso(VistaLogin vistaLogin) {
     this.vistaLogin = vistaLogin;
+    this.usuarioEnSesion = null;
   }
 
   public void ingresarSistema(String cedula, String clave) {
