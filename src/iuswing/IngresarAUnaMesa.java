@@ -4,6 +4,9 @@
  */
 package iuswing;
 
+import controladores.ControladorUsuarios;
+import dominio.subsistemas.usuarios.entidades.Jugador;
+import dominio.subsistemas.usuarios.estados.EstadoJugador;
 import vistas.VistaIngresarAMesa;
 
 /**
@@ -12,11 +15,14 @@ import vistas.VistaIngresarAMesa;
  */
 public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresarAMesa {
 
-    /**
-     * Creates new form InterfazJugador
-     */
+  
+    ControladorUsuarios controladorUsuarios; 
+    Jugador jugador = new Jugador(100, "52923064", "asd", "Agustina Sanchez", EstadoJugador.APUESTA_INICIADA);
+    
     public IngresarAUnaMesa() {
         initComponents();
+        controladorUsuarios = new ControladorUsuarios(this); 
+        controladorUsuarios.obtenerInfoJugador(jugador);
     }
 
     /**
@@ -42,10 +48,8 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
         lblBienvenido.setText("Bienvenido Jugador");
 
         lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblSaldo.setText("Saldo: $");
 
         lblNombreCompleto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNombreCompleto.setText("Nombre:");
 
         jScrollPane1.setViewportView(listaMesasAbiertas);
 
@@ -97,6 +101,12 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    public void actualizarInfoJugador(String nombreCompleto, double saldoActual) {
+        lblNombreCompleto.setText(nombreCompleto);
+        lblSaldo.setText("Saldo: $" + saldoActual);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -124,11 +134,10 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngresarAUnaMesa().setVisible(true);
+                new IngresarAUnaMesa().setVisible(true); 
             }
         });
     }
@@ -157,4 +166,6 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
     public void mostrarMensajeAviso(String mensajeAviso) {
         //nothing
     }
+
+
 }

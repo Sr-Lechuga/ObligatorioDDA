@@ -14,7 +14,9 @@ import dominio.subsistemas.usuarios.sUsuarios;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
 import dominio.subsistemas.usuarios.entidades.Usuario;
+import iuswing.IngresarAUnaMesa;
 import utilidades.observer.Observable;
+import vistas.VistaIngresarAMesa;
 
 /**
  *
@@ -26,6 +28,7 @@ public class Fachada extends Observable {
     private sUsuarios subUsuarios = new sUsuarios();
     private sMesas subMesas = new sMesas();
     private sReglas subReglas = new sReglas();
+
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructor">
@@ -88,6 +91,7 @@ public class Fachada extends Observable {
     public ArrayList<Mesa> obtenerMesas() {
         return subMesas.obtenerMesas();
     }
+
 
     // </editor-fold>
 
