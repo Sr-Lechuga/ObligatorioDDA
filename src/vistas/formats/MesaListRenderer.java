@@ -17,7 +17,7 @@ public class MesaListRenderer extends DefaultListCellRenderer {
 
     if (value instanceof Mesa) {
       Mesa mesa = (Mesa) value;
-      label.setText("[Numero: " + mesa.getNumeroMesa()
+      label.setText("[" + mesa.getNumeroMesa()
           + "] Requeridos: " + mesa.getJugadoresRequeridos()
           + " Ciega: " + mesa.getApuestaBase()
           + " Jugadores: " + mesa.getCantidadJugadores()

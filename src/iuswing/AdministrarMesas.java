@@ -201,19 +201,10 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaMesa {
     public void mostrarMesas() {
         ArrayList<Mesa> mesasAbiertas = controladorMesas.obtenerMesas();
 
-        // <editor-fold defaultstate="collapsed" desc="Test values" >
-        try {
-            mesasAbiertas.add(new Mesa(5, 10, 10));
-            mesasAbiertas.add(new Mesa(5, 10, 10));
-            mesasAbiertas.add(new Mesa(5, 10, 10));
-            mesasAbiertas.add(new Mesa(5, 10, 10));
-        } catch (ArgumentosMesaException e) {
-            e.printStackTrace();
-        }
-        // </editor-fold>
         if (mesasAbiertas.isEmpty())
             mostrarMensajeError("No hay mesas para mostrar");
         else {
+            listaMesas.setListData(new Mesa[0]);
             listaMesas.setListData(mesasAbiertas.toArray());
             listaMesas.setCellRenderer(new MesaListRenderer());
         }

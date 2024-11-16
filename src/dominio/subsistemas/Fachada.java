@@ -14,9 +14,7 @@ import dominio.subsistemas.usuarios.sUsuarios;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
 import dominio.subsistemas.usuarios.entidades.Usuario;
-import iuswing.IngresarAUnaMesa;
 import utilidades.observer.Observable;
-import vistas.VistaIngresarAMesa;
 
 /**
  *

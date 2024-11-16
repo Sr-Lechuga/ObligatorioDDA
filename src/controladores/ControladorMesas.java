@@ -25,14 +25,14 @@ public class ControladorMesas implements Observador {
   private Usuario usuario; // Puede ser un jugador o un administrador
   private Mesa mesa;
 
-    public void setVistaMesa(VistaMesa vistaMesa) {
-        this.vistaMesa = vistaMesa;
-    }
+  public void setVistaMesa(VistaMesa vistaMesa) {
+    this.vistaMesa = vistaMesa;
+  }
 
-    public void setVistaCrearMesa(VistaCrearMesa vistaCrearMesa) {
-        this.vistaCrearMesa = vistaCrearMesa;
-    }
-  
+  public void setVistaCrearMesa(VistaCrearMesa vistaCrearMesa) {
+    this.vistaCrearMesa = vistaCrearMesa;
+  }
+
   public ControladorMesas(VistaMesa vistaMesa, Usuario usuario) {
     this.vistaMesa = vistaMesa;
     this.usuario = usuario;
@@ -57,9 +57,10 @@ public class ControladorMesas implements Observador {
    *                                 inválido.
    */
   public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) {
+    vistaCrearMesa.mostrarMensajeError("");
     try {
       fachada.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
-      fachada.avisar("Mesa Agregada");
+      fachada.avisar(EventoMesa.MESA_AGREGADA);
     } catch (ArgumentosMesaException e) {
       vistaCrearMesa.mostrarMensajeError(e.getMessage());
     }
@@ -69,36 +70,32 @@ public class ControladorMesas implements Observador {
     return fachada.obtenerMesas();
   }
 
-  public String agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) {
+  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) {
+    vistaCrearMesa.mostrarMensajeError("");
     try {
-      try {
-        fachada.agregarParticipanteEnMesa(unaMesa, unJugador);
-      } catch (GestionMesasException ex) {
-        Logger.getLogger(ControladorMesas.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (SaldoException ex) {
-        Logger.getLogger(ControladorMesas.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      fachada.avisar("Participante Agregado");
-      return "OK";
-    } catch (ArgumentosMesaException e) {
-      return e.getMessage();
+      fachada.agregarParticipanteEnMesa(unaMesa, unJugador);
+      fachada.avisar(EventoMesa.PARTICIPANTE_AGREGADO);
+    } catch (GestionMesasException | SaldoException | ArgumentosMesaException ex) {
+      vistaCrearMesa.mostrarMensajeError(ex.getMessage());
     }
   }
 
-  public String calcularRecaudacion(int numeroMesa) {
+  public void calcularRecaudacion(int numeroMesa) {
+    vistaCrearMesa.mostrarMensajeError("");
     try {
-      String recuadacion = String.valueOf(fachada.calcularRecaudacion(numeroMesa));
-      fachada.avisar("Recaudacion");
-      return recuadacion;
+      String recaudacion = String.valueOf(fachada.calcularRecaudacion(numeroMesa));
+      vistaCrearMesa.mostrarMensajeError(recaudacion);
     } catch (GestionMesasException e) {
-      return e.getMessage();
+      vistaCrearMesa.mostrarMensajeError(e.getMessage());
     }
   }
 
   // <editor-fold defaultstate="collapsed" desc="Metodos de Interfaz">
   @Override
   public void actualizar(Observable unObservable, Object unEvento) {
-    throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    if (unEvento.equals(EventoMesa.MESA_AGREGADA)) {
+      vistaMesa.mostrarMesas();
+    }
   }
   // </editor-fold>
 
