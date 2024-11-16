@@ -7,21 +7,32 @@ import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Usuario;
+import iuswing.CrearMesa;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
+import vistas.VistaCrearMesa;
 import vistas.VistaMesa;
 
 public class ControladorMesas implements Observador {
 
   private Fachada fachada = Fachada.getInstancia();
   private VistaMesa vistaMesa;
+  private VistaCrearMesa vistaCrearMesa;
   private Usuario usuario; // Puede ser un jugador o un administrador
   private Mesa mesa;
 
+    public void setVistaMesa(VistaMesa vistaMesa) {
+        this.vistaMesa = vistaMesa;
+    }
+
+    public void setVistaCrearMesa(VistaCrearMesa vistaCrearMesa) {
+        this.vistaCrearMesa = vistaCrearMesa;
+    }
+  
   public ControladorMesas(VistaMesa vistaMesa, Usuario usuario) {
     this.vistaMesa = vistaMesa;
     this.usuario = usuario;
@@ -45,13 +56,12 @@ public class ControladorMesas implements Observador {
    * @throws ArgumentosMesaException si alguno de los argumentos proporcionados es
    *                                 inválido.
    */
-  public String crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) {
+  public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) {
     try {
       fachada.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
       fachada.avisar("Mesa Agregada");
-      return "OK";
     } catch (ArgumentosMesaException e) {
-      return e.getMessage();
+      vistaCrearMesa.mostrarMensajeError(e.getMessage());
     }
   }
 
@@ -98,5 +108,4 @@ public class ControladorMesas implements Observador {
     else
       vistaMesa.actualizarTitulo(usuario.getNombreCompleto() + " - Administrar Mesas");
   }
-
 }
