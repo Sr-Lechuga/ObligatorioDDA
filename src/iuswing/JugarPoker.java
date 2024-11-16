@@ -4,14 +4,18 @@
  */
 package iuswing;
 
+import java.util.ArrayList;
+import panelCartasPoker.CartaPoker;
+import panelCartasPoker.PanelCartasListener;
 import panelCartasPoker.PanelCartasPoker;
+import panelCartasPoker.PanelCartasPokerException;
 import vistas.VistaPoker;
 
 /**
  *
  * @author agust
  */
-public class JugarPoker extends javax.swing.JFrame implements VistaPoker {
+public class JugarPoker extends javax.swing.JFrame implements PanelCartasListener, VistaPoker {
 
     /**
      * Creates new form JugarPoker
@@ -19,7 +23,7 @@ public class JugarPoker extends javax.swing.JFrame implements VistaPoker {
     public JugarPoker() {
         initComponents();
         // Inicializar el panel de cartas de póker
-        PanelCartasPoker panelCartas = new PanelCartasPoker();
+        PanelCartasPoker panelCartas = new PanelCartasPoker();   
         // Añadir el panel de cartas al JFrame
         add(panelCartas);
     }
@@ -93,6 +97,11 @@ public class JugarPoker extends javax.swing.JFrame implements VistaPoker {
         checkBoxHabilitar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         checkBoxHabilitar.setSelected(true);
         checkBoxHabilitar.setText("Habilitar panel");
+        checkBoxHabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxHabilitarActionPerformed(evt);
+            }
+        });
 
         lblMontoBase.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblMontoBase.setText("Monto base: ");
@@ -268,6 +277,10 @@ public class JugarPoker extends javax.swing.JFrame implements VistaPoker {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkBoxHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxHabilitarActionPerformed
+        panelCartasPoker1.setEnabled(checkBoxHabilitar.isSelected());
+    }//GEN-LAST:event_checkBoxHabilitarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,5 +363,18 @@ public class JugarPoker extends javax.swing.JFrame implements VistaPoker {
     @Override
     public void mostrarFiguras() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void clickEnCarta(CartaPoker carta) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void cargarCartas(ArrayList<CartaPoker> cartas) {
+        try{
+            panelCartasPoker1.cargarCartas(cartas);
+        }catch (PanelCartasPokerException ex){
+            lblError.setText(ex.getMessage());
+        }
     }
 }
