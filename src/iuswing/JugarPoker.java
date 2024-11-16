@@ -64,6 +64,7 @@ public class JugarPoker extends javax.swing.JFrame {
 
         btnSeguir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSeguir.setText("Continuar jugando");
+        btnSeguir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalir.setText("Abandonar");
