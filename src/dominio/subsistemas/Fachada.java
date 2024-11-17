@@ -120,4 +120,8 @@ public class Fachada implements Observable {
         }
     }
     // </editor-fold>
+
+    public void ingresarEnMesa(Jugador jugadorEnSesion, Mesa mesaSeleccionada) throws ArgumentosMesaException, GestionMesasException, SaldoException {
+        subMesas.agregarParticipanteEnMesa(mesaSeleccionada, jugadorEnSesion);
+    }
 }

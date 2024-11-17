@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package iuswing;
 
+import controladores.ControladorJugarPoker;
+import dominio.subsistemas.usuarios.entidades.Jugador;
 import java.util.ArrayList;
 import panelCartasPoker.CartaPoker;
 import panelCartasPoker.PanelCartasListener;
@@ -17,11 +15,13 @@ import vistas.VistaPoker;
  */
 public class JugarPoker extends javax.swing.JFrame implements PanelCartasListener, VistaPoker {
 
-    /**
-     * Creates new form JugarPoker
-     */
-    public JugarPoker() {
+    ControladorJugarPoker controladorJugarPoker;
+    
+    public JugarPoker(Jugador jugadorEnSesion) {
         initComponents();
+        
+        controladorJugarPoker = new ControladorJugarPoker(jugadorEnSesion);
+        
         // Inicializar el panel de cartas de póker
         PanelCartasPoker panelCartas = new PanelCartasPoker();   
         // Añadir el panel de cartas al JFrame
@@ -311,7 +311,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JugarPoker().setVisible(true);
+                new JugarPoker(null).setVisible(true);
             }
         });
     }

@@ -105,6 +105,12 @@ public class Mesa {
         if (this.estado != EstadoMesa.ABIERTA) {
             throw new GestionMesasException("La mesa no esta abierta para recibir jugadores.");
         }
+        if(jugador.getSaldo() < this.apuestaBase * 10){
+            throw new SaldoException("Saldo insuficiente");
+        }
+        if(participantes.contains(jugador)){
+            throw new GestionMesasException("El participante ya esta en la mesa, no puede volver a ingresar");
+        }
 
         participantes.add(jugador);
 
@@ -132,6 +138,8 @@ public class Mesa {
         nuevaRonda.aumentarPozo(this.pozoAcumulado);
         this.pozoAcumulado = 0;
 
+        mazo.barajar();
+        
         for (Jugador jugador : participantes) {
             nuevaRonda.agregarParticipante(jugador);
             jugador.removerSaldo(apuestaBase);
@@ -142,7 +150,6 @@ public class Mesa {
 
         rondas.add(nuevaRonda);
 
-        mazo.barajar();
     }
 
     public double calcularRecaudacion() {

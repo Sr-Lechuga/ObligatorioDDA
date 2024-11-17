@@ -19,7 +19,7 @@ public class ControladorAdministrarMesa implements Observador {
   private Fachada fachada;
   private VistaMesa vistaMesa;
   private VistaCrearMesa vistaCrearMesa;
-  private Usuario usuario; // Puede ser un jugador o un administrador
+  private Usuario usuario; // Un administrador
 
   // <editor-fold defaultstate="collapsed" desc="Setters">
   public void setVistaMesa(VistaMesa vistaMesa) {
