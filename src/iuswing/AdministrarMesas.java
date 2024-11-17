@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import controladores.ControladorAdministrarMesa;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Administrador;
-import vistas.VistaMesa;
+import vistas.VistaAdministrarMesas;
 import vistas.formats.MesaListRenderer;
 
 /**
  *
  * @author agust
  */
-public class AdministrarMesas extends javax.swing.JFrame implements VistaMesa {
+public class AdministrarMesas extends javax.swing.JFrame implements VistaAdministrarMesas {
 
   ControladorAdministrarMesa controladorAdministrarMesas;
 
@@ -20,7 +20,7 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaMesa {
     initComponents();
     controladorAdministrarMesas = new ControladorAdministrarMesa(this, administrador);
 
-    mostrarMesas();
+    mostrarTodasLasMesas();
   }
 
   /**
@@ -223,7 +223,7 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaMesa {
 
   @SuppressWarnings("unchecked")
   @Override
-  public void mostrarMesas() {
+  public void mostrarTodasLasMesas() {
     ArrayList<Mesa> mesasAbiertas = controladorAdministrarMesas.obtenerTodasLasMesas();
 
     if (mesasAbiertas.isEmpty())

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import controladores.ControladorIngresarMesa;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
-import vistas.VistaMenuMesas;
+import vistas.VistaIngresarAUnaMesa;
 import vistas.formats.MesaListRenderer;
 
 /**
  *
  * @author agust
  */
-public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMesas {
+public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresarAUnaMesa {
 
   ControladorIngresarMesa controladorIngresarMesa;
 

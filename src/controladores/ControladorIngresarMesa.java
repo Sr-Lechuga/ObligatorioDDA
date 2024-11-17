@@ -10,12 +10,12 @@ import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
-import vistas.VistaMenuMesas;
+import vistas.VistaIngresarAUnaMesa;
 
 public class ControladorIngresarMesa implements Observador {
 
   // <editor-fold defaultstate="collapsed" desc="Atributos">
-  private VistaMenuMesas vistaMenuMesa;
+  private VistaIngresarAUnaMesa vistaMenuMesa;
   private Fachada fachada;
   private Jugador jugadorEnSesion;
   // </editor-fold>
@@ -24,7 +24,7 @@ public class ControladorIngresarMesa implements Observador {
     return jugadorEnSesion;
   }
 
-  public ControladorIngresarMesa(VistaMenuMesas vistaMenuMesa, Jugador jugador) {
+  public ControladorIngresarMesa(VistaIngresarAUnaMesa vistaMenuMesa, Jugador jugador) {
     this.vistaMenuMesa = vistaMenuMesa;
     this.fachada = Fachada.getInstancia();
     this.jugadorEnSesion = jugador;

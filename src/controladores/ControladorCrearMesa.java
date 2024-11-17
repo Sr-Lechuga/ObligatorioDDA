@@ -1,5 +1,6 @@
 package controladores;
 
+import dominio.excepciones.mesas.GestionMesasException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.usuarios.entidades.Administrador;
 import utilidades.observer.Observable;
@@ -34,4 +35,13 @@ public class ControladorCrearMesa implements Observador {
     throw new UnsupportedOperationException("Unimplemented method 'crearMesa'");
   }
 
+  public void calcularRecaudacion(int numeroMesa) {
+    vistaCrearMesa.mostrarMensajeError("");
+    try {
+      String recaudacion = String.valueOf(fachada.calcularRecaudacion(numeroMesa));
+      vistaCrearMesa.mostrarMensajeError(recaudacion);
+    } catch (GestionMesasException e) {
+      vistaCrearMesa.mostrarMensajeError(e.getMessage());
+    }
+  }
 }

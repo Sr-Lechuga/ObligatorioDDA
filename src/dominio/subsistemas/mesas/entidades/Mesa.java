@@ -21,8 +21,8 @@ public class Mesa {
     private double porcentajeComision;
     private double pozoAcumulado;
 
-    private List<Jugador> participantes;
-    private List<Ronda> rondas;
+    private ArrayList<Jugador> participantes;
+    private ArrayList<Ronda> rondas;
     private Mazo mazo;
     private EstadoMesa estado;
     // </editor-fold>
@@ -71,11 +71,11 @@ public class Mesa {
         return pozoAcumulado;
     }
 
-    public List<Jugador> getParticipantes() {
+    public ArrayList<Jugador> getParticipantes() {
         return participantes;
     }
 
-    public List<Ronda> getRondas() {
+    public ArrayList<Ronda> getRondas() {
         return rondas;
     }
 
@@ -105,10 +105,10 @@ public class Mesa {
         if (this.estado != EstadoMesa.ABIERTA) {
             throw new GestionMesasException("La mesa no esta abierta para recibir jugadores.");
         }
-        if(jugador.getSaldo() < this.apuestaBase * 10){
+        if (jugador.getSaldo() < this.apuestaBase * 10) {
             throw new SaldoException("Saldo insuficiente");
         }
-        if(participantes.contains(jugador)){
+        if (participantes.contains(jugador)) {
             throw new GestionMesasException("El participante ya esta en la mesa, no puede volver a ingresar");
         }
 
@@ -139,7 +139,7 @@ public class Mesa {
         this.pozoAcumulado = 0;
 
         mazo.barajar();
-        
+
         for (Jugador jugador : participantes) {
             nuevaRonda.agregarParticipante(jugador);
             jugador.removerSaldo(apuestaBase);

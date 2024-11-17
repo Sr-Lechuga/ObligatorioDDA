@@ -6,6 +6,7 @@ import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.entidades.Mesa;
+import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
@@ -76,5 +77,9 @@ public class sMesas {
       }
     }
     return mesasAbiertas;
+  }
+
+  public ArrayList<Ronda> obtenerRondasDeMesa(Mesa mesa) {
+    return mesa.getRondas();
   }
 }

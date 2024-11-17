@@ -66,6 +66,18 @@ public class Ronda {
   public Apuesta getApuesta() {
     return apuesta;
   }
+
+  public String getCantidadParticipantes() {
+    return String.valueOf(participantes.size());
+  }
+
+  public String getNombreJugadorGanador() {
+    return jugadorGanador.getNombreCompleto();
+  }
+
+  public String getNombreFiguraGanadora() {
+    return figuraGanadora.getNombre();
+  }
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Setters">

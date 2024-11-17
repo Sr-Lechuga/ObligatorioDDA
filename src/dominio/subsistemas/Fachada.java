@@ -10,6 +10,7 @@ import dominio.excepciones.usuarios.SaldoException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
 import dominio.subsistemas.mesas.sMesas;
 import dominio.subsistemas.mesas.entidades.Mesa;
+import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.reglas.sReglas;
 import dominio.subsistemas.usuarios.sUsuarios;
 import dominio.subsistemas.usuarios.entidades.Jugador;
@@ -95,6 +96,11 @@ public class Fachada implements Observable {
     public ArrayList<Mesa> obtenerMesasAbiertas() {
         return subMesas.obtenerMesasAbiertas();
     }
+
+    public ArrayList<Ronda> obtenerRondasDeMesa(Mesa mesa) {
+        return subMesas.obtenerRondasDeMesa(mesa);
+    }
+
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
