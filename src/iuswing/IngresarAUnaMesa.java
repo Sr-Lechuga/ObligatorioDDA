@@ -108,11 +108,15 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaMenuMes
     private void btnJugarPokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarPokerActionPerformed
         Mesa mesaSeleccionada = (Mesa)listaMesasAbiertas.getSelectedValue();
         controladorIngresarMesa.ingresarMesa(mesaSeleccionada);
-        JugarPoker juego = new JugarPoker(controladorIngresarMesa.getJugadorEnSesion());
-        dispose();
-        juego.setVisible(true);
     }//GEN-LAST:event_btnJugarPokerActionPerformed
 
+  @Override
+    public void ingresarEnMesa(){
+                JugarPoker juego = new JugarPoker(controladorIngresarMesa.getJugadorEnSesion());
+        dispose();
+        juego.setVisible(true);
+    }
+    
   /**
    * @param args the command line arguments
    */
