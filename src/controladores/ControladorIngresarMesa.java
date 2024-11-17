@@ -20,24 +20,22 @@ public class ControladorIngresarMesa implements Observador {
   private Jugador jugadorEnSesion;
   // </editor-fold>
 
-    public Jugador getJugadorEnSesion() {
-        return jugadorEnSesion;
-    }
-    
+  public Jugador getJugadorEnSesion() {
+    return jugadorEnSesion;
+  }
+
   public ControladorIngresarMesa(VistaMenuMesas vistaMenuMesa, Jugador jugador) {
     this.vistaMenuMesa = vistaMenuMesa;
     this.fachada = Fachada.getInstancia();
     this.jugadorEnSesion = jugador;
-  
-    
+
     fachada.agregar(this); // Add Observador
     actualizarInformacion();
   }
 
-
   // <editor-fold defaultstate="collapsed" desc="Metodos publicos">
-  public ArrayList<Mesa> obtenerMesasDisponibles() {
-    return fachada.obtenerMesas();
+  public ArrayList<Mesa> obtenerMesasAbiertas() {
+    return fachada.obtenerMesasAbiertas();
   }
   // </editor-fold>
 
@@ -55,11 +53,12 @@ public class ControladorIngresarMesa implements Observador {
   }
   // </editor-fold>
 
-    public void ingresarMesa(Mesa mesaSeleccionada) {
-      try {
-          fachada.ingresarEnMesa(jugadorEnSesion,mesaSeleccionada);
-      } catch (ArgumentosMesaException | GestionMesasException | SaldoException ex) {
-          vistaMenuMesa.mostrarMensajeError(ex.getMessage());
-      }
+  public void ingresarMesa(Mesa mesaSeleccionada) {
+    try {
+      fachada.ingresarEnMesa(jugadorEnSesion, mesaSeleccionada);
+      vistaMenuMesa.ingresarEnMesa();
+    } catch (ArgumentosMesaException | GestionMesasException | SaldoException ex) {
+      vistaMenuMesa.mostrarMensajeError(ex.getMessage());
     }
+  }
 }

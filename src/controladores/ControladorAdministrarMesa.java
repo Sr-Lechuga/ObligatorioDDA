@@ -5,8 +5,8 @@ import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
+import dominio.subsistemas.usuarios.entidades.Administrador;
 import dominio.subsistemas.usuarios.entidades.Jugador;
-import dominio.subsistemas.usuarios.entidades.Usuario;
 
 import java.util.ArrayList;
 import utilidades.observer.Observable;
@@ -19,23 +19,20 @@ public class ControladorAdministrarMesa implements Observador {
   private Fachada fachada;
   private VistaMesa vistaMesa;
   private VistaCrearMesa vistaCrearMesa;
-  private Usuario usuario; // Un administrador
+  private Administrador administradorEnSesion; // Un administrador
 
-  // <editor-fold defaultstate="collapsed" desc="Setters">
-  public void setVistaMesa(VistaMesa vistaMesa) {
-    this.vistaMesa = vistaMesa;
-  }
+  // <editor-fold defaultstate="collapsed" desc="Getters">
 
-  public void setVistaCrearMesa(VistaCrearMesa vistaCrearMesa) {
-    this.vistaCrearMesa = vistaCrearMesa;
+  public Administrador getAdministrador() {
+    return this.administradorEnSesion;
   }
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Constructor">
-  public ControladorAdministrarMesa(VistaMesa vistaMesa, Usuario usuarioEnSesion) {
+  public ControladorAdministrarMesa(VistaMesa vistaMesa, Administrador administradorEnSesion) {
     this.fachada = Fachada.getInstancia();
     this.vistaMesa = vistaMesa;
-    this.usuario = usuarioEnSesion;
+    this.administradorEnSesion = administradorEnSesion;
 
     this.fachada.agregar(this); // Add observador
     actualizarTitulo();
@@ -68,18 +65,8 @@ public class ControladorAdministrarMesa implements Observador {
     }
   }
 
-  public ArrayList<Mesa> obtenerMesas() {
-    return fachada.obtenerMesas();
-  }
-
-  public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) {
-    vistaCrearMesa.mostrarMensajeError("");
-    try {
-      fachada.agregarParticipanteEnMesa(unaMesa, unJugador);
-      fachada.avisar(EventoMesa.PARTICIPANTE_AGREGADO);
-    } catch (GestionMesasException | SaldoException | ArgumentosMesaException ex) {
-      vistaCrearMesa.mostrarMensajeError(ex.getMessage());
-    }
+  public ArrayList<Mesa> obtenerTodasLasMesas() {
+    return fachada.obtenerTodasLasMesas();
   }
 
   public void calcularRecaudacion(int numeroMesa) {
@@ -102,9 +89,7 @@ public class ControladorAdministrarMesa implements Observador {
   // </editor-fold>
 
   private void actualizarTitulo() {
-    if (this.usuario instanceof Jugador jugador)
-      vistaMesa.actualizarTitulo(jugador.getNombreCompleto() + " - " + jugador.getSaldo());
-    else
-      vistaMesa.actualizarTitulo(usuario.getNombreCompleto() + " - Administrar Mesas");
+    vistaMesa.actualizarTitulo(administradorEnSesion.getNombreCompleto() + " - Administrar Mesas");
   }
+
 }

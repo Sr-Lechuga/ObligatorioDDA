@@ -6,11 +6,12 @@ import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.entidades.Mesa;
+import dominio.subsistemas.mesas.estados.EstadoMesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class sMesas {
 
-  ArrayList<Mesa> mesasAbiertas = new ArrayList<>();
+  ArrayList<Mesa> todasLasMesas = new ArrayList<>();
 
   /**
    * @param jugadoresRequeridos
@@ -21,7 +22,7 @@ public class sMesas {
   public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision)
       throws ArgumentosMesaException {
     Mesa mesaNueva = new Mesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
-    mesasAbiertas.add(mesaNueva);
+    todasLasMesas.add(mesaNueva);
   }
 
   /**
@@ -60,10 +61,20 @@ public class sMesas {
    * @return
    */
   private Mesa buscarMesa(int numeroMesa) {
-    return mesasAbiertas.get(numeroMesa);
+    return todasLasMesas.get(numeroMesa);
   }
 
-  public ArrayList<Mesa> obtenerMesas() {
-    return this.mesasAbiertas;
+  public ArrayList<Mesa> obtenerTodasLasMesas() {
+    return this.todasLasMesas;
+  }
+
+  public ArrayList<Mesa> obtenerMesasAbiertas() {
+    ArrayList<Mesa> mesasAbiertas = new ArrayList<>();
+    for (Mesa unaMesa : todasLasMesas) {
+      if (unaMesa.getEstado() == EstadoMesa.ABIERTA) {
+        mesasAbiertas.add(unaMesa);
+      }
+    }
+    return mesasAbiertas;
   }
 }

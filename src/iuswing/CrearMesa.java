@@ -4,7 +4,9 @@
  */
 package iuswing;
 
-import controladores.ControladorAdministrarMesa;
+import controladores.ControladorCrearMesa;
+import dominio.subsistemas.usuarios.entidades.Administrador;
+
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
@@ -16,17 +18,16 @@ import vistas.VistaCrearMesa;
  */
 public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
 
-    private ControladorAdministrarMesa controladorMesas;
+    private ControladorCrearMesa controladorCrearMesa;
 
-    public CrearMesa(java.awt.Frame parent, boolean modal, ControladorAdministrarMesa controladorMesas) {
+    public CrearMesa(java.awt.Frame parent, boolean modal, Administrador administradorEnSesion) {
         super(parent, modal);
         initComponents();
 
         // Los inputs solo reciben numeros
         setOnlyNumberInputs();
 
-        this.controladorMesas = controladorMesas;
-        controladorMesas.setVistaCrearMesa(this);
+        this.controladorCrearMesa = new ControladorCrearMesa(this, administradorEnSesion);
 
         limpiarCampos();
     }
@@ -243,7 +244,7 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
         Double comision = Double.parseDouble(txtComision.getText());
         Double apuestaBase = Double.parseDouble(txtMontoApuestaBase.getText());
 
-        this.controladorMesas.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
+        this.controladorCrearMesa.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
         limpiarCampos();
     }
 
