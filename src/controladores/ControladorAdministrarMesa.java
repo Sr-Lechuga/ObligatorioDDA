@@ -68,8 +68,8 @@ public class ControladorAdministrarMesa implements Observador {
     }
   }
 
-  public ArrayList<Mesa> obtenerMesas() {
-    return fachada.obtenerMesas();
+  public ArrayList<Mesa> obtenerTodasLasMesas() {
+    return fachada.obtenerTodasLasMesas();
   }
 
   public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador) {

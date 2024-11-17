@@ -88,8 +88,8 @@ public class Fachada implements Observable {
         return subMesas.calcularRecaudacion(numeroMesa);
     }
 
-    public ArrayList<Mesa> obtenerMesas() {
-        return subMesas.obtenerMesas();
+    public ArrayList<Mesa> obtenerTodasLasMesas() {
+        return subMesas.obtenerTodasLasMesas();
     }
 
     // </editor-fold>
@@ -121,7 +121,8 @@ public class Fachada implements Observable {
     }
     // </editor-fold>
 
-    public void ingresarEnMesa(Jugador jugadorEnSesion, Mesa mesaSeleccionada) throws ArgumentosMesaException, GestionMesasException, SaldoException {
+    public void ingresarEnMesa(Jugador jugadorEnSesion, Mesa mesaSeleccionada)
+            throws ArgumentosMesaException, GestionMesasException, SaldoException {
         subMesas.agregarParticipanteEnMesa(mesaSeleccionada, jugadorEnSesion);
     }
 }
