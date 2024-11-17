@@ -243,12 +243,31 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
 
     @Override
     public void crearMesa() {
-        Integer cantidadMaximaJugadores = Integer.parseInt(txtCantidadJugadores.getText());
-        Double comision = Double.parseDouble(txtComision.getText());
-        Double apuestaBase = Double.parseDouble(txtMontoApuestaBase.getText());
+        if (validarCampos()) {
+            Integer cantidadMaximaJugadores = Integer.parseInt(txtCantidadJugadores.getText());
+            Double comision = Double.parseDouble(txtComision.getText());
+            Double apuestaBase = Double.parseDouble(txtMontoApuestaBase.getText());
 
-        this.controladorCrearMesa.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
-        limpiarCampos();
+            this.controladorCrearMesa.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
+            limpiarCampos();
+        }
+    }
+
+    private boolean validarCampos() {
+        if (txtCantidadJugadores.getText().isBlank()) {
+            mostrarMensajeError("El campo Cantidad de jugadores es requerido");
+            return false;
+        }
+        if (txtComision.getText().isBlank()) {
+            mostrarMensajeError("El campo Comision es requerido");
+            return false;
+
+        }
+        if (txtMontoApuestaBase.getText().isBlank()) {
+            mostrarMensajeError("El campo monto de apuesta es requerido");
+            return false;
+        }
+        return true;
     }
 
     @Override

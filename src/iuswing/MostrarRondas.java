@@ -28,6 +28,7 @@ public class MostrarRondas extends javax.swing.JFrame implements VistaMostrarRon
   public MostrarRondas(Administrador administradorEnSesion, Mesa mesaSeleccionada) {
     initComponents();
     controladorMostrarRondas = new ControladorMostrarRondas(this, administradorEnSesion, mesaSeleccionada);
+    controladorMostrarRondas.mostrarRondas();
   }
 
   /**
