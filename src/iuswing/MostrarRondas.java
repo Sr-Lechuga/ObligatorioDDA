@@ -38,43 +38,43 @@ public class MostrarRondas extends javax.swing.JFrame implements VistaMostrarRon
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated
   // <editor-fold defaultstate="collapsed" desc="Generated
-  // Code">//GEN-BEGIN:initComponents
-  private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    lblManosJugadas = new javax.swing.JLabel();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    listInfoRondas = new javax.swing.JList();
+        lblManosJugadas = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listInfoRondas = new javax.swing.JList();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-    lblManosJugadas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    lblManosJugadas.setText("Lista de rondas/manos jugadas:");
+        lblManosJugadas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblManosJugadas.setText("Lista de rondas/manos jugadas:");
 
-    jScrollPane1.setViewportView(listInfoRondas);
+        jScrollPane1.setViewportView(listInfoRondas);
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 974,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 974, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblManosJugadas))
-                .addContainerGap(16, Short.MAX_VALUE)));
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblManosJugadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357,
-                    javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE)));
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
   /**
    * @param args the command line arguments
@@ -115,11 +115,11 @@ public class MostrarRondas extends javax.swing.JFrame implements VistaMostrarRon
     });
   }
 
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JLabel lblManosJugadas;
-  private javax.swing.JList listInfoRondas;
-  // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblManosJugadas;
+    private javax.swing.JList listInfoRondas;
+    // End of variables declaration//GEN-END:variables
 
   @Override
   public void mostrarMensajeError(String mensajeError) {

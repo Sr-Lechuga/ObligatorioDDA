@@ -30,6 +30,7 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
    */
   // <editor-fold defaultstate="collapsed" desc="Generated
   // <editor-fold defaultstate="collapsed" desc="Generated
+  // <editor-fold defaultstate="collapsed" desc="Generated
   // Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
@@ -52,14 +53,16 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
 
     btnSeleccionarMesa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     btnSeleccionarMesa.setText("Seleccionar Mesa");
-    btnSeleccionarMesa
-        .setBorder(javax.swing.BorderFactory
-            .createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    btnSeleccionarMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    btnSeleccionarMesa.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSeleccionarMesaActionPerformed(evt);
+      }
+    });
 
     btnCrearMesa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     btnCrearMesa.setText("Crear nueva Mesa");
-    btnCrearMesa.setBorder(
-        javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    btnCrearMesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
     btnCrearMesa.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         btnCrearMesaActionPerformed(evt);
@@ -76,45 +79,28 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(
-                    javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addGroup(layout
-                            .createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                false)
-                            .addComponent(lblErrorMessage,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCrearMesa,
-                                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                                    276,
+                                .addComponent(btnCrearMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 276,
                                     javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(81, 81, 81)
-                                .addComponent(btnSeleccionarMesa,
-                                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                                    272,
+                                .addComponent(btnSeleccionarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 272,
                                     javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 141, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(layout
-                            .createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listaMesas,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listaMesas, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(
-                                    javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTitulo)
-                                    .addComponent(lblMontoTotalRecaudado,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        342,
+                                    .addComponent(lblMontoTotalRecaudado, javax.swing.GroupLayout.PREFERRED_SIZE, 342,
                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(19, 19, 19)));
@@ -124,40 +110,38 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
                 .addGap(24, 24, 24)
                 .addComponent(lblTitulo)
                 .addGap(12, 12, 12)
-                .addComponent(lblMontoTotalRecaudado,
-                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                    42,
+                .addComponent(lblMontoTotalRecaudado, javax.swing.GroupLayout.PREFERRED_SIZE, 42,
                     javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(
-                    javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listaMesas,
-                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                    319,
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(listaMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 319,
                     javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblErrorMessage,
-                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                    28,
+                .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
                     javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(
-                    javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(
-                    javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrearMesa,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        32,
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarMesa,
-                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                        32,
+                    .addComponent(btnSeleccionarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
                         javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE)));
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  private void btnSeleccionarMesaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSeleccionarMesaActionPerformed
+    Object mesa = listaMesas.getSelectedValue();
+    if (mesa instanceof Mesa) {
+      MostrarRondas dialoMostrarRondas = new MostrarRondas(controladorAdministrarMesas.getAdministrador(), (Mesa) mesa);
+      dialoMostrarRondas.setVisible(true);
+      dialoMostrarRondas.setLocationRelativeTo(this);
+    } else {
+      mostrarMensajeError("Debe seleccionar una mesa");
+    }
+  }// GEN-LAST:event_btnSeleccionarMesaActionPerformed
+
   private void btnCrearMesaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCrearMesaActionPerformed
-    CrearMesa dialogCrearMesa = new CrearMesa(null, false, controladorAdministrarMesas.getAdministrador());
+    CrearMesa dialogCrearMesa = new CrearMesa(null, false, controladorAdministrarMesas.getAdministrador(), this);
     dialogCrearMesa.setVisible(true);
     dialogCrearMesa.setLocationRelativeTo(this);
   }// GEN-LAST:event_btnCrearMesaActionPerformed

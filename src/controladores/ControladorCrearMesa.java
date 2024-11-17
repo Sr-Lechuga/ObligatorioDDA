@@ -1,15 +1,18 @@
 package controladores;
 
+import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.usuarios.entidades.Administrador;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
+import vistas.VistaAdministrarMesas;
 import vistas.VistaCrearMesa;
 
 public class ControladorCrearMesa implements Observador {
 
   private VistaCrearMesa vistaCrearMesa;
+  private VistaAdministrarMesas vistaParent;
   private Administrador administradorEnSesion;
   private Fachada fachada;
 
@@ -17,7 +20,9 @@ public class ControladorCrearMesa implements Observador {
     return administradorEnSesion;
   }
 
-  public ControladorCrearMesa(VistaCrearMesa vistaCrearMesa, Administrador administradorEnSesion) {
+  public ControladorCrearMesa(VistaCrearMesa vistaCrearMesa, Administrador administradorEnSesion,
+      VistaAdministrarMesas parent) {
+    this.vistaParent = parent;
     this.vistaCrearMesa = vistaCrearMesa;
     this.administradorEnSesion = administradorEnSesion;
 
@@ -25,14 +30,25 @@ public class ControladorCrearMesa implements Observador {
     fachada.agregar(this); // Add Observador
   }
 
+  // <editor-fold defaultstate="collapsed" desc="Metodos de Interfaz">
   @Override
   public void actualizar(Observable unObservable, Object unEvento) {
-    throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    if (unEvento instanceof EventoMesa) {
+      if (((EventoMesa) unEvento) == EventoMesa.MESA_AGREGADA) {
+        vistaParent.mostrarTodasLasMesas();
+      }
+    }
   }
+  // </editor-fold>
 
   public void crearMesa(Integer cantidadMaximaJugadores, Double apuestaBase, Double comision) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'crearMesa'");
+    vistaCrearMesa.mostrarMensajeError("");
+    try {
+      fachada.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
+      fachada.avisar(EventoMesa.MESA_AGREGADA);
+    } catch (ArgumentosMesaException e) {
+      vistaCrearMesa.mostrarMensajeError(e.getMessage());
+    }
   }
 
   public void calcularRecaudacion(int numeroMesa) {

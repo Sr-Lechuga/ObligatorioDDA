@@ -10,6 +10,8 @@ import dominio.subsistemas.usuarios.entidades.Administrador;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+
+import vistas.VistaAdministrarMesas;
 import vistas.VistaCrearMesa;
 
 /**
@@ -20,14 +22,15 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
 
     private ControladorCrearMesa controladorCrearMesa;
 
-    public CrearMesa(java.awt.Frame parent, boolean modal, Administrador administradorEnSesion) {
+    public CrearMesa(java.awt.Frame parent, boolean modal, Administrador administradorEnSesion,
+            VistaAdministrarMesas vistaParent) {
         super(parent, modal);
         initComponents();
 
         // Los inputs solo reciben numeros
         setOnlyNumberInputs();
 
-        this.controladorCrearMesa = new ControladorCrearMesa(this, administradorEnSesion);
+        this.controladorCrearMesa = new ControladorCrearMesa(this, administradorEnSesion, vistaParent);
 
         limpiarCampos();
     }
@@ -226,7 +229,7 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CrearMesa dialog = new CrearMesa(new javax.swing.JFrame(), true, null);
+                CrearMesa dialog = new CrearMesa(new javax.swing.JFrame(), true, null, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
