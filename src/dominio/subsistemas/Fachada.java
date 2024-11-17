@@ -92,6 +92,9 @@ public class Fachada implements Observable {
         return subMesas.obtenerTodasLasMesas();
     }
 
+    public ArrayList<Mesa> obtenerMesasAbiertas() {
+        return subMesas.obtenerMesasAbiertas();
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
@@ -125,4 +128,5 @@ public class Fachada implements Observable {
             throws ArgumentosMesaException, GestionMesasException, SaldoException {
         subMesas.agregarParticipanteEnMesa(mesaSeleccionada, jugadorEnSesion);
     }
+
 }

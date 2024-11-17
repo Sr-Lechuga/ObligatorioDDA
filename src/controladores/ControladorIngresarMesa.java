@@ -34,8 +34,8 @@ public class ControladorIngresarMesa implements Observador {
   }
 
   // <editor-fold defaultstate="collapsed" desc="Metodos publicos">
-  public ArrayList<Mesa> obtenerMesasDisponibles() {
-    return fachada.obtenerTodasLasMesas();
+  public ArrayList<Mesa> obtenerMesasAbiertas() {
+    return fachada.obtenerMesasAbiertas();
   }
   // </editor-fold>
 
