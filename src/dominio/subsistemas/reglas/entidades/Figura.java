@@ -1,6 +1,6 @@
 package dominio.subsistemas.reglas.entidades;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import dominio.excepciones.reglas.FiguraArgumentoException;
 import dominio.interfaces.IValidable;
@@ -40,7 +40,7 @@ public class Figura implements IValidable {
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Métodos">
-  public boolean analizarMano(List<Carta> mano) {
+  public String analizarMano(ArrayList<Carta> mano) {
     return estrategia.analizarMano(mano);
   }
 
@@ -53,15 +53,19 @@ public class Figura implements IValidable {
   // </editor-fold>
 
   public void validarNombre() throws FiguraArgumentoException {
-    if (nombre == null || nombre.isEmpty()) {
+    if (nombre == null) {
       throw new FiguraArgumentoException("El nombre de la figura no puede ser nulo o vacío");
     }
 
   }
 
   public void validarDescripcion() throws FiguraArgumentoException {
-    if (descripcion == null || descripcion.isEmpty()) {
+    if (descripcion == null) {
       throw new FiguraArgumentoException("La descripción de la figura no puede ser vacía");
     }
+  }
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
   }
 }
