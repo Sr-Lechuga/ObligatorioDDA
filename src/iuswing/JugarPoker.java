@@ -39,7 +39,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         lblMesa.setText(lblMesa.getText() + " " + mesa.getNumeroMesa());
         lblMontoBase.setText(lblMontoBase.getText() + " " + mesa.getApuestaBase());
 
-        cargarListaJugadores(mesa.getParticipantes());
+        mostrarJugadores(mesa.getParticipantes());
         mostrarFiguras(controladorJugarPoker.obtenerFigurasDisponibles());
     }
 
@@ -510,15 +510,6 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
     private javax.swing.JTextField txtPagar;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarListaJugadores(CopyOnWriteArrayList<Jugador> participantes) {
-
-        DefaultListModel<String> modelo = new DefaultListModel<>();
-        for (Jugador jugador : participantes) {
-            modelo.addElement(jugador.getNombreCompleto());
-        }
-        listJugadores.setModel(modelo);
-    }
-
     @Override
     public void mostrarPozoActual(String pozoRondaActual) {
         lblPozoActual
@@ -527,7 +518,6 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
 
     @Override
     public void mostrarFiguraActual(String figuraActual) {
-
         lblFiguraActual.setText(lblFiguraActual.getText() + " " + figuraActual);
     }
 

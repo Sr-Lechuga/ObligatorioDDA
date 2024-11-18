@@ -7,8 +7,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-import dominio.subsistemas.usuarios.entidades.Jugador;
-
 public class FigurasListRenderer extends DefaultListCellRenderer {
 
   @Override
@@ -20,7 +18,7 @@ public class FigurasListRenderer extends DefaultListCellRenderer {
       Figura figura = (Figura) value;
       label.setText(figura.getNombre());
       label.setToolTipText(figura.getDescripcion());
-      label.setHorizontalTextPosition(CENTER);
+      label.setHorizontalAlignment(JLabel.CENTER);
     }
     return label;
   }

@@ -9,6 +9,7 @@ import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
+import dominio.subsistemas.usuarios.estados.EstadoJugador;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class sMesas {
@@ -38,6 +39,7 @@ public class sMesas {
    */
   public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador)
       throws ArgumentosMesaException, GestionMesasException, SaldoException {
+    unJugador.setEstado(EstadoJugador.ACCION_PENDIENTE);
     unaMesa.agregarParticipante(unJugador);
   }
 
