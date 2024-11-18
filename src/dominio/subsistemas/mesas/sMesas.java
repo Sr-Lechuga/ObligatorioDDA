@@ -96,4 +96,9 @@ public class sMesas {
     mesa.iniciarNuevaRonda();
   }
 
+  public ArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
+    Mesa mesaEncontrada = buscarMesa(mesaActual.getNumeroMesa());
+    return mesaEncontrada.getParticipantesRondaActual();
+  }
+
 }

@@ -3,6 +3,7 @@ package dominio.subsistemas.usuarios;
 import java.util.HashMap;
 
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
+import dominio.excepciones.usuarios.SaldoException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
 import dominio.excepciones.usuarios.UsuarioInvalidoException;
 import dominio.subsistemas.usuarios.entidades.Administrador;
@@ -34,12 +35,12 @@ public class sUsuarios {
      *                       ser única.
      * @param clave          La clave de acceso del administrador.
      * @param nombreCompleto El nombre completo del administrador.
+     * @throws SaldoException
      * @throws UsuarioInvalidoException Si el usuario ya está registrado en el
      *                                  sistema.
-     * @throws Exception                Si ocurre un error durante la validación del
-     *                                  administrador.
      */
-    public void agregarAdministrador(String cedula, String clave, String nombreCompleto) throws Exception {
+    public void agregarAdministrador(String cedula, String clave, String nombreCompleto)
+            throws UsuarioInvalidoException, SaldoException {
         if (buscarUsuario(cedula) != null) {
             throw new UsuarioInvalidoException(
                     String.format("El usuario %s ya está registrado en el sistema.", cedula));
@@ -55,9 +56,11 @@ public class sUsuarios {
      * @param cedula
      * @param clave
      * @param nombreCompleto
-     * @throws Exception
+     * @throws UsuarioInvalidoException
+     * @throws SaldoException
      */
-    public void agregarJugador(double saldo, String cedula, String clave, String nombreCompleto) throws Exception {
+    public void agregarJugador(double saldo, String cedula, String clave, String nombreCompleto)
+            throws UsuarioInvalidoException, SaldoException {
         if (buscarUsuario(cedula) != null) {
             throw new UsuarioInvalidoException(
                     String.format("El usuario %s ya está registrado en el sistema.", cedula));

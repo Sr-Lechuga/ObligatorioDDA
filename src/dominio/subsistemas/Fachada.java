@@ -5,13 +5,16 @@ import java.util.List;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
+import dominio.excepciones.reglas.FiguraArgumentoException;
 import dominio.excepciones.usuarios.CredencialesIncorrectasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.excepciones.usuarios.UsuarioEnSesionException;
+import dominio.excepciones.usuarios.UsuarioInvalidoException;
 import dominio.subsistemas.mesas.sMesas;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.reglas.sReglas;
+import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.sUsuarios;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
@@ -51,11 +54,13 @@ public class Fachada implements Observable {
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Usuario">
 
-    public void agregarAdministrador(String cedula, String clave, String nombreCompleto) throws Exception {
+    public void agregarAdministrador(String cedula, String clave, String nombreCompleto)
+            throws UsuarioInvalidoException, SaldoException {
         subUsuarios.agregarAdministrador(cedula, clave, nombreCompleto);
     }
 
-    public void agregarJugador(double saldo, String cedula, String clave, String nombreCompleto) throws Exception {
+    public void agregarJugador(double saldo, String cedula, String clave, String nombreCompleto)
+            throws UsuarioInvalidoException, SaldoException {
         subUsuarios.agregarJugador(saldo, cedula, clave, nombreCompleto);
     }
 
@@ -108,9 +113,21 @@ public class Fachada implements Observable {
     public void iniciarJuego(Mesa mesa) throws SaldoException {
         subMesas.inciarJuego(mesa);
     }
+
+    public ArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
+        return subMesas.obtenerParticipantesDeRondaActualEnMesa(mesaActual);
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
+
+    public void agregarFigura(String nombre, String descripcion) throws FiguraArgumentoException {
+        subReglas.agregarFigura(nombre, descripcion);
+    }
+
+    public ArrayList<Figura> obtenerFigurasDisponibles() {
+        return subReglas.obtenerFigurasDisponibles();
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Inteface Observable">
@@ -136,4 +153,5 @@ public class Fachada implements Observable {
         }
     }
     // </editor-fold>
+
 }

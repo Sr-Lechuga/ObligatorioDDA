@@ -1,10 +1,13 @@
 package controladores;
 
+import java.util.ArrayList;
+
 import controladores.Eventos.EventoJuego;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
+import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
@@ -38,6 +41,10 @@ public class ControladorJugarPoker implements Observador {
         }
     }
 
+    private void actualizarParticipantes() {
+        vistaJugarPoker.mostrarJugadores(fachada.obtenerParticipantesDeRondaActualEnMesa(mesaActual));
+    }
+
     @Override
     public void actualizar(Observable unObservable, Object unEvento) {
         if (unEvento instanceof EventoJuego) {
@@ -45,11 +52,17 @@ public class ControladorJugarPoker implements Observador {
                 case EventoJuego.JUEGO_INICIADO:
                     iniciarRonda();
                     break;
-
+                case EventoJuego.JUGADOR_AGREGADO:
+                    actualizarParticipantes();
+                    break;
                 default:
                     break;
             }
         }
+    }
+
+    public ArrayList<Figura> obtenerFigurasDisponibles() {
+        return fachada.obtenerFigurasDisponibles();
     }
 
 }

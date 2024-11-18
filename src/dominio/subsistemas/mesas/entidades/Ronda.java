@@ -1,6 +1,6 @@
 package dominio.subsistemas.mesas.entidades;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
@@ -17,15 +17,15 @@ public class Ronda {
   private EstadoRonda estado;
   private int respuestas;
 
-  private List<Jugador> participantes;
-  private List<Jugador> retirados;
+  private ArrayList<Jugador> participantes;
+  private ArrayList<Jugador> retirados;
   private Apuesta apuesta;
   private Jugador jugadorGanador;
   private Figura figuraGanadora;
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Constructores">
-  public Ronda(List<Jugador> participantes) {
+  public Ronda(ArrayList<Jugador> participantes) {
     this.numeroRonda = contadorRondas++;
     this.pozo = 0.0;
     this.figuraGanadora = null;
@@ -55,7 +55,7 @@ public class Ronda {
     return estado;
   }
 
-  public List<Jugador> getParticipantes() {
+  public ArrayList<Jugador> getParticipantes() {
     return participantes;
   }
 

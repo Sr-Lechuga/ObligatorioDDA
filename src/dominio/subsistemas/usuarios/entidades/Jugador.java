@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dominio.excepciones.usuarios.SaldoException;
+import dominio.excepciones.usuarios.UsuarioInvalidoException;
 import dominio.interfaces.IValidable;
 import dominio.subsistemas.mesas.entidades.Carta;
 import dominio.subsistemas.usuarios.estados.EstadoJugador;
@@ -20,12 +21,14 @@ public class Jugador extends Usuario implements IValidable {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Jugador(double saldo, String cedula, String clave, String nombreCompleto, EstadoJugador estado) {
+    public Jugador(double saldo, String cedula, String clave, String nombreCompleto, EstadoJugador estado)
+            throws UsuarioInvalidoException, SaldoException {
         super(cedula, clave, nombreCompleto);
         this.saldo = saldo;
         this.estado = estado;
 
         this.mano = null;
+        validar();
     }
     // </editor-fold>
 
@@ -74,7 +77,7 @@ public class Jugador extends Usuario implements IValidable {
 
     // <editor-fold defaultstate="collapsed" desc="Validaciones">
     @Override
-    public void validar() throws Exception {
+    public void validar() throws UsuarioInvalidoException, SaldoException {
         super.validar();
         validarSaldo();
     }

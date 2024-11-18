@@ -139,7 +139,7 @@ public class Mesa {
       this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
     }
 
-    Ronda nuevaRonda = new Ronda(participantes);
+    Ronda nuevaRonda = new Ronda((ArrayList<Jugador>) participantes);
 
     nuevaRonda.aumentarPozo(this.pozoAcumulado);
     this.pozoAcumulado = 0;
@@ -193,5 +193,9 @@ public class Mesa {
     }
   }
   // </editor-fold>
+
+  public ArrayList<Jugador> getParticipantesRondaActual() {
+    return getRondaActual().getParticipantes();
+  }
 
 }

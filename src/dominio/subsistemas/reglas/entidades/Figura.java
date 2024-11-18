@@ -2,39 +2,66 @@ package dominio.subsistemas.reglas.entidades;
 
 import java.util.List;
 
+import dominio.excepciones.reglas.FiguraArgumentoException;
+import dominio.interfaces.IValidable;
 import dominio.subsistemas.mesas.entidades.Carta;
 
-public class Figura {
+public class Figura implements IValidable {
 
-    // <editor-fold defaultstate="collapsed" desc="Atributos">
-    private String nombre;
-    private String descripcion;
-    private FiguraStrategy estrategia;
-    // </editor-fold>
+  // <editor-fold defaultstate="collapsed" desc="Atributos">
+  private String nombre;
+  private String descripcion;
+  private FiguraStrategy estrategia;
+  // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Setter">
-    public void setEstrategia(FiguraStrategy estrategia) {
-        this.estrategia = estrategia;
+  // <editor-fold defaultstate="collapsed" desc="Setter">
+  public void setEstrategia(FiguraStrategy estrategia) {
+    this.estrategia = estrategia;
+  }
+  // </editor-fold>
+
+  // <editor-fold defaultstate="collapsed" desc="Constructores">
+  public Figura(String nombre, String descripcion) throws FiguraArgumentoException {
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    validar();
+  }
+  // </editor-fold>
+
+  // <editor-fold defaultstate="collapsed" desc="Getters">
+  public String getNombre() {
+    return nombre;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  // </editor-fold>
+
+  // <editor-fold defaultstate="collapsed" desc="Métodos">
+  public boolean analizarMano(List<Carta> mano) {
+    return estrategia.analizarMano(mano);
+  }
+
+  @Override
+  public void validar() throws FiguraArgumentoException {
+    validarNombre();
+    validarDescripcion();
+  }
+
+  // </editor-fold>
+
+  public void validarNombre() throws FiguraArgumentoException {
+    if (nombre == null || nombre.isEmpty()) {
+      throw new FiguraArgumentoException("El nombre de la figura no puede ser nulo o vacío");
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Figura(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+  }
+
+  public void validarDescripcion() throws FiguraArgumentoException {
+    if (descripcion == null || descripcion.isEmpty()) {
+      throw new FiguraArgumentoException("La descripción de la figura no puede ser vacía");
     }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Getters">
-    public String getNombre() {
-        return nombre;
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Métodos">
-    public boolean analizarMano(List<Carta> mano) {
-        return estrategia.analizarMano(mano);
-    }
-
-    // </editor-fold>
+  }
 }
