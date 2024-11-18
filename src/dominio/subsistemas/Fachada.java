@@ -135,4 +135,8 @@ public class Fachada implements Observable {
         subMesas.agregarParticipanteEnMesa(mesaSeleccionada, jugadorEnSesion);
     }
 
+    public double obtenerRecaudacionTotal() {
+        return subMesas.obtenerRecaudacionTotal();
+    }
+
 }

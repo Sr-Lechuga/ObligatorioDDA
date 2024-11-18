@@ -1,7 +1,9 @@
 package vistas;
 
 public interface VistaAdministrarMesas extends VistaIU {
-  public void mostrarTodasLasMesas();
+  void mostrarTodasLasMesas();
 
-  public void actualizarTitulo(String mensaje);
+  void actualizarTitulo(String mensaje);
+
+  void mostrarRecaudacion(String recaudacion);
 }

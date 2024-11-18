@@ -23,7 +23,7 @@ public class sMesas {
   public void crearMesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision)
       throws ArgumentosMesaException {
     Mesa mesaNueva = new Mesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
-    
+
     todasLasMesas.add(mesaNueva);
   }
 
@@ -82,5 +82,13 @@ public class sMesas {
 
   public ArrayList<Ronda> obtenerRondasDeMesa(Mesa mesa) {
     return mesa.getRondas();
+  }
+
+  public double obtenerRecaudacionTotal() {
+    double recaudacionTotal = 0;
+    for (Mesa unaMesa : todasLasMesas) {
+      recaudacionTotal += unaMesa.calcularRecaudacion();
+    }
+    return recaudacionTotal;
   }
 }

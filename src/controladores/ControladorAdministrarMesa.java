@@ -50,4 +50,10 @@ public class ControladorAdministrarMesa implements Observador {
     vistaAdministrarMesa.actualizarTitulo(administradorEnSesion.getNombreCompleto() + " - Administrar Mesas");
   }
 
+  public String obtenerRecaudacionTotal() {
+    double recaudacion = fachada.obtenerRecaudacionTotal();
+
+    return String.valueOf(recaudacion);
+  }
+
 }

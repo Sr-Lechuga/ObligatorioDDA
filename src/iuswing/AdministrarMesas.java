@@ -21,6 +21,7 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
     controladorAdministrarMesas = new ControladorAdministrarMesa(this, administrador);
 
     mostrarTodasLasMesas();
+    mostrarRecaudacion(controladorAdministrarMesas.obtenerRecaudacionTotal());
   }
 
   /**
@@ -193,6 +194,10 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
         new AdministrarMesas(admin).setVisible(true);
       }
     });
+  }
+
+  public void mostrarRecaudacion(String recaudacion) {
+    lblMontoTotalRecaudado.setText("Monto total recaudado: " + recaudacion);
   }
 
   @Override
