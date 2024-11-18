@@ -213,6 +213,7 @@ public class AdministrarMesas extends javax.swing.JFrame implements VistaAdminis
     if (mesasAbiertas.isEmpty())
       mostrarMensajeError("No hay mesas para mostrar");
     else {
+      lblErrorMessage.setText("");
       listaMesas.setListData(new Mesa[0]);
       listaMesas.setListData(mesasAbiertas.toArray());
       listaMesas.setCellRenderer(new MesaListRenderer());
