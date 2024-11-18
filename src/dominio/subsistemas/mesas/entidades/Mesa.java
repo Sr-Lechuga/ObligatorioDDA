@@ -128,7 +128,7 @@ public class Mesa {
 
   private void iniciarMesa() throws SaldoException {
     this.estado = EstadoMesa.INICIADA;
-    iniciarNuevaRonda();
+    // iniciarNuevaRonda();
   }
 
   public void iniciarNuevaRonda() throws SaldoException {

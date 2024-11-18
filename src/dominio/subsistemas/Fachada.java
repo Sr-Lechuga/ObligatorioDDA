@@ -80,9 +80,9 @@ public class Fachada implements Observable {
         subMesas.crearMesa(jugadoresRequeridos, apuestaBase, porcentajeComision);
     }
 
-    public void agregarParticipanteEnMesa(Mesa unaMesa, Jugador unJugador)
+    public void ingresarEnMesa(Jugador jugadorEnSesion, Mesa mesaSeleccionada)
             throws ArgumentosMesaException, GestionMesasException, SaldoException {
-        subMesas.agregarParticipanteEnMesa(unaMesa, unJugador);
+        subMesas.agregarParticipanteEnMesa(mesaSeleccionada, jugadorEnSesion);
     }
 
     public double calcularRecaudacion(int numeroMesa) throws GestionMesasException {
@@ -101,6 +101,9 @@ public class Fachada implements Observable {
         return subMesas.obtenerRondasDeMesa(mesa);
     }
 
+    public double obtenerRecaudacionTotal() {
+        return subMesas.obtenerRecaudacionTotal();
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
@@ -129,14 +132,4 @@ public class Fachada implements Observable {
         }
     }
     // </editor-fold>
-
-    public void ingresarEnMesa(Jugador jugadorEnSesion, Mesa mesaSeleccionada)
-            throws ArgumentosMesaException, GestionMesasException, SaldoException {
-        subMesas.agregarParticipanteEnMesa(mesaSeleccionada, jugadorEnSesion);
-    }
-
-    public double obtenerRecaudacionTotal() {
-        return subMesas.obtenerRecaudacionTotal();
-    }
-
 }

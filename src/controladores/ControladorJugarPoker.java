@@ -1,5 +1,6 @@
 package controladores;
 
+import controladores.Eventos.EventoJuego;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import utilidades.observer.Observable;
@@ -22,8 +23,16 @@ public class ControladorJugarPoker implements Observador {
 
     @Override
     public void actualizar(Observable unObservable, Object unEvento) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (unEvento instanceof EventoJuego) {
+            switch ((EventoJuego) unEvento) {
+                case EventoJuego.JUEGO_INICIADO:
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
 }
