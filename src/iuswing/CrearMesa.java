@@ -249,7 +249,7 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
             Double comision = Double.valueOf(txtComision.getText());
             Double apuestaBase = Double.valueOf(txtMontoApuestaBase.getText());
 
-            this.controladorCrearMesa.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
+            controladorCrearMesa.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
             limpiarCampos();
         }
     }

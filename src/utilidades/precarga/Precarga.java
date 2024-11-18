@@ -1,5 +1,6 @@
 package utilidades.precarga;
 
+import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.reglas.FiguraArgumentoException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.excepciones.usuarios.UsuarioInvalidoException;
@@ -11,10 +12,17 @@ import dominio.subsistemas.Fachada;
  */
 public class Precarga {
 
-    public void cargar(Fachada fachada) throws UsuarioInvalidoException, SaldoException, FiguraArgumentoException {
+    public void cargar(Fachada fachada)
+            throws UsuarioInvalidoException, SaldoException, FiguraArgumentoException, ArgumentosMesaException {
         cargarAdministradores(fachada);
         cargarJugadores(fachada);
         cargarFiguras(fachada);
+        cargarMesasPrueba(fachada);
+    }
+
+    private void cargarMesasPrueba(Fachada fachada) throws ArgumentosMesaException {
+        fachada.crearMesa(1, 1, 1);
+        fachada.crearMesa(2, 2, 2);
     }
 
     private void cargarAdministradores(Fachada fachada) throws UsuarioInvalidoException, SaldoException {

@@ -1,13 +1,13 @@
 package dominio.subsistemas.mesas.entidades;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
+import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class Mesa {
@@ -20,6 +20,7 @@ public class Mesa {
   private double totalApostado;
   private double porcentajeComision;
   private double pozoAcumulado;
+  private Ronda rondaActual;
 
   private EstadoMesa estado;
   private Mazo mazo;
@@ -39,6 +40,7 @@ public class Mesa {
 
     this.totalApostado = 0.0;
     this.pozoAcumulado = 0.0;
+    this.rondaActual = null;
 
     this.participantes = new CopyOnWriteArrayList<>();
     this.rondas = new ArrayList<>();
@@ -82,7 +84,7 @@ public class Mesa {
   }
 
   public Ronda getRondaActual() {
-    return rondas.get(rondas.size() - 1);
+    return this.rondaActual;
   }
 
   public Mazo getMazo() {
@@ -131,7 +133,6 @@ public class Mesa {
 
   private void iniciarMesa() throws SaldoException {
     this.estado = EstadoMesa.INICIADA;
-    // iniciarNuevaRonda();
   }
 
   public void iniciarNuevaRonda() throws SaldoException {
@@ -139,22 +140,20 @@ public class Mesa {
       this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
     }
 
-    Ronda nuevaRonda = new Ronda(participantes);
+    this.rondaActual = new Ronda(participantes);
 
-    nuevaRonda.aumentarPozo(this.pozoAcumulado);
+    rondaActual.aumentarPozo(this.pozoAcumulado);
     this.pozoAcumulado = 0;
 
     mazo.barajar();
 
     for (Jugador jugador : participantes) {
       jugador.removerSaldo(apuestaBase);
-      nuevaRonda.aumentarPozo(apuestaBase);
+      rondaActual.aumentarPozo(apuestaBase);
 
-      nuevaRonda.agregarParticipante(jugador);
+      rondaActual.agregarParticipante(jugador);
       jugador.recibirCartas(mazo.repartirCartas(5));
     }
-
-    rondas.add(nuevaRonda);
 
   }
 
@@ -166,6 +165,10 @@ public class Mesa {
     jugador.recibirCartas(mazo.repartirCartas(cantidadDeCartas));
   }
 
+  public void terminarRonda() {
+    this.rondas.add(rondaActual);
+    rondaActual = null;
+  }
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Validaciones">
@@ -200,6 +203,17 @@ public class Mesa {
 
   public String getPozoRondaActual() {
     return String.valueOf(getRondaActual().getPozo());
+  }
+
+  public void pasarTurno(Jugador jugadorEnSesion) {
+    Ronda rondaActual = getRondaActual();
+    rondaActual.pasar(jugadorEnSesion);
+
+  }
+
+  public EstadoRonda getEstadoRondaActual() {
+    Ronda rondaActual = getRondaActual();
+    return rondaActual.getEstado();
   }
 
 }

@@ -8,13 +8,14 @@ import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
+import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.estados.EstadoJugador;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class sMesas {
 
-  ArrayList<Mesa> todasLasMesas = new ArrayList<>();
+  private ArrayList<Mesa> todasLasMesas = new ArrayList<>();
 
   /**
    * @param jugadoresRequeridos
@@ -102,6 +103,21 @@ public class sMesas {
   public CopyOnWriteArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
     Mesa mesaEncontrada = buscarMesa(mesaActual.getNumeroMesa());
     return mesaEncontrada.getParticipantesRondaActual();
+  }
+
+  public void pasar(Mesa mesaActual, Jugador jugadorEnSesion) {
+    if (mesaActual.getEstado() == EstadoMesa.INICIADA) {
+      mesaActual.pasarTurno(jugadorEnSesion);
+    }
+  }
+
+  public EstadoMesa obtenerEstadoMesa(Mesa mesaActual) {
+    Mesa mesaEncontrada = buscarMesa(mesaActual.getNumeroMesa());
+    return mesaEncontrada.getEstado();
+  }
+
+  public EstadoRonda obtenerEstadoRondaActualMesa(Mesa mesaActual) {
+    return mesaActual.getEstadoRondaActual();
   }
 
 }

@@ -7,6 +7,7 @@ import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
+import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import utilidades.observer.Observable;
@@ -55,15 +56,25 @@ public class ControladorJugarPoker implements Observador {
         vistaJugarPoker.mostrarJugadores(fachada.obtenerParticipantesDeRondaActualEnMesa(mesaActual));
     }
 
+    private void confirmarEstadoRonda() {
+        EstadoRonda estadoActualRondaDeMesa = mesaActual.getEstadoRondaActual();
+        if (estadoActualRondaDeMesa == EstadoRonda.TERMINADA) {
+            vistaJugarPoker.mostrarMensajeAviso("La ronda ha finalizado");
+        }
+    }
+
     @Override
     public void actualizar(Observable unObservable, Object unEvento) {
         if (unEvento instanceof EventoJuego) {
             switch ((EventoJuego) unEvento) {
+                case EventoJuego.JUGADOR_AGREGADO:
+                    actualizarParticipantes();
+                    break;
                 case EventoJuego.JUEGO_INICIADO:
                     iniciarRonda();
                     break;
-                case EventoJuego.JUGADOR_AGREGADO:
-                    actualizarParticipantes();
+                case EventoJuego.JUGADOR_PASO:
+                    confirmarEstadoRonda();
                     break;
                 default:
                     break;
@@ -73,6 +84,11 @@ public class ControladorJugarPoker implements Observador {
 
     public ArrayList<Figura> obtenerFigurasDisponibles() {
         return fachada.obtenerFigurasDisponibles();
+    }
+
+    public void pasar() {
+        fachada.pasar(mesaActual, jugadorEnSesion);
+        fachada.avisar(EventoJuego.JUGADOR_PASO);
     }
 
 }
