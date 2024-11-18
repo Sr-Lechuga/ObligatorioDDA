@@ -2,6 +2,7 @@ package dominio.subsistemas.mesas.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
@@ -12,180 +13,182 @@ import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class Mesa {
 
-    // <editor-fold defaultstate="collapsed" desc="Atributos">
-    private static int contadorMesas = 1;
-    private int numeroMesa;
-    private int jugadoresRequeridos;
-    private double apuestaBase;
-    private double totalApostado;
-    private double porcentajeComision;
-    private double pozoAcumulado;
+  // <editor-fold defaultstate="collapsed" desc="Atributos">
+  private static int contadorMesas = 1;
+  private int numeroMesa;
+  private int jugadoresRequeridos;
+  private double apuestaBase;
+  private double totalApostado;
+  private double porcentajeComision;
+  private double pozoAcumulado;
 
-    private ArrayList<Jugador> participantes;
-    private ArrayList<Ronda> rondas;
-    private Mazo mazo;
-    private EstadoMesa estado;
-    // </editor-fold>
+  private EstadoMesa estado;
+  private Mazo mazo;
 
-    // <editor-fold defaultstate="collapsed" desc="Constructores">
-    public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) throws ArgumentosMesaException {
-        this.numeroMesa = contadorMesas++;
+  private List<Jugador> participantes;
+  private ArrayList<Ronda> rondas;
 
-        this.jugadoresRequeridos = jugadoresRequeridos;
-        this.apuestaBase = apuestaBase;
-        this.porcentajeComision = porcentajeComision;
+  // </editor-fold>
 
-        this.totalApostado = 0.0;
-        this.pozoAcumulado = 0.0;
+  // <editor-fold defaultstate="collapsed" desc="Constructores">
+  public Mesa(int jugadoresRequeridos, double apuestaBase, double porcentajeComision) throws ArgumentosMesaException {
+    this.numeroMesa = contadorMesas++;
 
-        this.participantes = new ArrayList<>();
-        this.rondas = new ArrayList<>();
-        this.mazo = new Mazo();
-        this.estado = EstadoMesa.ABIERTA;
-        validar();
+    this.jugadoresRequeridos = jugadoresRequeridos;
+    this.apuestaBase = apuestaBase;
+    this.porcentajeComision = porcentajeComision;
+
+    this.totalApostado = 0.0;
+    this.pozoAcumulado = 0.0;
+
+    this.participantes = new CopyOnWriteArrayList<>();
+    this.rondas = new ArrayList<>();
+    this.mazo = new Mazo();
+    this.estado = EstadoMesa.ABIERTA;
+    validar();
+  }
+  // </editor-fold>
+
+  // <editor-fold defaultstate="collapsed" desc="Getters">
+  public int getNumeroMesa() {
+    return numeroMesa;
+  }
+
+  public int getJugadoresRequeridos() {
+    return jugadoresRequeridos;
+  }
+
+  public double getApuestaBase() {
+    return apuestaBase;
+  }
+
+  public double getTotalApostado() {
+    return totalApostado;
+  }
+
+  public double getPorcentajeComision() {
+    return porcentajeComision;
+  }
+
+  public double getPozoAcumulado() {
+    return pozoAcumulado;
+  }
+
+  public List<Jugador> getParticipantes() {
+    return participantes;
+  }
+
+  public ArrayList<Ronda> getRondas() {
+    return rondas;
+  }
+
+  public Mazo getMazo() {
+    return mazo;
+  }
+
+  public EstadoMesa getEstado() {
+    return estado;
+  }
+
+  public int getCantidadJugadores() {
+    return participantes.size();
+  }
+
+  public int getNumeroRondaActual() {
+    return rondas.size();
+  }
+  // </editor-fold>
+
+  // <editor-fold defaultstate="collapsed" desc="Métodos">
+  public void agregarParticipante(Jugador jugador)
+      throws ArgumentosMesaException, GestionMesasException, SaldoException {
+    if (participantes.size() > jugadoresRequeridos) {
+      throw new ArgumentosMesaException("No se pueden agregar más jugadores, la mesa está llena.");
     }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Getters">
-    public int getNumeroMesa() {
-        return numeroMesa;
+    if (this.estado != EstadoMesa.ABIERTA) {
+      throw new GestionMesasException("La mesa no esta abierta para recibir jugadores.");
     }
-
-    public int getJugadoresRequeridos() {
-        return jugadoresRequeridos;
+    if (jugador.getSaldo() < this.apuestaBase * 10) {
+      throw new SaldoException("Saldo insuficiente");
     }
-
-    public double getApuestaBase() {
-        return apuestaBase;
-    }
-
-    public double getTotalApostado() {
-        return totalApostado;
-    }
-
-    public double getPorcentajeComision() {
-        return porcentajeComision;
-    }
-
-    public double getPozoAcumulado() {
-        return pozoAcumulado;
-    }
-
-    public ArrayList<Jugador> getParticipantes() {
-        return participantes;
-    }
-
-    public ArrayList<Ronda> getRondas() {
-        return rondas;
-    }
-
-    public Mazo getMazo() {
-        return mazo;
-    }
-
-    public EstadoMesa getEstado() {
-        return estado;
-    }
-
-    public int getCantidadJugadores() {
-        return participantes.size();
-    }
-
-    public int getNumeroRondaActual() {
-        return rondas.size();
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Métodos">
-    public void agregarParticipante(Jugador jugador)
-            throws ArgumentosMesaException, GestionMesasException, SaldoException {
-        if (participantes.size() > jugadoresRequeridos) {
-            throw new ArgumentosMesaException("No se pueden agregar más jugadores, la mesa está llena.");
-        }
-        if (this.estado != EstadoMesa.ABIERTA) {
-            throw new GestionMesasException("La mesa no esta abierta para recibir jugadores.");
-        }
-        if (jugador.getSaldo() < this.apuestaBase * 10) {
-            throw new SaldoException("Saldo insuficiente");
-        }
-        if (participantes.contains(jugador)) {
-            throw new GestionMesasException("El participante ya esta en la mesa, no puede volver a ingresar");
-        }
-
-        participantes.add(jugador);
-
-        if (this.participantes.size() == jugadoresRequeridos) {
-            iniciarMesa();
-        }
+    if (participantes.contains(jugador)) {
+      throw new GestionMesasException("El participante ya esta en la mesa, no puede volver a ingresar");
     }
 
-    public void quitarParticipante(Jugador jugador) {
-        participantes.remove(jugador);
+    participantes.add(jugador);
+
+    if (this.participantes.size() == jugadoresRequeridos) {
+      iniciarMesa();
+    }
+  }
+
+  public void quitarParticipante(Jugador jugador) {
+    participantes.remove(jugador);
+  }
+
+  private void iniciarMesa() throws SaldoException {
+    this.estado = EstadoMesa.INICIADA;
+    iniciarNuevaRonda();
+  }
+
+  public void iniciarNuevaRonda() throws SaldoException {
+    if (this.rondas.size() > 0) {
+      this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
     }
 
-    private void iniciarMesa() throws SaldoException {
-        this.estado = EstadoMesa.INICIADA;
-        iniciarNuevaRonda();
+    Ronda nuevaRonda = new Ronda(participantes);
+
+    nuevaRonda.aumentarPozo(this.pozoAcumulado);
+    this.pozoAcumulado = 0;
+
+    mazo.barajar();
+
+    for (Jugador jugador : participantes) {
+      jugador.removerSaldo(apuestaBase);
+      nuevaRonda.aumentarPozo(apuestaBase);
+
+      nuevaRonda.agregarParticipante(jugador);
+      jugador.recibirCartas(mazo.repartirCartas(5));
     }
 
-    public void iniciarNuevaRonda() throws SaldoException {
-        if (this.rondas.size() > 0) {
-            this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
-        }
+    rondas.add(nuevaRonda);
 
-        Ronda nuevaRonda = new Ronda(participantes);
+  }
 
-        nuevaRonda.aumentarPozo(this.pozoAcumulado);
-        this.pozoAcumulado = 0;
+  public double calcularRecaudacion() {
+    return totalApostado * (porcentajeComision / 100);
+  }
 
-        mazo.barajar();
+  public void pedirCartas(Jugador jugador, int cantidadDeCartas) {
+    jugador.recibirCartas(mazo.repartirCartas(cantidadDeCartas));
+  }
 
-        for (Jugador jugador : participantes) {
-            nuevaRonda.agregarParticipante(jugador);
-            jugador.removerSaldo(apuestaBase);
-            nuevaRonda.aumentarPozo(apuestaBase);
+  // </editor-fold>
 
-            jugador.recibirCartas(mazo.repartirCartas(5));
-        }
+  // <editor-fold defaultstate="collapsed" desc="Validaciones">
+  private void validar() throws ArgumentosMesaException {
+    validarJugadoresRequeridos();
+    validarApuestaBase();
+    validarComision();
+  }
 
-        rondas.add(nuevaRonda);
-
+  private void validarJugadoresRequeridos() throws ArgumentosMesaException {
+    if (jugadoresRequeridos < 2 || jugadoresRequeridos > 5) {
+      throw new ArgumentosMesaException("Cantidad de jugadores no valida");
     }
+  }
 
-    public double calcularRecaudacion() {
-        return totalApostado * (porcentajeComision / 100);
+  private void validarApuestaBase() throws ArgumentosMesaException {
+    if (apuestaBase < 1) {
+      throw new ArgumentosMesaException("Apuesta base invalida");
     }
+  }
 
-    public void pedirCartas(Jugador jugador, int cantidadDeCartas) {
-        jugador.recibirCartas(mazo.repartirCartas(cantidadDeCartas));
+  private void validarComision() throws ArgumentosMesaException {
+    if (porcentajeComision < 1 || porcentajeComision > 50) {
+      throw new ArgumentosMesaException("Comision invalida");
     }
-
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Validaciones">
-    private void validar() throws ArgumentosMesaException {
-        validarJugadoresRequeridos();
-        validarApuestaBase();
-        validarComision();
-    }
-
-    private void validarJugadoresRequeridos() throws ArgumentosMesaException {
-        if (jugadoresRequeridos < 2 || jugadoresRequeridos > 5) {
-            throw new ArgumentosMesaException("Cantidad de jugadores no valida");
-        }
-    }
-
-    private void validarApuestaBase() throws ArgumentosMesaException {
-        if (apuestaBase < 1) {
-            throw new ArgumentosMesaException("Apuesta base invalida");
-        }
-    }
-
-    private void validarComision() throws ArgumentosMesaException {
-        if (porcentajeComision < 1 || porcentajeComision > 50) {
-            throw new ArgumentosMesaException("Comision invalida");
-        }
-    }
-    // </editor-fold>
+  }
+  // </editor-fold>
 
 }

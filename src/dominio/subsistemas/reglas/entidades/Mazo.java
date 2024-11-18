@@ -3,9 +3,10 @@ package dominio.subsistemas.reglas.entidades;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Mazo {
-    
+
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private List<Carta> cartas;
     // </editor-fold>
@@ -18,15 +19,15 @@ public class Mazo {
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     public Mazo() {
-        cartas = new ArrayList<>();
+        cartas = new CopyOnWriteArrayList<>();
     }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos Privados">
     private void crearMazo() {
         cartas = new ArrayList<>();
-        int[] valores = {1,2,3,4,5,6,7,8,9,10,11,12,13};
-        String[] palos = {"C","D","T","P"};
+        int[] valores = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+        String[] palos = { "C", "D", "T", "P" };
 
         for (String palo : palos) {
             for (int valor : valores) {
@@ -41,7 +42,7 @@ public class Mazo {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos Publicos">
-    public void barajar(){
+    public void barajar() {
         crearMazo();
         mezclar();
     }
