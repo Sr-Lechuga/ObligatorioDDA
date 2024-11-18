@@ -2,6 +2,7 @@ package iuswing;
 
 import controladores.ControladorJugarPoker;
 import dominio.subsistemas.mesas.entidades.Mesa;
+import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import java.util.ArrayList;
 import panelCartasPoker.CartaPoker;
@@ -425,13 +426,12 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
     }
 
     @Override
-    public void mostrarJugadores(ArrayList<Jugadores> participantes) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void mostrarJugadores(ArrayList<Jugador> participantes) {
+        
     }
 
     @Override
-    public void mostrarFiguras() {
+    public void mostrarFiguras(ArrayList<Figura> figurasDisponibles) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
