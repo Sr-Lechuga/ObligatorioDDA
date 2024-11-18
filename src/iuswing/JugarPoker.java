@@ -25,7 +25,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
 
     public JugarPoker(Jugador jugadorEnSesion, Mesa mesa) {
         initComponents();
-
+        mostrarMensajeAviso("");
         controladorJugarPoker = new ControladorJugarPoker(jugadorEnSesion, mesa, this);
 
         // Inicializar el panel de cartas de póker
@@ -204,12 +204,11 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
                                         .addComponent(lblMontoBase)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblPozoActual))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(lblFiguraActual, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(370, 370, 370)
-                                .addComponent(checkBoxHabilitar)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblFiguraActual, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(370, 370, 370)
+                                    .addComponent(checkBoxHabilitar))))
                         .addGap(179, 179, 179))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +351,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
 
     @Override
     public void mostrarMensajeAviso(String mensajeAviso) {
-        // No hay aviso
+        lblMensaje.setText(mensajeAviso);
     }
 
     @Override
