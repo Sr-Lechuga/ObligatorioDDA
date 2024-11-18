@@ -1,11 +1,14 @@
 package iuswing;
 
 import controladores.ControladorJugarPoker;
+import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import panelCartasPoker.CartaPoker;
 import panelCartasPoker.PanelCartasListener;
@@ -22,12 +25,15 @@ import vistas.formats.ParticipantesListRenderer;
 public class JugarPoker extends javax.swing.JFrame implements PanelCartasListener, VistaJugarPoker {
 
     ControladorJugarPoker controladorJugarPoker;
+    private Jugador jugadorEnSesion;
+    private Mesa mesa;
 
     public JugarPoker(Jugador jugadorEnSesion, Mesa mesa) {
         initComponents();
         mostrarMensajeAviso("");
         controladorJugarPoker = new ControladorJugarPoker(jugadorEnSesion, mesa, this);
-
+        this.jugadorEnSesion = jugadorEnSesion;
+        this.mesa = mesa;
         // Inicializar el panel de cartas de póker
         PanelCartasPoker panelCartas = new PanelCartasPoker();
         // Añadir el panel de cartas al JFrame
@@ -139,6 +145,11 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         btnPagar.setForeground(new java.awt.Color(255, 255, 255));
         btnPagar.setText("Pagar");
         btnPagar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
 
         txtApostar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -246,9 +257,9 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
                     .addComponent(lblSaldo)
                     .addComponent(lblMesa))
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMontoBase)
-                    .addComponent(lblPozoActual))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPozoActual, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblMontoBase))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -256,10 +267,11 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFiguraActual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSeguir)
-                    .addComponent(btnPedirCartas)
-                    .addComponent(btnFinalizarPedidoCartas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFinalizarPedidoCartas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSeguir)
+                        .addComponent(btnPedirCartas)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -294,6 +306,27 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        double saldoJugador = jugadorEnSesion.getSaldo();
+        double apuestaBase = mesa.getApuestaBase();
+        
+        if(saldoJugador >= apuestaBase) {
+            jugadorEnSesion.setSaldo(saldoJugador - apuestaBase);
+            try {
+                mesa.incrementarPozo(apuestaBase);
+            } catch (ArgumentosMesaException ex) {
+                Logger.getLogger(JugarPoker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            lblSaldo.setText("Saldo: $" + jugadorEnSesion.getSaldo());
+            lblMensaje.setText("¡Apuesta pagada!");
+        } else {
+            lblError.setText("Saldo insuficiente para pagar la apuesta base.");
+            lblMensaje.setText("");
+        }
+        
+    }//GEN-LAST:event_btnPagarActionPerformed
 
     private void checkBoxHabilitarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_checkBoxHabilitarActionPerformed
         panelCartas.setEnabled(checkBoxHabilitar.isSelected());

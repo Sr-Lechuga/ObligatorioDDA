@@ -202,4 +202,12 @@ public class Mesa {
     return String.valueOf(getRondaActual().getPozo());
   }
 
+  public void incrementarPozo(double apuestaBase) throws ArgumentosMesaException {
+    if(apuestaBase > 0) {
+        this.pozoAcumulado += apuestaBase;
+    }else{
+        throw new ArgumentosMesaException("La apuesta base debe ser mayor que cero");
+    }   
+  }
+
 }
