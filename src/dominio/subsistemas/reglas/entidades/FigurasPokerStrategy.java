@@ -4,17 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import dominio.subsistemas.mesas.entidades.Carta;
+
 public class FigurasPokerStrategy {
   protected boolean contarNCartasDeMismoValor(List<Carta> mano, int repeticiones) {
-    HashMap<Integer,Integer> conjuntos = new HashMap<>();
-    
+    HashMap<Integer, Integer> conjuntos = new HashMap<>();
+
     for (Carta carta : mano) {
-      conjuntos.put(carta.getValorCarta(), conjuntos.getOrDefault(carta.getValorCarta(),0) + 1);
+      conjuntos.put(carta.getValorCarta(), conjuntos.getOrDefault(carta.getValorCarta(), 0) + 1);
     }
 
     Set<Integer> keys = conjuntos.keySet();
-    for(Integer key : keys) {
-      if(conjuntos.get(key) == repeticiones){
+    for (Integer key : keys) {
+      if (conjuntos.get(key) == repeticiones) {
         return true;
       }
     }

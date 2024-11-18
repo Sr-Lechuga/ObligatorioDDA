@@ -1,6 +1,8 @@
 
 package vistas;
 
+import dominio.subsistemas.mesas.entidades.Mesa;
+
 public interface VistaIngresarAUnaMesa extends VistaIU {
 
     void mostrarMesas();
@@ -9,5 +11,5 @@ public interface VistaIngresarAUnaMesa extends VistaIU {
 
     void actualizarTitulo(String string);
 
-    void ingresarEnMesa();
+    void ingresarEnMesa(Mesa mesaSeleccionada);
 }

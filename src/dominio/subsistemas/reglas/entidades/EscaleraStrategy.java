@@ -3,7 +3,9 @@ package dominio.subsistemas.reglas.entidades;
 import java.util.Collections;
 import java.util.List;
 
-public class EscaleraStrategy extends FigurasPokerStrategy implements FiguraStrategy{
+import dominio.subsistemas.mesas.entidades.Carta;
+
+public class EscaleraStrategy extends FigurasPokerStrategy implements FiguraStrategy {
 
   @Override
   public boolean analizarMano(List<Carta> mano) {
@@ -11,7 +13,7 @@ public class EscaleraStrategy extends FigurasPokerStrategy implements FiguraStra
     Collections.sort(mano);
 
     for (int i = 1; i < mano.size(); i++) {
-      if(mano.get(i-1).getValorCarta() != mano.get(i).getValorCarta() - 1) {
+      if (mano.get(i - 1).getValorCarta() != mano.get(i).getValorCarta() - 1) {
         return false;
       }
     }

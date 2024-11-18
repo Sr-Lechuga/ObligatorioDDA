@@ -6,6 +6,7 @@ import dominio.excepciones.usuarios.SaldoException;
 import java.util.ArrayList;
 
 import controladores.Eventos.EventoIngresarMesa;
+import controladores.Eventos.EventoJuego;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
@@ -39,7 +40,18 @@ public class ControladorIngresarMesa implements Observador {
   public ArrayList<Mesa> obtenerMesasAbiertas() {
     return fachada.obtenerMesasAbiertas();
   }
-  // </editor-fold>
+
+  public void ingresarMesa(Mesa mesaSeleccionada) {
+    try {
+      fachada.ingresarEnMesa(jugadorEnSesion, mesaSeleccionada);
+      vistaIngresarAUnaMesa.ingresarEnMesa(mesaSeleccionada);
+      if(mesaSeleccionada.getEstado() == EstadoMesa.INICIADA){
+          fachada.avisar(EventoJuego.JUEGO_INICIADO);
+      }
+    } catch (ArgumentosMesaException | GestionMesasException | SaldoException ex) {
+      vistaIngresarAUnaMesa.mostrarMensajeError(ex.getMessage());
+    }
+  }// </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Metodos privados">
   private void actualizarInformacion() {
@@ -64,12 +76,4 @@ public class ControladorIngresarMesa implements Observador {
   }
   // </editor-fold>
 
-  public void ingresarMesa(Mesa mesaSeleccionada) {
-    try {
-      fachada.ingresarEnMesa(jugadorEnSesion, mesaSeleccionada);
-      vistaIngresarAUnaMesa.ingresarEnMesa();
-    } catch (ArgumentosMesaException | GestionMesasException | SaldoException ex) {
-      vistaIngresarAUnaMesa.mostrarMensajeError(ex.getMessage());
-    }
-  }
 }

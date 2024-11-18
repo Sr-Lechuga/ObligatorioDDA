@@ -2,7 +2,9 @@ package dominio.subsistemas.reglas.entidades;
 
 import java.util.List;
 
-public class PokerStrategy extends FigurasPokerStrategy implements FiguraStrategy{
+import dominio.subsistemas.mesas.entidades.Carta;
+
+public class PokerStrategy extends FigurasPokerStrategy implements FiguraStrategy {
 
   @Override
   public boolean analizarMano(List<Carta> mano) {

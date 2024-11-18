@@ -1,13 +1,13 @@
-package dominio.subsistemas.reglas.entidades;
+package dominio.subsistemas.mesas.entidades;
 
 import panelCartasPoker.CartaPoker;
 
 public class Carta implements CartaPoker, Comparable<Carta> {
-    
+
     // <editor-fold defaultstate="collapsed" desc="Atributos">
     private int valor;
     private String palo;
-    private boolean visible; 
+    private boolean visible;
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
@@ -50,9 +50,8 @@ public class Carta implements CartaPoker, Comparable<Carta> {
 
     // </editor-fold>
 
-
     // <editor-fold defaultstate="collapsed" desc="Validaciones">
-    public void validar(){
+    public void validar() {
         validarPalo();
         validarValor();
     }
@@ -64,11 +63,10 @@ public class Carta implements CartaPoker, Comparable<Carta> {
     }
 
     private void validarValor() {
-        if(valor < 1 || valor > 13){
+        if (valor < 1 || valor > 13) {
             throw new IllegalArgumentException("Valor de la carta inválido. Debe ser entre 1 y 13.");
         }
     }
     // </editor-fold>
-
 
 }

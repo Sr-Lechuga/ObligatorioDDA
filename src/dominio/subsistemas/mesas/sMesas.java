@@ -91,4 +91,9 @@ public class sMesas {
     }
     return recaudacionTotal;
   }
+
+  public void inciarJuego(Mesa mesa) throws SaldoException {
+    mesa.iniciarNuevaRonda();
+  }
+
 }

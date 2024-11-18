@@ -104,6 +104,10 @@ public class Fachada implements Observable {
     public double obtenerRecaudacionTotal() {
         return subMesas.obtenerRecaudacionTotal();
     }
+
+    public void iniciarJuego(Mesa mesa) throws SaldoException {
+        subMesas.inciarJuego(mesa);
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">

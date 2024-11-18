@@ -8,7 +8,6 @@ import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.mesas.GestionMesasException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
-import dominio.subsistemas.reglas.entidades.Mazo;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 
 public class Mesa {
@@ -80,6 +79,10 @@ public class Mesa {
 
   public ArrayList<Ronda> getRondas() {
     return rondas;
+  }
+
+  public Ronda getRondaActual() {
+    return rondas.get(rondas.size() - 1);
   }
 
   public Mazo getMazo() {
@@ -173,7 +176,7 @@ public class Mesa {
   }
 
   private void validarJugadoresRequeridos() throws ArgumentosMesaException {
-    if (jugadoresRequeridos < 2 || jugadoresRequeridos > 5) {
+    if (jugadoresRequeridos < 1 || jugadoresRequeridos > 5) {
       throw new ArgumentosMesaException("Cantidad de jugadores no valida");
     }
   }

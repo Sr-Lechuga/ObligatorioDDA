@@ -1,11 +1,13 @@
 package dominio.subsistemas.usuarios.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.interfaces.IValidable;
-import dominio.subsistemas.reglas.entidades.Carta;
+import dominio.subsistemas.mesas.entidades.Carta;
 import dominio.subsistemas.usuarios.estados.EstadoJugador;
+import panelCartasPoker.CartaPoker;
 
 @SuppressWarnings("unused")
 public class Jugador extends Usuario implements IValidable {
@@ -35,6 +37,16 @@ public class Jugador extends Usuario implements IValidable {
     public EstadoJugador getEstado() {
         return estado;
     }
+
+    public ArrayList<CartaPoker> getManoCartasPoker() {
+        ArrayList<CartaPoker> manoConvertida = new ArrayList<>();
+        for (Carta carta : this.mano) {
+            manoConvertida.add((CartaPoker) carta);
+        }
+
+        return manoConvertida;
+    }
+
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">

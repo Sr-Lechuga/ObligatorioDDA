@@ -72,15 +72,15 @@ public class Ronda {
   }
 
   public String getNombreJugadorGanador() {
-    if(jugadorGanador == null){
-        return "No hay ganador";
+    if (jugadorGanador == null) {
+      return "No hay ganador";
     }
     return jugadorGanador.getNombreCompleto().isBlank() ? "No hay ganador" : jugadorGanador.getNombreCompleto();
   }
 
   public String getNombreFiguraGanadora() {
-    if(figuraGanadora == null){
-        return "No hay figura ganadora";
+    if (figuraGanadora == null) {
+      return "No hay figura ganadora";
     }
     return figuraGanadora.getNombre().isBlank() ? "No hay figura ganadora" : figuraGanadora.getNombre();
   }
@@ -132,6 +132,9 @@ public class Ronda {
     this.respuestas++;
   }
 
+  public boolean participa(Jugador jugadorEnSesion) {
+    return participantes.contains(jugadorEnSesion);
+  }
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Metodos privados">

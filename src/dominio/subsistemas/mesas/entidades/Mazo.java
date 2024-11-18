@@ -1,4 +1,4 @@
-package dominio.subsistemas.reglas.entidades;
+package dominio.subsistemas.mesas.entidades;
 
 import java.util.ArrayList;
 import java.util.Collections;
