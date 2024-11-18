@@ -193,6 +193,7 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarCampos();
+        mostrarMensajeError("");
     }// GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
@@ -244,9 +245,9 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
     @Override
     public void crearMesa() {
         if (validarCampos()) {
-            Integer cantidadMaximaJugadores = Integer.parseInt(txtCantidadJugadores.getText());
-            Double comision = Double.parseDouble(txtComision.getText());
-            Double apuestaBase = Double.parseDouble(txtMontoApuestaBase.getText());
+            Integer cantidadMaximaJugadores = Integer.valueOf(txtCantidadJugadores.getText());
+            Double comision = Double.valueOf(txtComision.getText());
+            Double apuestaBase = Double.valueOf(txtMontoApuestaBase.getText());
 
             this.controladorCrearMesa.crearMesa(cantidadMaximaJugadores, apuestaBase, comision);
             limpiarCampos();
@@ -306,10 +307,11 @@ public class CrearMesa extends javax.swing.JDialog implements VistaCrearMesa {
             if (input instanceof JTextField jTextField) {
                 String text = jTextField.getText();
                 if (!text.matches("\\d*")) {
-                    mostrarMensajeError("El valor del campo debe ser numerico");
+                    mostrarMensajeError("El valor del campo debe ser numerico ");
                     return false;
                 }
             }
+            mostrarMensajeError("");
             return true;
         }
     }
