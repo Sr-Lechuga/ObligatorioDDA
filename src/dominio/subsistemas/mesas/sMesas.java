@@ -11,6 +11,7 @@ import dominio.subsistemas.mesas.estados.EstadoMesa;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.estados.EstadoJugador;
+import java.util.HashSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class sMesas {
@@ -119,5 +120,19 @@ public class sMesas {
   public EstadoRonda obtenerEstadoRondaActualMesa(Mesa mesaActual) {
     return mesaActual.getEstadoRondaActual();
   }
+  
+    public void pagar(Jugador jugadorEnSesion, Mesa mesaActual) throws SaldoException, ArgumentosMesaException {
+        mesaActual.getRondaActual().pagarApuesta(jugadorEnSesion);
+    }
+    
+    public void apostar(Jugador jugadorEnSesion, Mesa mesaActual, double cantidadApostada) throws ArgumentosMesaException, SaldoException {
+        if (cantidadApostada <= 0) {
+            throw new ArgumentosMesaException("La cantidad apostada debe ser mayor a cero");
+        }
+        if (jugadorEnSesion.getSaldo() < cantidadApostada) { 
+            throw new SaldoException("No tiene suficiente saldo para realizar la apuesta.");
+        }
+        mesaActual.getRondaActual().iniciarApuesta(jugadorEnSesion, cantidadApostada);
+    }
 
 }

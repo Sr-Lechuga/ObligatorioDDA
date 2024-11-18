@@ -24,4 +24,10 @@ public interface VistaJugarPoker extends VistaIU {
     public void mostrarPozoActual(String pozoRondaActual);
 
     public void mostrarFiguraActual(String string);
+
+    public void actualizarSaldo(double saldoActualizado);
+
+    public void actualizarPozo(String pozoActualizado);
+    
+    
 }
