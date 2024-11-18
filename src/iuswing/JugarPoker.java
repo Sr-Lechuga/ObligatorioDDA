@@ -2,6 +2,8 @@ package iuswing;
 
 import controladores.ControladorJugarPoker;
 import dominio.excepciones.mesas.ArgumentosMesaException;
+import dominio.excepciones.usuarios.SaldoException;
+import dominio.subsistemas.mesas.entidades.Apuesta;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
@@ -115,6 +117,11 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         btnApostar.setForeground(new java.awt.Color(255, 255, 255));
         btnApostar.setText("Apostar");
         btnApostar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnApostar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApostarActionPerformed(evt);
+            }
+        });
 
         listJugadores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listJugadores);
@@ -327,6 +334,28 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         }
         
     }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApostarActionPerformed
+        try{
+            double valor = Double.parseDouble(txtApostar.getText());
+            Jugador creador = jugadorEnSesion;
+            Mesa mesaActual = mesa;
+            
+            if(creador.getSaldo() < valor) {
+                lblError.setText("Saldo insuficiente para realizar apuesta");
+                return;
+            }
+            Apuesta apuesta = new Apuesta(valor, creador);
+            apuesta.agregarApostador(creador);
+            mesaActual.incrementarPozo(valor);
+            
+            lblPozoActual.setText("Pozo actual: $" + mesaActual.getPozoAcumulado());
+            lblSaldo.setText("Saldo: $" + creador.getSaldo());
+            lblMensaje.setText("¡Apuesta realizada!");
+        }catch (ArgumentosMesaException | SaldoException ex ){
+            lblError.setText("Error en la apuesta:" + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnApostarActionPerformed
 
     private void checkBoxHabilitarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_checkBoxHabilitarActionPerformed
         panelCartas.setEnabled(checkBoxHabilitar.isSelected());
