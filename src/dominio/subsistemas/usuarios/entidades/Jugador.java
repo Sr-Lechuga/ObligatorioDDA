@@ -56,6 +56,10 @@ public class Jugador extends Usuario implements IValidable {
         this.estado = estado;
     }
     
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     public void validarSaldoMinimo(double saldoMinimo) throws SaldoException {
         if (Double.compare(this.saldo, saldoMinimo) < 0) {
