@@ -4,6 +4,7 @@ package vistas;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import panelCartasPoker.CartaPoker;
 
@@ -14,7 +15,7 @@ public interface VistaJugarPoker extends VistaIU {
     @Override
     public void mostrarMensajeAviso(String mensajeAviso);
 
-    public void mostrarJugadores(ArrayList<Jugador> participantes);
+    public void mostrarJugadores(CopyOnWriteArrayList<Jugador> participantes);
 
     public void mostrarFiguras(ArrayList<Figura> figuras);
 

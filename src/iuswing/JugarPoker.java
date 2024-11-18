@@ -5,6 +5,7 @@ import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.DefaultListModel;
 import panelCartasPoker.CartaPoker;
 import panelCartasPoker.PanelCartasListener;
@@ -32,7 +33,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         // Añadir el panel de cartas al JFrame
         add(panelCartas);
 
-        mostrarFiguras(controladorJugarPoker.obtenerFigurasDisponibles());
+        setTitle("Mesa - " + mesa.getNumeroMesa());
         lblJugador.setText(lblJugador.getText() + " " + jugadorEnSesion.getNombreCompleto());
         lblSaldo.setText(lblSaldo.getText() + " " + jugadorEnSesion.getSaldo());
         lblMesa.setText(lblMesa.getText() + " " + mesa.getNumeroMesa());
@@ -41,8 +42,9 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         lblMontoBase.setText(lblMontoBase.getText() + " " + mesa.getApuestaBase());
         // lblPozoActual.setText(lblPozoActual.getText() + " " +
         // mesa.getPozoRondaActual());
-        cargarListaJugadores(new ArrayList<>(mesa.getParticipantes()));
 
+        cargarListaJugadores(mesa.getParticipantes());
+        mostrarFiguras(controladorJugarPoker.obtenerFigurasDisponibles());
     }
 
     /**
@@ -444,7 +446,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
     }
 
     @Override
-    public void mostrarJugadores(ArrayList<Jugador> participantes) {
+    public void mostrarJugadores(CopyOnWriteArrayList<Jugador> participantes) {
 
         if (participantes.isEmpty())
             mostrarMensajeError("No hay participantes para mostrar");
@@ -512,7 +514,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
     private javax.swing.JTextField txtPagar;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarListaJugadores(ArrayList<Jugador> participantes) {
+    private void cargarListaJugadores(CopyOnWriteArrayList<Jugador> participantes) {
 
         DefaultListModel<String> modelo = new DefaultListModel<>();
         for (Jugador jugador : participantes) {

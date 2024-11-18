@@ -19,6 +19,7 @@ import dominio.subsistemas.usuarios.sUsuarios;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
 import dominio.subsistemas.usuarios.entidades.Usuario;
+import java.util.concurrent.CopyOnWriteArrayList;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
 
@@ -114,7 +115,7 @@ public class Fachada implements Observable {
         subMesas.inciarJuego(mesa);
     }
 
-    public ArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
+    public CopyOnWriteArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
         return subMesas.obtenerParticipantesDeRondaActualEnMesa(mesaActual);
     }
     // </editor-fold>

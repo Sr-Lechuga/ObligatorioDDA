@@ -24,7 +24,7 @@ public class Mesa {
   private EstadoMesa estado;
   private Mazo mazo;
 
-  private List<Jugador> participantes;
+  private CopyOnWriteArrayList<Jugador> participantes;
   private ArrayList<Ronda> rondas;
 
   // </editor-fold>
@@ -73,7 +73,7 @@ public class Mesa {
     return pozoAcumulado;
   }
 
-  public List<Jugador> getParticipantes() {
+  public CopyOnWriteArrayList<Jugador> getParticipantes() {
     return participantes;
   }
 
@@ -139,7 +139,7 @@ public class Mesa {
       this.pozoAcumulado = this.rondas.get(this.rondas.size() - 1).obtenerPozoAcumulado();
     }
 
-    Ronda nuevaRonda = new Ronda((ArrayList<Jugador>) participantes);
+    Ronda nuevaRonda = new Ronda(participantes);
 
     nuevaRonda.aumentarPozo(this.pozoAcumulado);
     this.pozoAcumulado = 0;
@@ -194,7 +194,7 @@ public class Mesa {
   }
   // </editor-fold>
 
-  public ArrayList<Jugador> getParticipantesRondaActual() {
+  public CopyOnWriteArrayList<Jugador> getParticipantesRondaActual() {
     return getRondaActual().getParticipantes();
   }
 

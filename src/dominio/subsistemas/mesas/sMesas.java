@@ -9,6 +9,7 @@ import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.mesas.estados.EstadoMesa;
 import dominio.subsistemas.usuarios.entidades.Jugador;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class sMesas {
 
@@ -96,7 +97,7 @@ public class sMesas {
     mesa.iniciarNuevaRonda();
   }
 
-  public ArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
+  public CopyOnWriteArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
     Mesa mesaEncontrada = buscarMesa(mesaActual.getNumeroMesa());
     return mesaEncontrada.getParticipantesRondaActual();
   }

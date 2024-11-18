@@ -6,6 +6,7 @@ import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Ronda {
 
@@ -17,7 +18,7 @@ public class Ronda {
   private EstadoRonda estado;
   private int respuestas;
 
-  private ArrayList<Jugador> participantes;
+  private CopyOnWriteArrayList<Jugador> participantes;
   private ArrayList<Jugador> retirados;
   private Apuesta apuesta;
   private Jugador jugadorGanador;
@@ -25,7 +26,7 @@ public class Ronda {
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="Constructores">
-  public Ronda(ArrayList<Jugador> participantes) {
+  public Ronda(CopyOnWriteArrayList<Jugador> participantes) {
     this.numeroRonda = contadorRondas++;
     this.pozo = 0.0;
     this.figuraGanadora = null;
@@ -55,7 +56,7 @@ public class Ronda {
     return estado;
   }
 
-  public ArrayList<Jugador> getParticipantes() {
+  public CopyOnWriteArrayList<Jugador> getParticipantes() {
     return participantes;
   }
 
