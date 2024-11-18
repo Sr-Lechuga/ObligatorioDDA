@@ -31,88 +31,82 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
   // <editor-fold defaultstate="collapsed" desc="Generated
   // <editor-fold defaultstate="collapsed" desc="Generated
   // <editor-fold defaultstate="collapsed" desc="Generated
-  // Code">//GEN-BEGIN:initComponents
-  private void initComponents() {
+  // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    lblBienvenido = new javax.swing.JLabel();
-    lblSaldo = new javax.swing.JLabel();
-    lblNombreCompleto = new javax.swing.JLabel();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    listaMesasAbiertas = new javax.swing.JList();
-    btnJugarPoker = new javax.swing.JButton();
-    lblError = new javax.swing.JLabel();
+        lblBienvenido = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaMesasAbiertas = new javax.swing.JList();
+        btnJugarPoker = new javax.swing.JButton();
+        lblError = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    lblBienvenido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    lblBienvenido.setText("Bienvenido Jugador");
+        lblBienvenido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblBienvenido.setText("Bienvenido Jugador");
 
-    lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSaldo.setText("Tu saldo es: $ 999.999.00");
 
-    lblNombreCompleto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jScrollPane1.setViewportView(listaMesasAbiertas);
 
-    jScrollPane1.setViewportView(listaMesasAbiertas);
+        btnJugarPoker.setBackground(new java.awt.Color(0, 153, 0));
+        btnJugarPoker.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnJugarPoker.setForeground(new java.awt.Color(255, 255, 255));
+        btnJugarPoker.setText("Jugar");
+        btnJugarPoker.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnJugarPoker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarPokerActionPerformed(evt);
+            }
+        });
 
-    btnJugarPoker.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-    btnJugarPoker.setText("Jugar");
-    btnJugarPoker.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-    btnJugarPoker.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnJugarPokerActionPerformed(evt);
-      }
-    });
+        lblError.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblError.setForeground(new java.awt.Color(255, 0, 51));
 
-    lblError.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-    lblError.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("Mesas disponibles");
+        jLabel1.setToolTipText("");
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(257, 257, 257)
-                            .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 229,
-                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 605,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(76, 76, 76)
-                            .addComponent(btnJugarPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 229,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(btnJugarPoker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblBienvenido)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862,
-                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 43, Short.MAX_VALUE)));
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 43, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(lblBienvenido)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSaldo, javax.swing.GroupLayout.Alignment.TRAILING,
-                        javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
-                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337,
-                    javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSaldo)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnJugarPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE)));
+                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnJugarPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
 
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
   private void btnJugarPokerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnJugarPokerActionPerformed
     Mesa mesaSeleccionada = (Mesa) listaMesasAbiertas.getSelectedValue();
@@ -204,16 +198,17 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
 
   @Override
   public void actualizarTitulo(String titulo) {
+    setTitle(titulo);
     lblBienvenido.setText(titulo);
   }
 
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnJugarPoker;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JLabel lblBienvenido;
-  private javax.swing.JLabel lblError;
-  private javax.swing.JLabel lblNombreCompleto;
-  private javax.swing.JLabel lblSaldo;
-  private javax.swing.JList listaMesasAbiertas;
-  // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnJugarPoker;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBienvenido;
+    private javax.swing.JLabel lblError;
+    private javax.swing.JLabel lblSaldo;
+    private javax.swing.JList listaMesasAbiertas;
+    // End of variables declaration//GEN-END:variables
 }
