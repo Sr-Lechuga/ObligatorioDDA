@@ -6,6 +6,8 @@ import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
+import dominio.subsistemas.usuarios.estados.EstadoJugador;
+
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Ronda {
@@ -36,6 +38,7 @@ public class Ronda {
     this.estado = EstadoRonda.ESPERANDO_APUESTA;
 
     this.participantes = participantes;
+    this.retirados = new ArrayList<>();
   }
   // </editor-fold>
 
@@ -96,7 +99,9 @@ public class Ronda {
   // <editor-fold defaultstate="collapsed" desc="Metodos publicos">
   // DEPRECTED
   public void agregarParticipante(Jugador jugador) {
+    if(!participa(jugador)){
     participantes.add(jugador);
+    }
   }
 
   public void aumentarPozo(double apuesta) {
@@ -116,8 +121,14 @@ public class Ronda {
 
     this.apuesta = new Apuesta(valorApuesta, jugador);
 
+    for (Jugador retirado : retirados) {
+      retirado.setEstado(EstadoJugador.ACCION_PENDIENTE);
+      participantes.add(retirado);
+    }
+    retirados.clear();
+
     setEstado(EstadoRonda.APUESTA_INICIADA);
-    this.respuestas++;
+    this.respuestas = 1;
   }
 
   public void pasar(Jugador jugador) {

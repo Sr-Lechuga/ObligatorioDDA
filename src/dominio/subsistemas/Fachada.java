@@ -13,6 +13,8 @@ import dominio.excepciones.usuarios.UsuarioInvalidoException;
 import dominio.subsistemas.mesas.sMesas;
 import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.mesas.entidades.Ronda;
+import dominio.subsistemas.mesas.estados.EstadoMesa;
+import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.sReglas;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.sUsuarios;
@@ -118,6 +120,10 @@ public class Fachada implements Observable {
     public CopyOnWriteArrayList<Jugador> obtenerParticipantesDeRondaActualEnMesa(Mesa mesaActual) {
         return subMesas.obtenerParticipantesDeRondaActualEnMesa(mesaActual);
     }
+
+    public void pasar(Mesa mesaActual, Jugador jugadorEnSesion) {
+        subMesas.pasar(mesaActual, jugadorEnSesion);
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">
@@ -154,5 +160,13 @@ public class Fachada implements Observable {
         }
     }
     // </editor-fold>
+
+    public EstadoMesa obtenerEstadoMesa(Mesa mesaActual) {
+        return subMesas.obtenerEstadoMesa(mesaActual);
+    }
+
+    public EstadoRonda obtenerEstadoRondaActualMesa(Mesa mesaActual) {
+        return subMesas.obtenerEstadoRondaActualMesa(mesaActual);
+    }
 
 }
