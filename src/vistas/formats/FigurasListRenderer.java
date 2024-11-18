@@ -20,6 +20,7 @@ public class FigurasListRenderer extends DefaultListCellRenderer {
       Figura figura = (Figura) value;
       label.setText(figura.getNombre());
       label.setToolTipText(figura.getDescripcion());
+      label.setHorizontalTextPosition(CENTER);
     }
     return label;
   }

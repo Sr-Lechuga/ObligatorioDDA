@@ -20,7 +20,9 @@ public class ParticipantesListRenderer extends DefaultListCellRenderer {
       Jugador participante = (Jugador) value;
       label.setText(participante.getNombreCompleto()
           + " - " + participante.getEstado());
+      label.setHorizontalTextPosition(CENTER);
     }
+
     return label;
   }
 
