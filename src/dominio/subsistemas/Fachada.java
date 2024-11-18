@@ -22,6 +22,8 @@ import dominio.subsistemas.usuarios.entidades.Jugador;
 import dominio.subsistemas.usuarios.entidades.Sesion;
 import dominio.subsistemas.usuarios.entidades.Usuario;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
 
@@ -124,6 +126,15 @@ public class Fachada implements Observable {
     public void pasar(Mesa mesaActual, Jugador jugadorEnSesion) {
         subMesas.pasar(mesaActual, jugadorEnSesion);
     }
+    
+    public void pagar(Jugador jugadorEnSesion, Mesa mesaActual) throws SaldoException, ArgumentosMesaException {
+        subMesas.pagar(jugadorEnSesion, mesaActual);       
+    }
+    
+    public void apostar(Jugador jugadorEnSesion, Mesa mesaActual, double cantidadApostada) throws ArgumentosMesaException, SaldoException {
+        subMesas.apostar(jugadorEnSesion, mesaActual, cantidadApostada);
+    }
+    
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Métodos Reglas">

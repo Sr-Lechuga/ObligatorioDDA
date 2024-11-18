@@ -3,6 +3,7 @@ package controladores;
 import java.util.ArrayList;
 
 import controladores.Eventos.EventoJuego;
+import dominio.excepciones.mesas.ArgumentosMesaException;
 import dominio.excepciones.usuarios.SaldoException;
 import dominio.subsistemas.Fachada;
 import dominio.subsistemas.mesas.entidades.Mesa;
@@ -10,6 +11,8 @@ import dominio.subsistemas.mesas.entidades.Ronda;
 import dominio.subsistemas.mesas.estados.EstadoRonda;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilidades.observer.Observable;
 import utilidades.observer.Observador;
 import vistas.VistaJugarPoker;
@@ -76,6 +79,11 @@ public class ControladorJugarPoker implements Observador {
                 case EventoJuego.JUGADOR_PASO:
                     confirmarEstadoRonda();
                     break;
+                case EventoJuego.JUGADOR_PAGO:
+                    pagoJugador();
+                    break;
+                case EventoJuego.JUGADOR_APOSTO:
+                    apostoJugador();
                 default:
                     break;
             }
@@ -91,4 +99,33 @@ public class ControladorJugarPoker implements Observador {
         fachada.avisar(EventoJuego.JUGADOR_PASO);
     }
 
+    public void pagar() throws SaldoException, ArgumentosMesaException {
+        fachada.pagar(jugadorEnSesion, mesaActual);
+        fachada.avisar(EventoJuego.JUGADOR_PAGO);
+    }
+
+    public void apostar(double cantidadApostada) throws SaldoException, ArgumentosMesaException {
+        fachada.apostar(jugadorEnSesion, mesaActual, cantidadApostada);
+        fachada.avisar(EventoJuego.JUGADOR_APOSTO);
+        fachada.avisar(EstadoRonda.APUESTA_INICIADA);
+    }
+
+    public void pagoJugador() {
+       double saldoActualizado = jugadorEnSesion.getSaldo();
+       String pozoActualizado = mesaActual.getPozoRondaActual();
+       
+       vistaJugarPoker.actualizarSaldo(saldoActualizado);
+       vistaJugarPoker.actualizarPozo(pozoActualizado);
+       vistaJugarPoker.mostrarMensajeAviso("Pago realizado con exito");
+    }
+    
+    public void apostoJugador() {
+        double saldoActualizado = jugadorEnSesion.getSaldo();
+        String pozoActualizado = mesaActual.getPozoRondaActual();
+        
+        vistaJugarPoker.actualizarSaldo(saldoActualizado);
+        vistaJugarPoker.actualizarPozo(pozoActualizado);
+        vistaJugarPoker.mostrarMensajeAviso("Apuesta realizada con exito");
+    }
+    
 }

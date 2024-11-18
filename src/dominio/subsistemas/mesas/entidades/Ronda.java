@@ -140,7 +140,10 @@ public class Ronda {
 
   public void pagarApuesta(Jugador apostador) throws SaldoException {
     this.apuesta.agregarApostador(apostador);
-    aumentarPozo(apuesta.getValor());
+    if (!this.apuesta.getApostadores().contains(apostador)) { 
+        apostador.removerSaldo(apuesta.getValor()); 
+    } 
+    aumentarPozo(apuesta.getValor()); 
     this.respuestas++;
   }
 
