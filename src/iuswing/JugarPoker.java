@@ -507,8 +507,6 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JList listFiguras;
     private javax.swing.JList listJugadores;
-    private javax.swing.JList listFiguras;
-    private javax.swing.JList listJugadores;
     private panelCartasPoker.PanelCartasPoker panelCartas;
     private javax.swing.JTextField txtApostar;
     private javax.swing.JTextField txtPagar;
