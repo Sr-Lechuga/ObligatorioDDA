@@ -133,6 +133,7 @@ public class Principal extends javax.swing.JFrame {
     private void loginJugador() {
         Login login = new LoginJugador(this, false);
         login.setVisible(true);
+        
     }
 
 }
