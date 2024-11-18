@@ -198,4 +198,8 @@ public class Mesa {
     return getRondaActual().getParticipantes();
   }
 
+  public String getPozoRondaActual() {
+    return String.valueOf(getRondaActual().getPozo());
+  }
+
 }

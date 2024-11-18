@@ -20,4 +20,8 @@ public interface VistaJugarPoker extends VistaIU {
     public void mostrarFiguras(ArrayList<Figura> figuras);
 
     void cargarCartas(ArrayList<CartaPoker> cartas);
+
+    public void mostrarPozoActual(String pozoRondaActual);
+
+    public void mostrarFiguraActual(String string);
 }

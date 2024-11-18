@@ -37,11 +37,7 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         lblJugador.setText(lblJugador.getText() + " " + jugadorEnSesion.getNombreCompleto());
         lblSaldo.setText(lblSaldo.getText() + " " + jugadorEnSesion.getSaldo());
         lblMesa.setText(lblMesa.getText() + " " + mesa.getNumeroMesa());
-        // lblFiguraActual.setText(lblFiguraActual.getText() + " " +
-        // mesa.getFiguraActual());
         lblMontoBase.setText(lblMontoBase.getText() + " " + mesa.getApuestaBase());
-        // lblPozoActual.setText(lblPozoActual.getText() + " " +
-        // mesa.getPozoRondaActual());
 
         cargarListaJugadores(mesa.getParticipantes());
         mostrarFiguras(controladorJugarPoker.obtenerFigurasDisponibles());
@@ -521,6 +517,18 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
             modelo.addElement(jugador.getNombreCompleto());
         }
         listJugadores.setModel(modelo);
+    }
+
+    @Override
+    public void mostrarPozoActual(String pozoRondaActual) {
+        lblPozoActual
+                .setText(lblPozoActual.getText() + " " + pozoRondaActual);
+    }
+
+    @Override
+    public void mostrarFiguraActual(String figuraActual) {
+
+        lblFiguraActual.setText(lblFiguraActual.getText() + " " + figuraActual);
     }
 
 }

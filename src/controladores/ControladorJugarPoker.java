@@ -20,6 +20,14 @@ public class ControladorJugarPoker implements Observador {
     Fachada fachada;
     Mesa mesaActual;
 
+    public Jugador getJugadorEnSesion() {
+        return jugadorEnSesion;
+    }
+
+    public Mesa getMesaActual() {
+        return mesaActual;
+    }
+
     public ControladorJugarPoker(Jugador jugadorEnSesion, Mesa mesa, VistaJugarPoker vistaJugarPoker) {
         this.jugadorEnSesion = jugadorEnSesion;
         this.vistaJugarPoker = vistaJugarPoker;
@@ -35,6 +43,8 @@ public class ControladorJugarPoker implements Observador {
             Ronda rondaActual = mesaActual.getRondaActual();
             if (rondaActual.participa(jugadorEnSesion)) {
                 vistaJugarPoker.cargarCartas(jugadorEnSesion.getManoCartasPoker());
+                vistaJugarPoker.mostrarPozoActual(mesaActual.getPozoRondaActual());
+                vistaJugarPoker.mostrarFiguraActual("Papitas Fritas con ketchup");
             }
         } catch (SaldoException e) {
             vistaJugarPoker.mostrarMensajeError(e.getMessage());
