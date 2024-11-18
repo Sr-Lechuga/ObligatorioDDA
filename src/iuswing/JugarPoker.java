@@ -5,6 +5,7 @@ import dominio.subsistemas.mesas.entidades.Mesa;
 import dominio.subsistemas.reglas.entidades.Figura;
 import dominio.subsistemas.usuarios.entidades.Jugador;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import panelCartasPoker.CartaPoker;
 import panelCartasPoker.PanelCartasListener;
 import panelCartasPoker.PanelCartasPoker;
@@ -31,10 +32,11 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
         lblJugador.setText(lblJugador.getText() + " " + jugadorEnSesion.getNombreCompleto());
         lblSaldo.setText(lblSaldo.getText() + " " + jugadorEnSesion.getSaldo());
         lblMesa.setText(lblMesa.getText() + " " + mesa.getNumeroMesa());
-        lblFiguraActual.setText(lblFiguraActual.getText() + " " + mesa.getFiguraActual()); 
+//        lblFiguraActual.setText(lblFiguraActual.getText() + " " + mesa.getFiguraActual()); 
         lblMontoBase.setText(lblMontoBase.getText() + " " + mesa.getApuestaBase());
-        lblPozoActual.setText(lblPozoActual.getText() + " " + mesa.getPozoRondaActual());
-        
+//        lblPozoActual.setText(lblPozoActual.getText() + " " + mesa.getPozoRondaActual());
+        cargarListaJugadores(new ArrayList<>(mesa.getParticipantes()));
+
     }
 
     /**
@@ -404,5 +406,15 @@ public class JugarPoker extends javax.swing.JFrame implements PanelCartasListene
     private javax.swing.JTextField txtApostar;
     private javax.swing.JTextField txtPagar;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarListaJugadores(ArrayList<Jugador> participantes) {
+        
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        for (Jugador jugador : participantes) {
+            modelo.addElement(jugador.getNombreCompleto()); 
+        }
+        listJugadores.setModel(modelo);
+    }
+    
 
 }
