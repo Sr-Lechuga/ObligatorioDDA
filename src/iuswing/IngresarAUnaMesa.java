@@ -43,7 +43,7 @@ public class IngresarAUnaMesa extends javax.swing.JFrame implements VistaIngresa
         lblError = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblBienvenido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBienvenido.setText("Bienvenido Jugador");
